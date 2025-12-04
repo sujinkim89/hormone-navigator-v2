@@ -19,14 +19,11 @@ const StartPage = () => {
           </div>
 
           {/* Floating chat bubbles decoration */}
-          <div className="relative h-16 mb-6">
-            <div className="absolute left-4 top-0 bg-card px-3 py-2 rounded-2xl shadow-card text-sm animate-float-chat">헤어지자. 
-에그위키야. 
-PMS 땜에 너랑
-못 다니겠어</div>
-            <div className="absolute right-4 top-4 bg-primary/10 px-3 py-2 rounded-2xl shadow-card text-sm animate-float-chat delay-500">
-              💕 오늘은 괜찮아!
-            </div>
+          <div className="flex flex-wrap justify-center gap-2 mb-6">
+            <div className="bg-card px-2.5 py-1.5 rounded-xl shadow-card text-xs animate-float-chat">헤어지자</div>
+            <div className="bg-primary/10 px-2.5 py-1.5 rounded-xl shadow-card text-xs animate-float-chat delay-100">에그위키야</div>
+            <div className="bg-card px-2.5 py-1.5 rounded-xl shadow-card text-xs animate-float-chat delay-200">PMS 땜에</div>
+            <div className="bg-primary/10 px-2.5 py-1.5 rounded-xl shadow-card text-xs animate-float-chat delay-300">못 다니겠어 😤</div>
           </div>
 
           {/* Headlines */}
