@@ -36,8 +36,8 @@ const StartPage = () => {
           {/* CTA Buttons */}
           <div className="space-y-4 animate-fade-up delay-400">
             <Button variant="female" size="xl" className="w-full" onClick={() => handleStart('female')}>👩
-여성 PMS 유형 진단<span className="text-lg">👩</span>
-              <span>여성 PMS 유형 진단</span>
+여성 PMS 유형 진단
+              
             </Button>
             
             <p className="text-xs text-muted-foreground">내 호르몬 패턴 팩폭 받기</p>
