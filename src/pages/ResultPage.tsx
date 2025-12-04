@@ -70,6 +70,10 @@ const ResultPage = () => {
                 {type.title}
               </h1>
             </div>
+            {/* Hook Line */}
+            <p className="mt-3 text-sm text-muted-foreground italic">
+              {type.hookLine}
+            </p>
           </div>
 
           {/* Coordinate Chart */}
@@ -116,6 +120,14 @@ const ResultPage = () => {
           {/* All Types Section */}
           <div className="mb-6 animate-fade-up delay-400">
             <AllTypesSection currentTypeCode={resultType} gender={gender} />
+          </div>
+
+          {/* Section Divider */}
+          <div className="relative my-8 py-6">
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent rounded-2xl" />
+            <div className="relative text-center">
+              <span className="text-xs text-muted-foreground bg-background px-4">✨ Premium Content ✨</span>
+            </div>
           </div>
 
           {/* Bridge Section */}
