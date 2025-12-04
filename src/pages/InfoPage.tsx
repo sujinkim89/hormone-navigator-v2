@@ -77,7 +77,7 @@ const InfoPage = () => {
                 <Heart className="w-5 h-5 text-secondary" />
               </div>
               <p className="text-sm text-foreground">
-                <span className="font-medium">내 {partner}의 발작 버튼</span>을 알면 평화가 옴
+                <span className="font-medium">나의 호르몬 발작 버튼</span>을 알면 평화가 옴
               </p>
             </div>
             
