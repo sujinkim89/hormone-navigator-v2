@@ -68,18 +68,16 @@ const StartPage = () => {
 
           {/* CTA Buttons */}
           <div className="space-y-4 animate-fade-up delay-400">
+            <p className="text-xs text-muted-foreground">내 호르몬 패턴 팩폭 받기</p>
             <Button variant="female" size="xl" className="w-full" onClick={() => handleStart('female')}>
               👩 여성 PMS 유형 진단
             </Button>
-            
-            <p className="text-xs text-muted-foreground">내 호르몬 패턴 팩폭 받기</p>
 
+            <p className="text-xs text-muted-foreground mt-6">여친의 호르몬 발작 위치 분석</p>
             <Button variant="male" size="xl" className="w-full" onClick={() => handleStart('male')}>
               <span className="text-lg">👨</span>
               <span>남성 PMS 대응 유형</span>
             </Button>
-            
-            <p className="text-xs text-muted-foreground">여친의 발작 버튼 위치 분석</p>
           </div>
         </div>
       </div>
