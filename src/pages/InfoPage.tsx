@@ -68,7 +68,7 @@ const InfoPage = () => {
                 <Sparkles className="w-5 h-5 text-primary" />
               </div>
               <p className="text-sm text-foreground">
-                <span className="font-medium">네 {partner} 이상한 사람 아님!</span> 호르몬 탓임!
+                <span className="font-medium">너 성격 이상한 사람 아님!</span>
               </p>
             </div>
             
