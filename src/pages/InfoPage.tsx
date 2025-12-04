@@ -13,6 +13,9 @@ const InfoPage = () => {
   const setNickname = useQuizStore(state => state.setNickname);
   const gender = useQuizStore(state => state.gender);
 
+  const isFemale = gender === 'female';
+  const partner = isFemale ? '남자친구' : '여자친구';
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (inputName.trim()) {
@@ -35,13 +38,15 @@ const InfoPage = () => {
             <h1 className="font-display text-2xl sm:text-3xl text-foreground mb-2">
               잠깐! 🚨
             </h1>
-            <p className="font-display text-xl text-gradient-meme">그거 네 여자친구 성격 아니야!</p>
+            <p className="font-display text-xl text-gradient-meme">
+              그거 네 {partner} 성격 아니야!
+            </p>
           </div>
 
           {/* Nickname Input */}
           <div className="space-y-2 mb-6 animate-fade-up delay-100">
             <label className="text-sm font-medium text-foreground">
-              {gender === 'female' ? '👩 언니 본캐 이름이 뭐야?' : '👨 형 이름이 뭐야?'}
+              {isFemale ? '👩 언니 본캐 이름이 뭐야?' : '👨 형 이름이 뭐야?'}
             </label>
             <Input 
               type="text" 
@@ -63,7 +68,7 @@ const InfoPage = () => {
                 <Sparkles className="w-5 h-5 text-primary" />
               </div>
               <p className="text-sm text-foreground">
-                <span className="font-medium">네 여자친구 이상한 사람 아님!</span> 호르몬 탓임!
+                <span className="font-medium">네 {partner} 이상한 사람 아님!</span> 호르몬 탓임!
               </p>
             </div>
             
@@ -72,7 +77,7 @@ const InfoPage = () => {
                 <Heart className="w-5 h-5 text-secondary" />
               </div>
               <p className="text-sm text-foreground">
-                <span className="font-medium">내 여자친구의 발작 버튼</span>을 알면 평화가 옴
+                <span className="font-medium">내 {partner}의 발작 버튼</span>을 알면 평화가 옴
               </p>
             </div>
             
