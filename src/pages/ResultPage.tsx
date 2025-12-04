@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { TypeChart } from "@/components/TypeChart";
 import { ResultCarousel } from "@/components/ResultCarousel";
 import { BridgeSection } from "@/components/BridgeSection";
+import { AllTypesSection } from "@/components/AllTypesSection";
 import { useQuizStore } from "@/store/quizStore";
 import { getTypeData, calculateCoordinates } from "@/data/quizData";
 import { Share2, RotateCcw } from "lucide-react";
@@ -111,15 +112,20 @@ const ResultPage = () => {
             </div>
           </div>
 
+          {/* All Types Section */}
+          <div className="mb-6 animate-fade-up delay-400">
+            <AllTypesSection currentTypeCode={resultType} gender={gender} />
+          </div>
+
           {/* Bridge Section (Female only) */}
           {gender === 'female' && (
-            <div className="mb-8 animate-fade-up delay-400">
+            <div className="mb-8 animate-fade-up delay-500">
               <BridgeSection />
             </div>
           )}
 
           {/* Action Buttons */}
-          <div className="flex gap-3 mb-6 animate-fade-up delay-500">
+          <div className="flex gap-3 mb-6 animate-fade-up delay-600">
             <Button 
               variant="meme" 
               size="lg" 
