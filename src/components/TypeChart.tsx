@@ -14,7 +14,7 @@ export const TypeChart = ({ x, y, className }: TypeChartProps) => {
   return (
     <div className={cn("relative w-full aspect-square max-w-[280px] mx-auto", className)}>
       {/* Background */}
-      <div className="absolute inset-0 rounded-2xl bg-gradient-card border border-border overflow-hidden">
+      <div className="absolute inset-0 rounded-2xl bg-gradient-card border border-border">
         {/* Grid lines */}
         <div className="absolute inset-0">
           {/* Vertical center line */}
@@ -24,10 +24,10 @@ export const TypeChart = ({ x, y, className }: TypeChartProps) => {
         </div>
 
         {/* Quadrant backgrounds */}
-        <div className="absolute top-0 left-0 w-1/2 h-1/2 bg-violet/5" />
-        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-hot-pink/5" />
-        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-secondary/5" />
-        <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-rose/5" />
+        <div className="absolute top-0 left-0 w-1/2 h-1/2 bg-violet/5 rounded-tl-2xl" />
+        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-hot-pink/5 rounded-tr-2xl" />
+        <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-secondary/5 rounded-bl-2xl" />
+        <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-rose/5 rounded-br-2xl" />
 
         {/* Quadrant labels */}
         <div className="absolute top-3 left-3 text-xs font-medium text-violet/70">TS</div>
@@ -36,33 +36,33 @@ export const TypeChart = ({ x, y, className }: TypeChartProps) => {
         <div className="absolute bottom-3 right-3 text-xs font-medium text-rose/70">ED</div>
 
         {/* Axis labels */}
-        <div className="absolute top-1 left-1/2 -translate-x-1/2 text-[10px] text-muted-foreground font-medium">
-          이성 (T)
+        <div className="absolute top-1 left-1/2 -translate-x-1/2 text-[9px] text-muted-foreground font-medium whitespace-nowrap">
+          테스토스테론 (T)
         </div>
-        <div className="absolute bottom-1 left-1/2 -translate-x-1/2 text-[10px] text-muted-foreground font-medium">
-          감성 (E)
+        <div className="absolute bottom-1 left-1/2 -translate-x-1/2 text-[9px] text-muted-foreground font-medium whitespace-nowrap">
+          에스트로겐 (E)
         </div>
-        <div className="absolute left-1 top-1/2 -translate-y-1/2 text-[10px] text-muted-foreground font-medium writing-mode-vertical">
-          안정 (S)
+        <div className="absolute left-1 top-1/2 -translate-y-1/2 text-[9px] text-muted-foreground font-medium [writing-mode:vertical-rl] rotate-180">
+          세로토닌 (S)
         </div>
-        <div className="absolute right-1 top-1/2 -translate-y-1/2 text-[10px] text-muted-foreground font-medium writing-mode-vertical">
-          자극 (D)
+        <div className="absolute right-1 top-1/2 -translate-y-1/2 text-[9px] text-muted-foreground font-medium [writing-mode:vertical-rl]">
+          도파민 (D)
         </div>
+      </div>
 
-        {/* Position marker */}
-        <div
-          className="absolute w-10 h-10 -translate-x-1/2 -translate-y-1/2 animate-scale-bounce z-10"
-          style={{
-            left: `${posX}%`,
-            top: `${posY}%`,
-          }}
-        >
-          {/* Glow effect */}
-          <div className="absolute inset-0 rounded-full bg-hot-pink/40 blur-lg" />
-          {/* Main dot */}
-          <div className="relative w-full h-full rounded-full bg-gradient-meme shadow-glow flex items-center justify-center border-2 border-background">
-            <span className="text-sm">📍</span>
-          </div>
+      {/* Position marker - outside overflow container */}
+      <div
+        className="absolute w-12 h-12 -translate-x-1/2 -translate-y-1/2 z-20"
+        style={{
+          left: `${posX}%`,
+          top: `${posY}%`,
+        }}
+      >
+        {/* Glow effect */}
+        <div className="absolute inset-0 rounded-full bg-hot-pink/50 blur-xl animate-pulse" />
+        {/* Main dot */}
+        <div className="relative w-full h-full rounded-full bg-gradient-meme shadow-glow flex items-center justify-center border-3 border-background animate-scale-bounce">
+          <span className="text-lg">📍</span>
         </div>
       </div>
     </div>
