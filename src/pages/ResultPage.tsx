@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { TypeChart } from "@/components/TypeChart";
 import { ResultCarousel } from "@/components/ResultCarousel";
 import { BridgeSection } from "@/components/BridgeSection";
+import { MaleBridgeSection } from "@/components/MaleBridgeSection";
 import { AllTypesSection } from "@/components/AllTypesSection";
 import { useQuizStore } from "@/store/quizStore";
 import { getTypeData, calculateCoordinates } from "@/data/quizData";
@@ -117,12 +118,10 @@ const ResultPage = () => {
             <AllTypesSection currentTypeCode={resultType} gender={gender} />
           </div>
 
-          {/* Bridge Section (Female only) */}
-          {gender === 'female' && (
-            <div className="mb-8 animate-fade-up delay-500">
-              <BridgeSection />
-            </div>
-          )}
+          {/* Bridge Section */}
+          <div className="mb-8 animate-fade-up delay-500">
+            {gender === 'female' ? <BridgeSection /> : <MaleBridgeSection />}
+          </div>
 
           {/* Action Buttons */}
           <div className="flex gap-3 mb-6 animate-fade-up delay-600">
