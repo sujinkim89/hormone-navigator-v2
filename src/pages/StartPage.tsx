@@ -14,8 +14,18 @@ const StartPage = () => {
       <div className="min-h-screen flex flex-col items-center justify-center px-4 py-8">
         <div className="w-full max-w-md mx-auto text-center">
           {/* Egg Character */}
-          <div className="mx-auto mb-6 animate-fade-up">
+          <div className="mx-auto mb-4 animate-fade-up">
             <EggCharacter size="lg" mood="worried" />
+          </div>
+
+          {/* Floating chat bubbles decoration */}
+          <div className="relative h-16 mb-6">
+            <div className="absolute left-4 top-0 bg-card px-3 py-2 rounded-2xl shadow-card text-sm animate-float-chat">
+              😤 또 시작이야...
+            </div>
+            <div className="absolute right-4 top-4 bg-primary/10 px-3 py-2 rounded-2xl shadow-card text-sm animate-float-chat delay-500">
+              💕 오늘은 괜찮아!
+            </div>
           </div>
 
           {/* Headlines */}
@@ -50,15 +60,6 @@ const StartPage = () => {
             <p className="text-xs text-muted-foreground">여친의 발작 버튼 위치 분석</p>
           </div>
 
-          {/* Floating chat bubbles decoration */}
-          <div className="mt-12 relative h-16">
-            <div className="absolute left-4 top-0 bg-card px-3 py-2 rounded-2xl shadow-card text-sm animate-float-chat">
-              😤 또 시작이야...
-            </div>
-            <div className="absolute right-4 top-4 bg-primary/10 px-3 py-2 rounded-2xl shadow-card text-sm animate-float-chat delay-500">
-              💕 오늘은 괜찮아!
-            </div>
-          </div>
         </div>
       </div>
     </AuraBackground>;
