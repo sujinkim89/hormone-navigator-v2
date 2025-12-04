@@ -34,6 +34,17 @@ const InfoPage = () => {
             <p className="font-display text-xl text-gradient-meme">그거 네 여자친구 성격 아니야!</p>
           </div>
 
+          {/* Nickname Input */}
+          <div className="space-y-2 mb-6 animate-fade-up delay-100">
+            <label className="text-sm font-medium text-foreground">
+              {gender === 'female' ? '👩 언니 본캐 이름이 뭐야?' : '👨 형 이름이 뭐야?'}
+            </label>
+            <Input type="text" placeholder="닉네임 입력" value={inputName} onChange={e => setInputName(e.target.value)} className="h-14 text-base rounded-2xl border-2 border-border focus:border-primary bg-card" maxLength={10} />
+            <p className="text-xs text-muted-foreground">
+              결과에 사용될 이름이에요 (최대 10자)
+            </p>
+          </div>
+
           {/* Warning Box */}
           <div className="bg-accent/20 border-2 border-accent rounded-2xl p-4 mb-6 animate-fade-up delay-100">
             <div className="flex items-start gap-3">
@@ -74,18 +85,8 @@ const InfoPage = () => {
             </div>
           </div>
 
-          {/* Nickname Input */}
+          {/* Submit Button */}
           <form onSubmit={handleSubmit} className="animate-fade-up delay-300">
-            <div className="space-y-2 mb-6">
-              <label className="text-sm font-medium text-foreground">
-                {gender === 'female' ? '👩 언니 본캐 이름이 뭐야?' : '👨 형 이름이 뭐야?'}
-              </label>
-              <Input type="text" placeholder="닉네임 입력" value={inputName} onChange={e => setInputName(e.target.value)} className="h-14 text-base rounded-2xl border-2 border-border focus:border-primary bg-card" maxLength={10} />
-              <p className="text-xs text-muted-foreground">
-                결과에 사용될 이름이에요 (최대 10자)
-              </p>
-            </div>
-
             <Button type="submit" variant="meme" size="xl" className="w-full" disabled={!inputName.trim()}>
               호르몬 자아 분석 시작! 🔮
             </Button>
