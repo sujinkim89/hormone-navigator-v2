@@ -39,7 +39,7 @@ const InfoPage = () => {
               잠깐! 🚨
             </h1>
             <p className="font-display text-xl text-gradient-meme">
-              그날 예민한거 네 성격 아니야!
+              {isFemale ? '그날 예민한거 네 성격 아니야!' : '그날 예민한거 네 여자친구 성격 아니야!'}
             </p>
           </div>
 
@@ -68,7 +68,7 @@ const InfoPage = () => {
                 <Sparkles className="w-5 h-5 text-primary" />
               </div>
               <p className="text-sm text-foreground">
-                <span className="font-medium">너 성격 이상한 사람 아님!</span>
+                <span className="font-medium">{isFemale ? '너 성격 이상한 사람 아님!' : '네 여자친구 성격 이상한 사람 아님!'}</span>
               </p>
             </div>
             
@@ -77,7 +77,7 @@ const InfoPage = () => {
                 <Heart className="w-5 h-5 text-secondary" />
               </div>
               <p className="text-sm text-foreground">
-                <span className="font-medium">나의 호르몬 발작 버튼</span>을 알면 평화가 옴
+                <span className="font-medium">{isFemale ? '나의 호르몬 발작 버튼' : '여자친구의 호르몬 발작 버튼'}</span>을 알면 평화가 옴
               </p>
             </div>
             
