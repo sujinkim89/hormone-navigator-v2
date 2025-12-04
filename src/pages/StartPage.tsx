@@ -4,35 +4,25 @@ import { EggCharacter } from "@/components/EggCharacter";
 import { Button } from "@/components/ui/button";
 import { useQuizStore } from "@/store/quizStore";
 import { Sparkles } from "lucide-react";
-
 const StartPage = () => {
   const navigate = useNavigate();
   const setGender = useQuizStore(state => state.setGender);
-  
   const handleStart = (gender: 'female' | 'male') => {
     setGender(gender);
     navigate('/info');
   };
-
-  return (
-    <AuraBackground>
+  return <AuraBackground>
       <div className="min-h-screen flex flex-col items-center justify-center px-4 py-8 relative overflow-hidden">
         {/* Snowflakes decoration */}
         <div className="absolute inset-0 pointer-events-none">
-          {[...Array(12)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute text-white/20 animate-float-chat"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${i * 0.3}s`,
-                fontSize: `${8 + Math.random() * 12}px`
-              }}
-            >
+          {[...Array(12)].map((_, i) => <div key={i} className="absolute text-white/20 animate-float-chat" style={{
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+          animationDelay: `${i * 0.3}s`,
+          fontSize: `${8 + Math.random() * 12}px`
+        }}>
               ❄
-            </div>
-          ))}
+            </div>)}
         </div>
 
         <div className="w-full max-w-md mx-auto text-center relative z-10">
@@ -62,7 +52,7 @@ const StartPage = () => {
 
           {/* Chat bubble below egg */}
           <div className="flex justify-center mb-6">
-            <div className="bg-primary/10 px-2.5 py-1.5 rounded-xl shadow-card text-xs animate-float-chat delay-300">호르몬 탓이야 😤</div>
+            <div className="bg-primary/10 px-2.5 py-1.5 rounded-xl shadow-card text-xs animate-float-chat delay-300">내 난소가 계속 흔들리는 탓일까?</div>
           </div>
 
           {/* Sub headline */}
@@ -94,8 +84,6 @@ const StartPage = () => {
           </div>
         </div>
       </div>
-    </AuraBackground>
-  );
+    </AuraBackground>;
 };
-
 export default StartPage;
