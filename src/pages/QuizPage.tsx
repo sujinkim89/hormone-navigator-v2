@@ -8,7 +8,7 @@ import { quizQuestions, calculateType } from "@/data/quizData";
 
 const QuizPage = () => {
   const navigate = useNavigate();
-  const { nickname, currentQuestion, answers, addAnswer, setResultType } = useQuizStore();
+  const { nickname, gender, currentQuestion, answers, addAnswer, setResultType } = useQuizStore();
 
   // Redirect if no nickname
   useEffect(() => {
@@ -26,7 +26,7 @@ const QuizPage = () => {
     // Check if this was the last question
     if (currentQuestion === quizQuestions.length - 1) {
       const finalAnswers = [...answers, type];
-      const resultType = calculateType(finalAnswers);
+      const resultType = calculateType(finalAnswers, gender || 'female');
       setResultType(resultType);
       navigate('/result');
     }
