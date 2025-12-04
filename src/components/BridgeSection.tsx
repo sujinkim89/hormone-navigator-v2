@@ -1,12 +1,17 @@
 import { Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { EggCharacter } from "@/components/EggCharacter";
+
 export const BridgeSection = () => {
   return <div className="space-y-6">
       {/* Section 1: Hook */}
       <div className="bg-card rounded-2xl p-5 shadow-card">
-        <h3 className="font-display text-lg text-foreground mb-3">
-          💭 재미로 본 테스트였는데... 왜 이렇게 정확하죠?
-        </h3>
+        <div className="flex items-start gap-3 mb-3">
+          <EggCharacter size="xs" animate={false} />
+          <h3 className="font-display text-lg text-foreground">
+            💭 재미로 본 테스트였는데... 왜 이렇게 정확하죠?
+          </h3>
+        </div>
         <div className="bg-muted/50 rounded-xl p-4">
           <p className="text-sm text-muted-foreground leading-relaxed">
             사실, 이건 우연이 아니에요.

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuraBackground } from "@/components/AuraBackground";
+import { EggCharacter } from "@/components/EggCharacter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useQuizStore } from "@/store/quizStore";
@@ -24,6 +25,11 @@ const InfoPage = () => {
     <AuraBackground>
       <div className="min-h-screen flex flex-col items-center justify-center px-4 py-8">
         <div className="w-full max-w-md mx-auto">
+          {/* Egg Character */}
+          <div className="flex justify-center mb-4 animate-fade-up">
+            <EggCharacter size="sm" />
+          </div>
+
           {/* Warning Title */}
           <div className="text-center mb-6 animate-fade-up">
             <h1 className="font-display text-2xl sm:text-3xl text-foreground mb-2">

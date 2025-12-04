@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { AuraBackground } from "@/components/AuraBackground";
-import { EggIcon } from "@/components/EggIcon";
+import { EggCharacter } from "@/components/EggCharacter";
 import { Button } from "@/components/ui/button";
 import { useQuizStore } from "@/store/quizStore";
 
@@ -17,9 +17,9 @@ const StartPage = () => {
     <AuraBackground>
       <div className="min-h-screen flex flex-col items-center justify-center px-4 py-8">
         <div className="w-full max-w-md mx-auto text-center">
-          {/* Egg Icon */}
-          <div className="w-24 h-28 mx-auto mb-6 animate-fade-up">
-            <EggIcon />
+          {/* Egg Character */}
+          <div className="mx-auto mb-6 animate-fade-up">
+            <EggCharacter size="lg" />
           </div>
 
           {/* Headlines */}

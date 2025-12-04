@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuraBackground } from "@/components/AuraBackground";
+import { EggCharacter } from "@/components/EggCharacter";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useQuizStore } from "@/store/quizStore";
@@ -86,8 +87,9 @@ const QuizPage = () => {
             </div>
           </div>
 
-          {/* Nickname indicator */}
-          <div className="mt-6 text-center animate-fade-up delay-400">
+          {/* Nickname indicator with Egg */}
+          <div className="mt-6 flex items-center justify-center gap-2 animate-fade-up delay-400">
+            <EggCharacter size="xs" animate={false} />
             <p className="text-xs text-muted-foreground">
               <span className="font-medium text-primary">{nickname}</span>님의 호르몬 분석 중...
             </p>
