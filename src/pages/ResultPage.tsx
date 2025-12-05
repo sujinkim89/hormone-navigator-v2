@@ -8,6 +8,7 @@ import { ResultCarousel } from "@/components/ResultCarousel";
 import { BridgeSection } from "@/components/BridgeSection";
 import { MaleBridgeSection } from "@/components/MaleBridgeSection";
 import { AllTypesSection } from "@/components/AllTypesSection";
+import { CredibilitySection } from "@/components/CredibilitySection";
 import { useQuizStore } from "@/store/quizStore";
 import { getTypeData, calculateCoordinates } from "@/data/quizData";
 import { Share2, RotateCcw } from "lucide-react";
@@ -120,6 +121,11 @@ const ResultPage = () => {
           {/* All Types Section */}
           <div className="mb-6 animate-fade-up delay-400">
             <AllTypesSection currentTypeCode={resultType} gender={gender} />
+          </div>
+
+          {/* Credibility Section */}
+          <div className="mb-6 animate-fade-up delay-400">
+            <CredibilitySection />
           </div>
 
           {/* Section Divider */}
