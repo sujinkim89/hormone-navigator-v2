@@ -1,7 +1,6 @@
 import { Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EggCharacter } from "@/components/EggCharacter";
-
 export const BridgeSection = () => {
   return <div className="space-y-6">
       
@@ -48,8 +47,8 @@ export const BridgeSection = () => {
               </div>
             </div>
             <div className="space-y-2 text-sm text-muted-foreground">
-              <p><strong className="text-foreground">알 수 있는 것:</strong> 난소에 남은 난자의 양</p>
-              <p><strong className="text-foreground">나에게 주는 것:</strong> 임신 가능 기간의 실제 타임라인</p>
+              
+              
             </div>
             <div className="mt-3 p-3 bg-primary/5 rounded-lg">
               <p className="text-xs text-primary">💡 "앞으로 얼마나 쓸 수 있는지, 통장 잔액을 확인하는 것과 같아요"</p>
@@ -68,7 +67,7 @@ export const BridgeSection = () => {
               </div>
             </div>
             <div className="space-y-2 text-sm text-muted-foreground">
-              <p><strong className="text-foreground">알 수 있는 것:</strong> 난소가 얼마나 힘들게 일하고 있는지</p>
+              
               <p><strong className="text-foreground">나에게 주는 것:</strong> 난소 기능 저하의 조기 경고 신호</p>
             </div>
             <div className="mt-3 p-3 bg-rose/5 rounded-lg">
