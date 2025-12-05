@@ -23,7 +23,7 @@ const InfoPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#ffeef8] to-[#fff5f7]">
+    <div className="min-h-screen bg-gradient-to-br from-[#ffeef8] via-[#fff5f7] to-[#e8f4fc]">
       <div className="max-w-[480px] mx-auto">
         
         {/* Section 1: Intro - Why PMS gets worse */}
@@ -66,7 +66,7 @@ const InfoPage = () => {
         </section>
 
         {/* Section 3: Test Introduction */}
-        <section className="px-6 py-10">
+        <section className="px-6 py-10 bg-gradient-to-b from-[#fff5f7] to-white">
           <div className="flex items-center gap-2 justify-center mb-4">
             <span className="text-2xl">📊</span>
             <h2 className="text-lg font-bold text-foreground">
@@ -78,73 +78,105 @@ const InfoPage = () => {
           </p>
         </section>
 
-        {/* Section 4: Hormone Characters */}
-        <section className="px-6 pb-10">
-          <div className="space-y-4">
+        {/* Section 4: Hormone Characters - Side by Side */}
+        <section className="px-4 pb-10 bg-white">
+          <div className="grid grid-cols-3 gap-3">
             {/* AMH - 통장 관리자 */}
-            <div className="bg-white rounded-2xl border-2 border-[#ffe4ef] p-5 flex items-center gap-4 hover:shadow-lg hover:-translate-y-0.5 transition-all">
-              <div className="flex-shrink-0">
-                <EggCharacter size="lg" mood="worried" animate={false} />
-              </div>
-              <div className="flex-1">
-                <div className="text-primary font-bold text-base mb-1">
-                  AMH (난소 나이) - 통장 관리자
-                </div>
-                <div className="bg-[#f8f9fa] rounded-lg p-2 mb-2">
-                  <p className="text-sm text-foreground italic">
-                    "제 난소 잔고, 확인하실래요?"
+            <div className="flex flex-col items-center">
+              <div className="relative mb-2">
+                {/* Speech Bubble */}
+                <div className="absolute -top-16 left-1/2 -translate-x-1/2 bg-[#fff5f7] border border-[#ffe4ef] rounded-xl px-2 py-1.5 min-w-[100px] text-center shadow-sm">
+                  <p className="text-xs text-foreground leading-tight">
+                    "제 난소 잔고,<br />확인하실래요?"
                   </p>
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-transparent border-t-[#ffe4ef]"></div>
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  난소에 남은 난자의 양을 정확한 숫자로 보여주는 잔고 확인서
-                </p>
+                <div className="pt-14">
+                  <EggCharacter size="lg" mood="worried" animate={false} />
+                </div>
               </div>
+              <div className="text-center">
+                <div className="text-primary font-bold text-xs mb-1">
+                  AMH
+                </div>
+                <div className="text-[10px] text-muted-foreground mb-1">
+                  난소 나이
+                </div>
+                <div className="text-[10px] font-medium text-foreground bg-[#f8f9fa] rounded-full px-2 py-0.5">
+                  통장 관리자
+                </div>
+              </div>
+              <p className="text-[10px] text-muted-foreground leading-tight text-center mt-2 px-1">
+                난소에 남은 난자의 양을 정확한 숫자로 보여주는 잔고 확인서
+              </p>
             </div>
 
             {/* FSH - 과로 경고등 */}
-            <div className="bg-white rounded-2xl border-2 border-[#ffe4ef] p-5 flex items-center gap-4 hover:shadow-lg hover:-translate-y-0.5 transition-all">
-              <div className="flex-shrink-0">
-                <EggCharacter size="lg" mood="tired" animate={false} />
-              </div>
-              <div className="flex-1">
-                <div className="text-primary font-bold text-base mb-1">
-                  FSH (난포자극호르몬) - 과로 경고등
-                </div>
-                <div className="bg-[#f8f9fa] rounded-lg p-2 mb-2">
-                  <p className="text-sm text-foreground italic">
-                    "더 이상 못 버티겠어요...! 🔋5%"
+            <div className="flex flex-col items-center">
+              <div className="relative mb-2">
+                {/* Speech Bubble */}
+                <div className="absolute -top-16 left-1/2 -translate-x-1/2 bg-[#fff5f7] border border-[#ffe4ef] rounded-xl px-2 py-1.5 min-w-[100px] text-center shadow-sm">
+                  <p className="text-xs text-foreground leading-tight">
+                    "더 이상<br />못 버티겠어요!"
                   </p>
+                  <span className="text-[10px]">🔋5%</span>
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-transparent border-t-[#ffe4ef]"></div>
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  난소가 보내는 SOS 신호. 배터리 5%처럼 과부하 상태를 알려줍니다
-                </p>
+                <div className="pt-14">
+                  <EggCharacter size="lg" mood="tired" animate={false} />
+                </div>
               </div>
+              <div className="text-center">
+                <div className="text-primary font-bold text-xs mb-1">
+                  FSH
+                </div>
+                <div className="text-[10px] text-muted-foreground mb-1">
+                  난포자극호르몬
+                </div>
+                <div className="text-[10px] font-medium text-foreground bg-[#f8f9fa] rounded-full px-2 py-0.5">
+                  과로 경고등
+                </div>
+              </div>
+              <p className="text-[10px] text-muted-foreground leading-tight text-center mt-2 px-1">
+                난소가 보내는 SOS 신호. 배터리 5%처럼 과부하 상태를 알려줍니다
+              </p>
             </div>
 
             {/* E2 - 감정 조율사 */}
-            <div className="bg-white rounded-2xl border-2 border-[#ffe4ef] p-5 flex items-center gap-4 hover:shadow-lg hover:-translate-y-0.5 transition-all">
-              <div className="flex-shrink-0">
-                <EggCharacter size="lg" mood="happy" animate={false} />
-              </div>
-              <div className="flex-1">
-                <div className="text-primary font-bold text-base mb-1">
-                  E2 (에스트로겐) - 감정 조율사
-                </div>
-                <div className="bg-[#f8f9fa] rounded-lg p-2 mb-2">
-                  <p className="text-sm text-foreground italic">
-                    "오늘 기분은 어떤 색깔? 🌈"
+            <div className="flex flex-col items-center">
+              <div className="relative mb-2">
+                {/* Speech Bubble */}
+                <div className="absolute -top-16 left-1/2 -translate-x-1/2 bg-[#fff5f7] border border-[#ffe4ef] rounded-xl px-2 py-1.5 min-w-[100px] text-center shadow-sm">
+                  <p className="text-xs text-foreground leading-tight">
+                    "오늘 기분은<br />어떤 색깔?"
                   </p>
+                  <span className="text-[10px]">🌈</span>
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-transparent border-t-[#ffe4ef]"></div>
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  감정 롤러코스터를 조절하는 리모컨. 기분 균형을 맞춰줍니다
-                </p>
+                <div className="pt-14">
+                  <EggCharacter size="lg" mood="happy" animate={false} />
+                </div>
               </div>
+              <div className="text-center">
+                <div className="text-primary font-bold text-xs mb-1">
+                  E2
+                </div>
+                <div className="text-[10px] text-muted-foreground mb-1">
+                  에스트로겐
+                </div>
+                <div className="text-[10px] font-medium text-foreground bg-[#f8f9fa] rounded-full px-2 py-0.5">
+                  감정 조율사
+                </div>
+              </div>
+              <p className="text-[10px] text-muted-foreground leading-tight text-center mt-2 px-1">
+                감정 롤러코스터를 조절하는 리모컨. 기분 균형을 맞춰줍니다
+              </p>
             </div>
           </div>
         </section>
 
         {/* Section 5: Checklist */}
-        <section className="px-6 py-10 bg-white/50">
+        <section className="px-6 py-10 bg-gradient-to-b from-white to-[#f0f7fc]">
           <div className="flex items-center gap-2 justify-center mb-6">
             <span className="text-2xl">💡</span>
             <h2 className="text-lg font-bold text-foreground">
@@ -168,11 +200,11 @@ const InfoPage = () => {
         </section>
 
         {/* Section 6: Founder Story */}
-        <section className="px-6 py-10">
-          <div className="bg-gradient-to-br from-[#fff9f0] to-[#fff5e6] rounded-2xl p-6">
+        <section className="px-6 py-10 bg-gradient-to-b from-[#f0f7fc] to-[#e8f4fc]">
+          <div className="bg-white rounded-2xl p-6 shadow-sm">
             <div className="flex items-center gap-2 justify-center mb-4">
               <span className="text-2xl">💝</span>
-              <h2 className="text-lg font-bold text-primary">
+              <h2 className="text-lg font-bold text-[#5b8fb9]">
                 라보 창업자의 고백
               </h2>
             </div>
@@ -181,7 +213,7 @@ const InfoPage = () => {
                 저는 <span className="font-semibold text-foreground">의사</span>입니다.<br />
                 그런데 창업을 결심하게 된 계기는 진료실이 아닌, 아내와의 대화였습니다.
               </p>
-              <div className="bg-white rounded-xl p-4 italic text-foreground">
+              <div className="bg-[#f0f7fc] rounded-xl p-4 italic text-foreground border-l-4 border-[#5b8fb9]">
                 "우리는 언제쯤 아이를 가져야 할까?"
               </div>
               <p>
@@ -207,23 +239,23 @@ const InfoPage = () => {
         </section>
 
         {/* Section 7: Closing */}
-        <section className="px-6 py-10 bg-gradient-to-br from-[#fff5f7] to-[#ffe4ef] rounded-t-3xl">
+        <section className="px-6 py-10 bg-gradient-to-br from-[#e8f4fc] to-[#d4e9f7]">
           <div className="text-center mb-8">
             <p className="text-muted-foreground text-sm leading-relaxed mb-4">
               이 글을 읽고 있다는 건,<br />
               당신이 이미 <span className="text-foreground font-medium">자신의 몸에 관심을 갖기 시작</span>했다는 뜻입니다.
             </p>
             <p className="text-foreground text-sm leading-relaxed mb-4">
-              그 첫걸음은 정말 <span className="font-semibold text-primary">용기 있는 선택</span>입니다.
+              그 첫걸음은 정말 <span className="font-semibold text-[#5b8fb9]">용기 있는 선택</span>입니다.
             </p>
             <p className="text-muted-foreground text-sm leading-relaxed">
               이제 한 걸음만 더 나아가면,<br />
               명확한 데이터와 전문가의 해석으로<br />
-              <span className="font-semibold bg-gradient-to-r from-transparent via-[#ffebb8]/60 to-transparent">불안 대신 계획</span>을 가질 수 있습니다.
+              <span className="font-semibold bg-gradient-to-r from-transparent via-[#b8d4e8]/60 to-transparent">불안 대신 계획</span>을 가질 수 있습니다.
             </p>
           </div>
 
-          <p className="text-center text-primary font-bold text-lg mb-8">
+          <p className="text-center text-[#5b8fb9] font-bold text-lg mb-8">
             당신의 난소 건강,<br />지금이 가장 빠른 시점입니다. 🌸
           </p>
 
@@ -238,7 +270,7 @@ const InfoPage = () => {
                 placeholder="닉네임 입력" 
                 value={inputName} 
                 onChange={e => setInputName(e.target.value)} 
-                className="h-14 text-base rounded-2xl border-2 border-border focus:border-primary bg-card" 
+                className="h-14 text-base rounded-2xl border-2 border-border focus:border-[#5b8fb9] bg-card" 
                 maxLength={10} 
               />
               <p className="text-xs text-muted-foreground">
@@ -249,7 +281,7 @@ const InfoPage = () => {
             <form onSubmit={handleSubmit}>
               <Button 
                 type="submit" 
-                className="w-full h-14 text-lg font-bold bg-gradient-to-r from-primary to-[#ff8fab] hover:opacity-90 text-white rounded-2xl"
+                className="w-full h-14 text-lg font-bold bg-gradient-to-r from-[#5b8fb9] to-[#7eb3d8] hover:opacity-90 text-white rounded-2xl"
                 disabled={!inputName.trim()}
               >
                 <Sparkles className="w-5 h-5 mr-2" />
