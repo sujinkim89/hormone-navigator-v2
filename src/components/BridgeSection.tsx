@@ -4,17 +4,6 @@ import { EggCharacter } from "@/components/EggCharacter";
 
 export const BridgeSection = () => {
   return <div className="space-y-6">
-      {/* Section 1: Hook */}
-      <div className="bg-card rounded-2xl p-5 shadow-card">
-        <div className="flex items-start gap-3 mb-3">
-          <EggCharacter size="xs" mood="worried" animate={false} />
-          <h3 className="font-display text-lg text-foreground">
-            💭 재미로 본 테스트였는데... 왜 이렇게 정확하죠?
-          </h3>
-        </div>
-      </div>
-
-      {/* Section 2: Why PMS gets worse */}
       
 
       {/* Section 3: Warning */}
