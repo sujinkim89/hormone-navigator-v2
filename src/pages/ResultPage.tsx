@@ -13,31 +13,31 @@ import { useQuizStore } from "@/store/quizStore";
 import { getTypeData, calculateCoordinates } from "@/data/quizData";
 import { Share2, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
-
 const ResultPage = () => {
   const navigate = useNavigate();
-  const { nickname, gender, resultType, answers, resetQuiz } = useQuizStore();
-
+  const {
+    nickname,
+    gender,
+    resultType,
+    answers,
+    resetQuiz
+  } = useQuizStore();
   useEffect(() => {
     if (!resultType || !nickname) {
       navigate('/');
     }
   }, [resultType, nickname, navigate]);
-
   if (!resultType || !nickname || !gender) return null;
-
   const type = getTypeData(resultType, gender);
   const coordinates = calculateCoordinates(answers);
-
   const handleShare = async () => {
     const shareText = `나의 PMS ${gender === 'female' ? '호르몬' : '대응'} 유형은 "${type.title}" ${type.emoji}\n\n나도 테스트하기 👇`;
-    
     if (navigator.share) {
       try {
         await navigator.share({
           title: 'PMS 호르몬 유형 테스트',
           text: shareText,
-          url: window.location.origin,
+          url: window.location.origin
         });
       } catch (err) {
         // User cancelled
@@ -47,14 +47,11 @@ const ResultPage = () => {
       toast.success("클립보드에 복사되었어요!");
     }
   };
-
   const handleRestart = () => {
     resetQuiz();
     navigate('/');
   };
-
-  return (
-    <AuraBackground>
+  return <AuraBackground>
       <div className="min-h-screen px-4 py-6">
         <div className="w-full max-w-md mx-auto">
           {/* Result Header */}
@@ -89,8 +86,7 @@ const ResultPage = () => {
           </div>
 
           {/* BF Guide (Female only) */}
-          {gender === 'female' && type.bfGuide && (
-            <div className="bg-violet/10 border border-violet/30 rounded-2xl p-5 mb-6 animate-fade-up delay-300">
+          {gender === 'female' && type.bfGuide && <div className="bg-violet/10 border border-violet/30 rounded-2xl p-5 mb-6 animate-fade-up delay-300">
               <div className="flex items-center gap-2 mb-3">
                 <span className="text-lg">📢</span>
                 <h3 className="font-medium text-foreground">남친 필독 가이드</h3>
@@ -106,12 +102,7 @@ const ResultPage = () => {
                 </p>
                 
                 {/* CTA for partner test */}
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="w-full bg-violet/20 border-violet/40 hover:bg-violet/30 text-foreground"
-                  onClick={handleShare}
-                >
+                <Button variant="outline" size="sm" className="w-full bg-violet/20 border-violet/40 hover:bg-violet/30 text-foreground" onClick={handleShare}>
                   <Share2 className="w-4 h-4 mr-2" />
                   "자기야, 너도 해봐" 링크 보내기
                 </Button>
@@ -119,8 +110,7 @@ const ResultPage = () => {
                   🔥 궁합 테스트 해보자고 조르기 성공률 87%
                 </p>
               </div>
-            </div>
-          )}
+            </div>}
 
           {/* Compatibility */}
           <div className="grid grid-cols-2 gap-3 mb-8 animate-fade-up delay-300">
@@ -147,12 +137,7 @@ const ResultPage = () => {
           </div>
 
           {/* Section Divider */}
-          <div className="relative my-8 py-6">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent rounded-2xl" />
-            <div className="relative text-center">
-              <span className="text-xs text-muted-foreground bg-background px-4">✨ Premium Content ✨</span>
-            </div>
-          </div>
+          
 
           {/* Bridge Section */}
           <div className="mb-8 animate-fade-up delay-500">
@@ -161,20 +146,11 @@ const ResultPage = () => {
 
           {/* Action Buttons */}
           <div className="flex gap-3 mb-6 animate-fade-up delay-600">
-            <Button 
-              variant="meme" 
-              size="lg" 
-              className="flex-1"
-              onClick={handleShare}
-            >
+            <Button variant="meme" size="lg" className="flex-1" onClick={handleShare}>
               <Share2 className="w-5 h-5" />
               공유하기
             </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              onClick={handleRestart}
-            >
+            <Button variant="outline" size="lg" onClick={handleRestart}>
               <RotateCcw className="w-5 h-5" />
             </Button>
           </div>
@@ -185,8 +161,6 @@ const ResultPage = () => {
           </p>
         </div>
       </div>
-    </AuraBackground>
-  );
+    </AuraBackground>;
 };
-
 export default ResultPage;

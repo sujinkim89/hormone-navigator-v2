@@ -7,9 +7,7 @@ export const BridgeSection = () => {
 
       {/* Section 3: Warning */}
       <div className="bg-gradient-to-br from-rose/20 to-violet/20 border border-rose/30 rounded-2xl p-5">
-        <h3 className="font-display text-lg text-rose mb-4">📉  '감정 폭주' 혹시 난소의 신호일까요?
-
-      </h3>
+        <h3 className="font-display text-lg text-rose mb-4">📉  '감정 폭주' 혹시 난소의 신호일까요?</h3>
         
         
 
@@ -121,35 +119,7 @@ export const BridgeSection = () => {
       </div>
 
       {/* Section 6: CTA Box */}
-      <div className="bg-card rounded-2xl p-5 shadow-card">
-        <h3 className="font-display text-lg text-foreground mb-4">
-          🎯 막연한 불안, 이제 데이터로 바꿔보세요
-        </h3>
-        <div className="bg-muted/50 rounded-xl p-4 mb-4">
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            "나중에 아이 갖고 싶은데... 괜찮을까?"
-            <br />"이 감정 기복, 평생 이러고 살아야 하나?"
-            <br />"갱년기는 대체 언제 오는 거지?"
-            <br /><br /><span className="text-rose font-medium">이런 질문에 '아마도'라는 답은 없어요.</span>
-            <br />숫자로 확인하고, 계획을 세우고, 내 삶의 주도권을 가져오세요.
-          </p>
-        </div>
-
-        <div className="bg-gradient-to-br from-primary/10 to-violet/10 rounded-xl p-4 border border-primary/20">
-          <h4 className="font-medium text-foreground mb-3">🏥 검사는 생각보다 간단해요</h4>
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">소요 시간</span>
-              <span className="font-medium text-foreground">단 5분</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">결과 확인</span>
-              <span className="font-medium text-foreground">3~5일 이내</span>
-            </div>
-            
-          </div>
-        </div>
-      </div>
+      
 
       {/* Section 7: Testimonials */}
       <div className="bg-card rounded-2xl p-5 shadow-card">
@@ -185,13 +155,7 @@ export const BridgeSection = () => {
         <h3 className="font-display text-lg text-foreground text-center mb-4">
           ✨ 지금 이 순간에도, 난소는 나이를 먹고 있어요
         </h3>
-        <p className="text-sm text-muted-foreground text-center mb-6 leading-relaxed">
-          심리테스트는 재밌었죠?
-          <br />하지만 <strong className="text-foreground">진짜 미래는 데이터가 결정해요.</strong>
-          <br /><br />막연한 불안 속에 시간을 보낼 건가요,
-          <br />아니면 명확한 숫자로 내 인생의 주도권을 잡을 건가요?
-          <br /><br /><strong className="text-foreground">선택은 당신의 몫이에요.</strong>
-        </p>
+        
 
         <div className="space-y-3">
           <Button variant="premium" size="lg" className="w-full">
