@@ -131,14 +131,14 @@ const ResultPage = () => {
             <AllTypesSection currentTypeCode={resultType} gender={gender} />
           </div>
 
-          {/* Credibility Section */}
+          {/* Bridge Section */}
           <div className="mb-6 animate-fade-up delay-400">
-            <CredibilitySection />
+            {gender === 'female' ? <BridgeSection /> : <MaleBridgeSection />}
           </div>
 
-          {/* Bridge Section */}
+          {/* Credibility Section */}
           <div className="mb-8 animate-fade-up delay-500">
-            {gender === 'female' ? <BridgeSection /> : <MaleBridgeSection />}
+            <CredibilitySection />
           </div>
 
           {/* Action Buttons */}
