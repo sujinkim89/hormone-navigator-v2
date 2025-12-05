@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { TypeChart } from "@/components/TypeChart";
 import { ResultCarousel } from "@/components/ResultCarousel";
-import { BridgeSection } from "@/components/BridgeSection";
-import { MaleBridgeSection } from "@/components/MaleBridgeSection";
+import { PromoSection } from "@/components/PromoSection";
 import { AllTypesSection } from "@/components/AllTypesSection";
 import { useQuizStore } from "@/store/quizStore";
 import { getTypeData, calculateCoordinates } from "@/data/quizData";
@@ -129,52 +128,37 @@ const ResultPage = () => {
           <section className="mb-8">
             <AllTypesSection currentTypeCode={resultType} gender={gender} />
           </section>
-
-          {/* Credibility */}
-          <section className="mb-8">
-            <div className="bg-gray-50 border-l-4 border-pink-400 rounded-r-lg p-5">
-              <p className="text-base font-bold text-gray-800 mb-2">
-                심리테스트인데 왜 정확하죠?
-              </p>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                라보의 전문성을 기반으로 호르몬 검사
-              </p>
-              <div className="flex flex-wrap gap-3 mt-4 text-xs text-gray-500">
-                <span className="flex items-center gap-1">✓ 전문의 자문</span>
-                <span className="flex items-center gap-1">✓ 임상 데이터 기반</span>
-                <span className="flex items-center gap-1">✓ 1만+ 검증</span>
-              </div>
-            </div>
-          </section>
-
-          {/* Bridge Section */}
-          <section className="mb-8">
-            {gender === 'female' ? <BridgeSection /> : <MaleBridgeSection />}
-          </section>
-
-          {/* Action Buttons */}
-          <div className="flex gap-3 mb-6">
-            <Button 
-              className="flex-1 bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white rounded-xl h-12"
-              onClick={handleShare}
-            >
-              <Share2 className="w-5 h-5 mr-2" />
-              공유하기
-            </Button>
-            <Button 
-              variant="outline" 
-              className="border-2 border-pink-200 hover:bg-pink-50 rounded-xl h-12 px-4"
-              onClick={handleRestart}
-            >
-              <RotateCcw className="w-5 h-5" />
-            </Button>
-          </div>
-
-          {/* Footer */}
-          <p className="text-center text-xs text-gray-400 pb-4">
-            © 2024 PMS 호르몬 유형 분석 · 전문의 자문 기반
-          </p>
         </div>
+
+        {/* Promo Section (Female only) */}
+        {gender === 'female' && (
+          <PromoSection onShare={handleShare} onRestart={handleRestart} />
+        )}
+
+        {/* For Male: Simple buttons */}
+        {gender === 'male' && (
+          <div className="px-6 pb-6">
+            <div className="flex gap-3 mb-6">
+              <Button 
+                className="flex-1 bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white rounded-xl h-12"
+                onClick={handleShare}
+              >
+                <Share2 className="w-5 h-5 mr-2" />
+                공유하기
+              </Button>
+              <Button 
+                variant="outline" 
+                className="border-2 border-pink-200 hover:bg-pink-50 rounded-xl h-12 px-4"
+                onClick={handleRestart}
+              >
+                <RotateCcw className="w-5 h-5" />
+              </Button>
+            </div>
+            <p className="text-center text-xs text-gray-400 pb-4">
+              © 2024 PMS 호르몬 유형 분석 · 전문의 자문 기반
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
