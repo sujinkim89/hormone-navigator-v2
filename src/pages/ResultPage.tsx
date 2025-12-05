@@ -136,9 +136,6 @@ const ResultPage = () => {
             <CredibilitySection />
           </div>
 
-          {/* Section Divider */}
-          
-
           {/* Bridge Section */}
           <div className="mb-8 animate-fade-up delay-500">
             {gender === 'female' ? <BridgeSection /> : <MaleBridgeSection />}
