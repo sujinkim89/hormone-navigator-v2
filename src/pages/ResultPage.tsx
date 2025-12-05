@@ -98,9 +98,27 @@ const ResultPage = () => {
               <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
                 {type.bfGuide}
               </p>
-              <p className="text-xs text-violet mt-3">
-                💡 캡처해서 보내주세요!
-              </p>
+              
+              {/* Share prompt */}
+              <div className="mt-4 pt-4 border-t border-violet/20">
+                <p className="text-xs text-muted-foreground mb-3">
+                  📸 캡쳐해서 파트너에게 공유해보세요!
+                </p>
+                
+                {/* CTA for partner test */}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="w-full bg-violet/20 border-violet/40 hover:bg-violet/30 text-foreground"
+                  onClick={handleShare}
+                >
+                  <Share2 className="w-4 h-4 mr-2" />
+                  "자기야, 너도 해봐" 링크 보내기
+                </Button>
+                <p className="text-[10px] text-violet mt-2 text-center">
+                  🔥 궁합 테스트 해보자고 조르기 성공률 87%
+                </p>
+              </div>
             </div>
           )}
 
