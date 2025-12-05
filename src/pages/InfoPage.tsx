@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { EggCharacter } from "@/components/EggCharacter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { ShaderAnimation } from "@/components/ui/shader-lines";
 import { useQuizStore } from "@/store/quizStore";
 import { Check, Sparkles } from "lucide-react";
 
@@ -26,24 +27,27 @@ const InfoPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-[#ffeef8] via-[#fff5f7] to-[#e8f4fc]">
       <div className="max-w-[480px] mx-auto">
         
-        {/* Section 1: Intro - Why PMS gets worse */}
-        <section className="px-6 py-12 text-center">
-          <h1 className="text-2xl font-bold text-foreground mb-6 leading-relaxed">
-            왜 갈수록 PMS가<br />더 심해지는 걸까요?
-          </h1>
-          <p className="text-muted-foreground text-base leading-relaxed mb-6">
-            "예전엔 이 정도는 아니었는데..."<br />
-            혹시 이런 생각, 해보신 적 있나요?
-          </p>
-          <div className="bg-white/80 rounded-2xl p-5 border-l-4 border-primary">
-            <p className="text-foreground text-sm leading-relaxed">
-              난소의 호르몬이 불규칙해지면,<br />
-              <span className="font-semibold bg-gradient-to-r from-transparent via-[#ffebb8]/60 to-transparent">감정의 파도도 함께 거칠어집니다.</span>
+        {/* Section 1: Intro - Why PMS gets worse with Shader Animation */}
+        <section className="relative px-6 py-16 text-center overflow-hidden min-h-[400px] flex flex-col items-center justify-center">
+          <ShaderAnimation />
+          <div className="relative z-10">
+            <h1 className="text-2xl font-bold text-white mb-6 leading-relaxed drop-shadow-lg">
+              왜 갈수록 PMS가<br />더 심해지는 걸까요?
+            </h1>
+            <p className="text-white/90 text-base leading-relaxed mb-6 drop-shadow-md">
+              "예전엔 이 정도는 아니었는데..."<br />
+              혹시 이런 생각, 해보신 적 있나요?
             </p>
-            <p className="text-muted-foreground text-sm mt-3">
-              이건 당신이 예민해진 게 아니라,<br />
-              <span className="text-primary font-medium">호르몬이 변하고 있다는 신호</span>예요.
-            </p>
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-5 border-l-4 border-primary shadow-xl">
+              <p className="text-foreground text-sm leading-relaxed">
+                난소의 호르몬이 불규칙해지면,<br />
+                <span className="font-semibold bg-gradient-to-r from-transparent via-[#ffebb8]/60 to-transparent">감정의 파도도 함께 거칠어집니다.</span>
+              </p>
+              <p className="text-muted-foreground text-sm mt-3">
+                이건 당신이 예민해진 게 아니라,<br />
+                <span className="text-primary font-medium">호르몬이 변하고 있다는 신호</span>예요.
+              </p>
+            </div>
           </div>
         </section>
 
