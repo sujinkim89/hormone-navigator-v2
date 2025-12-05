@@ -12,13 +12,6 @@ export const BridgeSection = () => {
             💭 재미로 본 테스트였는데... 왜 이렇게 정확하죠?
           </h3>
         </div>
-        <div className="bg-muted/50 rounded-xl p-4">
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            사실, 이건 우연이 아니에요.
-            <br />PMS 기간에 나타나는 감정 변화는 <span className="text-rose font-medium">성격의 문제가 아니라, 호르몬의 언어</span>거든요.
-            <br />당신의 몸이 보내는 신호를 테스트가 읽어낸 거예요.
-          </p>
-        </div>
       </div>
 
       {/* Section 2: Why PMS gets worse */}
