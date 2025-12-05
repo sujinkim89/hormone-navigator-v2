@@ -1,14 +1,11 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuraBackground } from "@/components/AuraBackground";
-import { EggCharacter } from "@/components/EggCharacter";
 import { Button } from "@/components/ui/button";
 import { TypeChart } from "@/components/TypeChart";
 import { ResultCarousel } from "@/components/ResultCarousel";
 import { BridgeSection } from "@/components/BridgeSection";
 import { MaleBridgeSection } from "@/components/MaleBridgeSection";
 import { AllTypesSection } from "@/components/AllTypesSection";
-import { CredibilitySection } from "@/components/CredibilitySection";
 import { useQuizStore } from "@/store/quizStore";
 import { getTypeData, calculateCoordinates } from "@/data/quizData";
 import { Share2, RotateCcw } from "lucide-react";
@@ -54,125 +51,119 @@ const ResultPage = () => {
   };
 
   return (
-    <AuraBackground>
-      <div className="min-h-screen px-4 py-6">
-        <div className="w-full max-w-md mx-auto">
-          {/* Result Header */}
-          <div className="text-center mb-6 animate-fade-up">
-            <div className="flex justify-center mb-3">
-              <EggCharacter size="sm" mood="happy" />
-            </div>
-            <p className="text-sm text-muted-foreground mb-2">
-              {nickname}님의 {gender === 'female' ? '호르몬 자아' : 'PMS 대응 유형'}는...
-            </p>
-            <div className={`inline-block px-6 py-4 rounded-3xl bg-gradient-to-r ${type.color} shadow-meme`}>
-              <span className="text-4xl mb-2 block">{type.emoji}</span>
-              <h1 className="font-display text-2xl text-primary-foreground">
-                {type.title}
-              </h1>
-            </div>
-            {/* Hook Line */}
-            <p className="mt-3 text-sm text-muted-foreground italic">
-              {type.hookLine}
-            </p>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-pink-100 p-4">
+      <div className="max-w-[480px] mx-auto bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] overflow-hidden">
+        
+        {/* Header */}
+        <div className="bg-gradient-to-br from-pink-400 to-pink-300 px-6 py-10 text-center text-white">
+          <p className="text-sm opacity-90 mb-2">
+            {nickname}님의 {gender === 'female' ? '호르몬 자아' : 'PMS 대응 유형'}는...
+          </p>
+          <div className="text-5xl mb-3">{type.emoji}</div>
+          <h1 className="text-2xl font-bold">{type.title}</h1>
+          <p className="text-sm opacity-80 mt-2 italic">{type.hookLine}</p>
+        </div>
 
+        {/* Content */}
+        <div className="p-6">
+          
           {/* Coordinate Chart */}
-          <div className="mb-6 animate-fade-up delay-100">
-            <h3 className="font-display text-lg text-center mb-4">내 호르몬 좌표</h3>
+          <section className="mb-8">
+            <h2 className="text-lg font-bold text-gray-800 mb-4">내 호르몬 좌표</h2>
             <TypeChart x={coordinates.x} y={coordinates.y} />
-          </div>
+          </section>
 
           {/* Carousel Tabs */}
-          <div className="mb-6 animate-fade-up delay-200">
+          <section className="mb-8">
             <ResultCarousel type={type} nickname={nickname} gender={gender} />
-          </div>
+          </section>
 
           {/* BF Guide (Female only) */}
           {gender === 'female' && type.bfGuide && (
-            <div className="bg-violet/10 border border-violet/30 rounded-2xl p-5 mb-6 animate-fade-up delay-300">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-lg">📢</span>
-                <h3 className="font-medium text-foreground">남친 필독 가이드</h3>
-              </div>
-              <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
-                {type.bfGuide}
-              </p>
-              
-              {/* Share prompt */}
-              <div className="mt-4 pt-4 border-t border-violet/20">
-                <p className="text-xs text-muted-foreground mb-3">
-                  📸 캡쳐해서 파트너에게 공유해보세요!
+            <section className="mb-8">
+              <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-5">
+                <h3 className="text-lg font-bold text-pink-500 mb-3 text-center">
+                  📢 남친 필독 가이드
+                </h3>
+                <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">
+                  {type.bfGuide}
                 </p>
-                
-                {/* CTA for partner test */}
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="w-full bg-violet/20 border-violet/40 hover:bg-violet/30 text-foreground"
-                  onClick={handleShare}
-                >
-                  <Share2 className="w-4 h-4 mr-2" />
-                  "자기야, 너도 해봐" 링크 보내기
-                </Button>
-                <p className="text-[10px] text-violet mt-2 text-center">
-                  🔥 궁합 테스트 해보자고 조르기 성공률 87%
-                </p>
+                <div className="mt-4 pt-4 border-t border-amber-200">
+                  <p className="text-xs text-gray-500 mb-3 text-center">
+                    📸 캡쳐해서 파트너에게 공유해보세요!
+                  </p>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full bg-white/80 border-pink-200 hover:bg-pink-50 text-gray-700"
+                    onClick={handleShare}
+                  >
+                    <Share2 className="w-4 h-4 mr-2" />
+                    "자기야, 너도 해봐" 링크 보내기
+                  </Button>
+                  <p className="text-[10px] text-pink-400 mt-2 text-center">
+                    🔥 궁합 테스트 해보자고 조르기 성공률 87%
+                  </p>
+                </div>
               </div>
-            </div>
+            </section>
           )}
 
           {/* Compatibility */}
-          <div className="grid grid-cols-2 gap-3 mb-8 animate-fade-up delay-300">
-            <div className="bg-card rounded-2xl p-4 shadow-card text-center">
-              <span className="text-2xl mb-1 block">🥰</span>
-              <p className="text-xs text-muted-foreground mb-1">BEST 궁합</p>
-              <p className="text-sm font-medium text-foreground">{type.bestMatch}</p>
+          <section className="mb-8">
+            <div className="flex gap-3">
+              <div className="flex-1 bg-gray-50 border-2 border-pink-100 rounded-2xl p-4 text-center hover:shadow-lg hover:-translate-y-0.5 transition-all">
+                <span className="text-3xl mb-2 block">🥰</span>
+                <p className="text-xs text-gray-500 mb-1">BEST 궁합</p>
+                <p className="text-sm font-bold text-gray-800">{type.bestMatch}</p>
+              </div>
+              <div className="flex-1 bg-gray-50 border-2 border-pink-100 rounded-2xl p-4 text-center hover:shadow-lg hover:-translate-y-0.5 transition-all">
+                <span className="text-3xl mb-2 block">😱</span>
+                <p className="text-xs text-gray-500 mb-1">WORST 궁합</p>
+                <p className="text-sm font-bold text-gray-800">{type.worstMatch}</p>
+              </div>
             </div>
-            <div className="bg-card rounded-2xl p-4 shadow-card text-center">
-              <span className="text-2xl mb-1 block">😱</span>
-              <p className="text-xs text-muted-foreground mb-1">WORST 궁합</p>
-              <p className="text-sm font-medium text-foreground">{type.worstMatch}</p>
-            </div>
-          </div>
+          </section>
 
           {/* All Types Section */}
-          <div className="mb-6 animate-fade-up delay-400">
+          <section className="mb-8">
             <AllTypesSection currentTypeCode={resultType} gender={gender} />
-          </div>
+          </section>
 
-          {/* Credibility Section */}
-          <div className="mb-6 animate-fade-up delay-400">
-            <CredibilitySection />
-          </div>
-
-          {/* Section Divider */}
-          <div className="relative my-8 py-6">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent rounded-2xl" />
-            <div className="relative text-center">
-              <span className="text-xs text-muted-foreground bg-background px-4">✨ Premium Content ✨</span>
+          {/* Credibility */}
+          <section className="mb-8">
+            <div className="bg-gray-50 border-l-4 border-pink-400 rounded-r-lg p-5">
+              <p className="text-base font-bold text-gray-800 mb-2">
+                심리테스트인데 왜 정확하죠?
+              </p>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                라보의 전문성을 기반으로 호르몬 검사
+              </p>
+              <div className="flex flex-wrap gap-3 mt-4 text-xs text-gray-500">
+                <span className="flex items-center gap-1">✓ 전문의 자문</span>
+                <span className="flex items-center gap-1">✓ 임상 데이터 기반</span>
+                <span className="flex items-center gap-1">✓ 1만+ 검증</span>
+              </div>
             </div>
-          </div>
+          </section>
 
           {/* Bridge Section */}
-          <div className="mb-8 animate-fade-up delay-500">
+          <section className="mb-8">
             {gender === 'female' ? <BridgeSection /> : <MaleBridgeSection />}
-          </div>
+          </section>
 
           {/* Action Buttons */}
-          <div className="flex gap-3 mb-6 animate-fade-up delay-600">
+          <div className="flex gap-3 mb-6">
             <Button 
-              variant="meme" 
-              size="lg" 
-              className="flex-1"
+              className="flex-1 bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white rounded-xl h-12"
               onClick={handleShare}
             >
-              <Share2 className="w-5 h-5" />
+              <Share2 className="w-5 h-5 mr-2" />
               공유하기
             </Button>
             <Button 
               variant="outline" 
-              size="lg"
+              className="border-2 border-pink-200 hover:bg-pink-50 rounded-xl h-12 px-4"
               onClick={handleRestart}
             >
               <RotateCcw className="w-5 h-5" />
@@ -180,12 +171,12 @@ const ResultPage = () => {
           </div>
 
           {/* Footer */}
-          <p className="text-center text-xs text-muted-foreground">
+          <p className="text-center text-xs text-gray-400 pb-4">
             © 2024 PMS 호르몬 유형 분석 · 전문의 자문 기반
           </p>
         </div>
       </div>
-    </AuraBackground>
+    </div>
   );
 };
 
