@@ -1,8 +1,9 @@
 import { Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import appMockup from "@/assets/app-mockup-presentation.png";
+import appMockup from "@/assets/app-mockup-transparent.png";
 import hormoneCharacters from "@/assets/hormone-characters-trio.png";
+import rhaboLogo from "@/assets/rhabo-logo-white.png";
 
 export const BridgeSection = () => {
   return (
@@ -95,9 +96,11 @@ export const BridgeSection = () => {
           viewport={{ once: true }}
           className="text-center mb-6"
         >
-          <h2 className="text-4xl font-black text-[#4A7CFF] tracking-wider mb-3">
-            RHA"BO
-          </h2>
+          <img 
+            src={rhaboLogo} 
+            alt="RHABO 로고" 
+            className="h-10 mx-auto mb-4"
+          />
           <p className="text-[13px] text-slate-400 tracking-wide-mobile">
             <span className="text-[#4A7CFF] font-semibold">의사</span>가 직접 만든
           </p>
@@ -106,7 +109,7 @@ export const BridgeSection = () => {
           </p>
         </motion.div>
 
-        {/* Mobile Mockup Image */}
+        {/* Mobile Mockup Image - Transparent Background */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
