@@ -47,11 +47,11 @@ export const BridgeSection = () => {
           viewport={{ once: true }}
           className="mb-10"
         >
-          <div className="text-center mb-6">
-            <h3 className="text-[22px] font-extrabold text-white mb-2 tracking-tight leading-tight">
+          <div className="text-center mb-5">
+            <h3 className="text-[20px] font-bold text-white mb-1.5 tracking-tight leading-tight font-pretendard">
               불안을 데이터로 바꿔야 합니다.
             </h3>
-            <p className="text-[13px] text-slate-400 tracking-wide-mobile">
+            <p className="text-[12px] text-slate-400 tracking-normal-mobile font-pretendard">
               우리 몸에는 여성 3대 호르몬이 있습니다.
             </p>
           </div>
