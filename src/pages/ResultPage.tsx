@@ -49,7 +49,18 @@ const ResultPage = () => {
 
   const percentile = calculatePercentile(coordinates.x, coordinates.y);
 
-  // Get main and sub hormone info
+  // Calculate percentile based on answer count
+  const getPercentileFromCount = (count: number, total: number) => {
+    const ratio = count / total;
+    if (ratio >= 1) return 1;
+    if (ratio >= 0.8) return 5;
+    if (ratio >= 0.7) return 10;
+    if (ratio >= 0.6) return 15;
+    if (ratio >= 0.5) return 25;
+    return 35;
+  };
+
+  // Get main and sub hormone info with percentiles
   const getHormoneInfo = () => {
     const hormones = {
       T: { name: '테스토스테론', emoji: '⚡', desc: '목표 쉐도 모드. 논리로 감정을 눌러버리고 해결책을 찾아 직진하는 전투형 호르몬.' },
@@ -58,14 +69,30 @@ const ResultPage = () => {
       S: { name: '세로토닌', emoji: '🌿', desc: '안정 추구 모드. 예측 가능한 루틴과 평화로운 환경 속에서 에너지를 충전하는 균형형 호르몬.' },
     };
 
-    // Parse resultType to get main and sub hormones
-    // Format: TD_T, TS_S, ED_D, ES_T etc.
+    // Count answers per hormone type
+    // TE axis: questions 8, 9, 10 (3 questions)
+    // DS axis: questions 1-7 (7 questions)
+    let tCount = 0, eCount = 0, dCount = 0, sCount = 0;
+    
+    Object.entries(answers).forEach(([questionId, answer]) => {
+      const id = Number(questionId);
+      if (id >= 8) {
+        // TE axis
+        if (answer === 'T') tCount++;
+        else if (answer === 'E') eCount++;
+      } else {
+        // DS axis
+        if (answer === 'D') dCount++;
+        else if (answer === 'S') sCount++;
+      }
+    });
+
+    // Determine main and sub hormones
     const parts = resultType.split('_');
     let main: 'T' | 'E' | 'D' | 'S' = 'T';
     let sub: 'T' | 'E' | 'D' | 'S' = 'D';
 
     if (parts.length >= 1) {
-      // First part like "TD", "TS", "ED", "ES"
       const firstPart = parts[0];
       if (firstPart.includes('T')) main = 'T';
       else if (firstPart.includes('E')) main = 'E';
@@ -74,7 +101,19 @@ const ResultPage = () => {
       else if (firstPart.includes('S')) sub = 'S';
     }
 
-    return { main: hormones[main], sub: hormones[sub] };
+    // Calculate percentiles
+    const mainPercentile = main === 'T' || main === 'E' 
+      ? getPercentileFromCount(main === 'T' ? tCount : eCount, 3)
+      : getPercentileFromCount(main === 'D' ? dCount : sCount, 7);
+    
+    const subPercentile = sub === 'D' || sub === 'S'
+      ? getPercentileFromCount(sub === 'D' ? dCount : sCount, 7)
+      : getPercentileFromCount(sub === 'T' ? tCount : eCount, 3);
+
+    return { 
+      main: { ...hormones[main], percentile: mainPercentile }, 
+      sub: { ...hormones[sub], percentile: subPercentile } 
+    };
   };
 
   const hormoneInfo = getHormoneInfo();
@@ -163,7 +202,10 @@ const ResultPage = () => {
                     <span className="text-lg">{hormoneInfo.main.emoji}</span>
                     <span className="font-bold text-foreground">주지배: {hormoneInfo.main.name}</span>
                   </div>
-                  <span className="text-xs bg-[#9D4EDD] text-white px-2 py-1 rounded-full font-medium">MAIN</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-[#9D4EDD] font-bold">상위 {hormoneInfo.main.percentile}%</span>
+                    <span className="text-xs bg-[#9D4EDD] text-white px-2 py-1 rounded-full font-medium">MAIN</span>
+                  </div>
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {hormoneInfo.main.desc}
@@ -177,7 +219,10 @@ const ResultPage = () => {
                     <span className="text-lg">{hormoneInfo.sub.emoji}</span>
                     <span className="font-bold text-foreground">부지배: {hormoneInfo.sub.name}</span>
                   </div>
-                  <span className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-full font-medium">SUB</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-muted-foreground font-bold">상위 {hormoneInfo.sub.percentile}%</span>
+                    <span className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-full font-medium">SUB</span>
+                  </div>
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {hormoneInfo.sub.desc}
