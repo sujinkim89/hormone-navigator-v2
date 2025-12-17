@@ -31,27 +31,23 @@ const ResultPage = () => {
   const type = getTypeData(resultType, gender);
   const coordinates = calculateCoordinates(answers);
 
-  // Calculate percentile based on how extreme the position is
+  // Calculate percentile based on how extreme the position is (10 questions total: 7 DS + 3 TE)
   const calculatePercentile = (x: number, y: number) => {
-    // Distance from center (0,0) - more extreme = rarer
+    // Count how many answers lean toward extremes
+    // DS axis: 7 questions, TE axis: 3 questions
+    const dsCount = Object.keys(answers).filter(k => Number(k) <= 7).length;
+    const teCount = Object.keys(answers).filter(k => Number(k) > 7).length;
+    
+    // Distance from center based on actual answer distribution
     const distance = Math.sqrt(x * x + y * y);
-    // Max distance would be sqrt(2) ≈ 1.414 if both x and y are at max
     const maxDistance = Math.sqrt(2);
-    // Convert to percentile (higher distance = lower percentile = rarer)
-    const percentile = Math.round((1 - distance / maxDistance) * 50) + 1;
-    return Math.max(1, Math.min(50, percentile));
+    
+    // More extreme positions = rarer = lower percentile
+    const rawPercentile = Math.round((1 - distance / maxDistance) * 40) + 1;
+    return Math.max(1, Math.min(50, rawPercentile));
   };
 
   const percentile = calculatePercentile(coordinates.x, coordinates.y);
-
-  // Get type description based on result
-  const getTypeDescription = () => {
-    if (resultType.includes('TD') || resultType.includes('DT')) return '치타형 리더';
-    if (resultType.includes('TS') || resultType.includes('ST')) return '판다형 완벽주의자';
-    if (resultType.includes('ED') || resultType.includes('DE')) return '햄스터형 감성파';
-    if (resultType.includes('ES') || resultType.includes('SE')) return '늘보형 힐러';
-    return '독특한 유형';
-  };
 
   // Get main and sub hormone info
   const getHormoneInfo = () => {
@@ -163,13 +159,13 @@ const ResultPage = () => {
               <div className="flex justify-center mb-3">
                 <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#9D4EDD] to-[#7C3AED] text-white px-4 py-2 rounded-full">
                   <span className="font-bold">상위 {percentile}%</span>
-                  <span className="text-white/80 text-sm">{getTypeDescription()}</span>
+                  <span className="text-white/80 text-sm">{type.title}</span>
                 </div>
               </div>
 
-              {/* Description */}
+              {/* Description - aligned with type hookLine */}
               <p className="text-center text-sm text-muted-foreground mb-4">
-                빠른 결단력으로 조직을 이끄는 추진형
+                {type.hookLine}
               </p>
 
               {/* Chart */}
