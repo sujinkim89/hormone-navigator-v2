@@ -88,25 +88,41 @@ export const BridgeSection = () => {
           </div>
         </motion.div>
 
-        {/* Logo and Tagline */}
+        {/* RHABO Introduction - Above Mockup */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
-          className="text-center mb-6"
+          className="mb-8"
         >
-          <img 
-            src={rhaboLogo} 
-            alt="RHABO 로고" 
-            className="h-10 mx-auto mb-4"
-          />
-          <p className="text-[13px] text-slate-400 tracking-wide-mobile">
-            <span className="text-[#4A7CFF] font-semibold">의사</span>가 직접 만든
-          </p>
-          <p className="text-white font-semibold text-[15px] tracking-tight-mobile">
-            여성호르몬 분석 서비스
-          </p>
+          {/* White Card Container */}
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mx-2">
+            {/* RHABO Logo Text */}
+            <div className="text-center mb-4">
+              <h2 className="text-3xl font-bold tracking-tight">
+                <span className="text-[#1E3A5F]">RHA</span>
+                <span className="text-[#9D4EDD]">"</span>
+                <span className="text-[#1E3A5F]">BO</span>
+              </h2>
+            </div>
+            
+            {/* Main Description */}
+            <p className="text-center text-[#1E3A5F] font-bold text-[15px] mb-5 tracking-tight font-pretendard">
+              전문의가 직접 운영하는 라보 여성 호르몬 3종 검사
+            </p>
+            
+            {/* Trust Badges */}
+            <div className="flex flex-wrap justify-center items-center gap-x-3 gap-y-1 text-[11px] text-slate-500 font-pretendard">
+              <span>전문의 창업</span>
+              <span className="text-[#9D4EDD]">•</span>
+              <span>전문의 자문</span>
+              <span className="text-[#9D4EDD]">•</span>
+              <span>임상 데이터 기반</span>
+              <span className="text-[#9D4EDD]">•</span>
+              <span>1만+ 검증</span>
+            </div>
+          </div>
         </motion.div>
 
         {/* Mobile Mockup Image - Transparent Background */}
