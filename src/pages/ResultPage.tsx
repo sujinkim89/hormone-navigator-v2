@@ -89,7 +89,7 @@ const ResultPage = () => {
           {gender === 'female' && type.bfGuide && <div className="bg-violet/10 border border-violet/30 rounded-2xl p-5 mb-6 animate-fade-up delay-300">
               <div className="flex items-center gap-2 mb-3">
                 <span className="text-lg">📢</span>
-                <h3 className="font-medium text-foreground">남친 필독 가이드</h3>
+                <h3 className="font-medium text-foreground">연인 필독 가이드</h3>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
                 {type.bfGuide}
