@@ -52,21 +52,21 @@ const QuizPage = () => {
         <div className="w-full max-w-md mx-auto flex-1 flex flex-col">
           {/* Progress Header */}
           <div className="mb-6 animate-fade-up">
+            {/* Back Button */}
+            {currentQuestion > 0 && (
+              <button
+                onClick={goBack}
+                className="flex items-center gap-1 mb-3 px-3 py-1.5 rounded-full bg-muted/80 hover:bg-muted transition-colors text-sm font-medium text-muted-foreground"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                이전 질문
+              </button>
+            )}
+            
             <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                {currentQuestion > 0 && (
-                  <button
-                    onClick={goBack}
-                    className="p-1 rounded-full hover:bg-muted/50 transition-colors"
-                    aria-label="이전 질문"
-                  >
-                    <ChevronLeft className="w-5 h-5 text-muted-foreground" />
-                  </button>
-                )}
-                <span className="text-sm font-medium text-muted-foreground">
-                  Q{currentQuestion + 1} / {quizQuestions.length}
-                </span>
-              </div>
+              <span className="text-sm font-medium text-muted-foreground">
+                Q{currentQuestion + 1} / {quizQuestions.length}
+              </span>
               <span className="text-sm font-medium text-primary">
                 {Math.round(progress)}%
               </span>
