@@ -85,45 +85,55 @@ const ResultPage = () => {
             <TypeChart x={coordinates.x} y={coordinates.y} />
           </div>
 
-          {/* BF Guide (Female only) */}
-          {gender === 'female' && type.bfGuide && <div className="bg-violet/10 border border-violet/30 rounded-2xl p-5 mb-6 animate-fade-up delay-300">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-lg">📢</span>
-                <h3 className="font-medium text-foreground">연인 필독 가이드</h3>
-              </div>
-              <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
-                {type.bfGuide}
-              </p>
-              
-              {/* Share prompt */}
-              <div className="mt-4 pt-4 border-t border-violet/20">
-                <p className="text-xs text-muted-foreground mb-3">
-                  📸 캡쳐해서 파트너에게 공유해보세요!
-                </p>
-                
-                {/* CTA for partner test */}
-                <Button variant="outline" size="sm" className="w-full bg-violet/20 border-violet/40 hover:bg-violet/30 text-foreground" onClick={handleShare}>
-                  <Share2 className="w-4 h-4 mr-2" />
-                  "자기야, 너도 해봐" 링크 보내기
-                </Button>
-                <p className="text-[10px] text-violet mt-2 text-center">
-                  🔥 궁합 테스트 해보자고 조르기 성공률 87%
-                </p>
-              </div>
-            </div>}
+          {/* Partner Guide Section */}
+          <div className="bg-gradient-to-br from-[#F8E8FF] to-[#E8D4F8] rounded-3xl p-4 mb-6 animate-fade-up delay-300 shadow-card">
+            {/* Header */}
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-xl">👫</span>
+              <h3 className="font-display text-lg font-bold text-[#9D4EDD]">
+                연인/친구 가이드
+              </h3>
+            </div>
 
-          {/* Compatibility */}
-          <div className="grid grid-cols-2 gap-3 mb-8 animate-fade-up delay-300">
-            <div className="bg-card rounded-2xl p-4 shadow-card text-center">
-              <span className="text-2xl mb-1 block">🥰</span>
-              <p className="text-xs text-muted-foreground mb-1">BEST 궁합</p>
-              <p className="text-sm font-medium text-foreground">{type.bestMatch}</p>
+            {/* Guide Content */}
+            {type.bfGuide && (
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 mb-3">
+                <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
+                  {type.bfGuide}
+                </p>
+              </div>
+            )}
+
+            {/* Compatibility Section */}
+            <p className="text-center text-sm text-muted-foreground mb-3">
+              PMS 대처유형 궁합
+            </p>
+            <div className="grid grid-cols-2 gap-3 mb-4">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 text-center">
+                <p className="text-xs text-muted-foreground mb-1">BEST 궁합</p>
+                <p className="text-sm font-bold text-foreground">{type.bestMatch}</p>
+                <p className="text-xs text-[#9D4EDD] mt-1">서로 부족한 부분을 채워줌</p>
+              </div>
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 text-center">
+                <p className="text-xs text-muted-foreground mb-1">WORST 궁합</p>
+                <p className="text-sm font-bold text-foreground">{type.worstMatch}</p>
+                <p className="text-xs text-rose-500 mt-1">감정 충돌 위험 높음</p>
+              </div>
             </div>
-            <div className="bg-card rounded-2xl p-4 shadow-card text-center">
-              <span className="text-2xl mb-1 block">😱</span>
-              <p className="text-xs text-muted-foreground mb-1">WORST 궁합</p>
-              <p className="text-sm font-medium text-foreground">{type.worstMatch}</p>
-            </div>
+
+            {/* CTA Button */}
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="w-full bg-white/90 border-[#9D4EDD]/30 hover:bg-white text-foreground font-medium"
+              onClick={handleShare}
+            >
+              <Share2 className="w-5 h-5 mr-2 text-[#9D4EDD]" />
+              테스트 링크 공유하기
+            </Button>
+            <p className="text-xs text-center text-[#9D4EDD] mt-2">
+              "궁합 테스트하고 PMS 평화협정 맺기"
+            </p>
           </div>
 
           {/* All Types Section */}
