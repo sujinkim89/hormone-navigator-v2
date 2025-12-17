@@ -275,36 +275,36 @@ const ResultPage = () => {
           {/* Partner Guide Section */}
           <div className="bg-gradient-to-br from-[#F8E8FF] to-[#E8D4F8] rounded-2xl p-3 mb-5 animate-fade-up delay-300 shadow-card">
             {/* Header */}
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-lg">👫</span>
-              <h3 className="font-display text-base font-bold text-[#9D4EDD]">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="text-xl">👫</span>
+              <h3 className="font-display text-lg font-bold text-[#9D4EDD]">
                 연인/친구 가이드
               </h3>
             </div>
 
             {/* Guide Content */}
             {type.bfGuide && (
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 mb-3">
-                <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 mb-3">
+                <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
                   {type.bfGuide}
                 </p>
               </div>
             )}
 
             {/* Compatibility Section */}
-            <p className="text-center text-xs text-muted-foreground mb-2">
+            <p className="text-center text-sm text-muted-foreground mb-2">
               PMS 대처유형 궁합
             </p>
             <div className="grid grid-cols-2 gap-2">
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2.5 text-center">
-                <p className="text-[10px] text-muted-foreground mb-0.5">BEST 궁합</p>
-                <p className="text-[11px] font-bold text-foreground leading-tight">{compatibility.best}</p>
-                <p className="text-[9px] text-[#9D4EDD] mt-0.5 leading-tight">{compatibility.bestReason}</p>
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-3 text-center">
+                <p className="text-xs text-muted-foreground mb-1">BEST 궁합</p>
+                <p className="text-sm font-bold text-foreground leading-tight">{compatibility.best}</p>
+                <p className="text-xs text-[#9D4EDD] mt-1 leading-tight">{compatibility.bestReason}</p>
               </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2.5 text-center">
-                <p className="text-[10px] text-muted-foreground mb-0.5">WORST 궁합</p>
-                <p className="text-[11px] font-bold text-foreground leading-tight">{compatibility.worst}</p>
-                <p className="text-[9px] text-rose-500 mt-0.5 leading-tight">{compatibility.worstReason}</p>
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-3 text-center">
+                <p className="text-xs text-muted-foreground mb-1">WORST 궁합</p>
+                <p className="text-sm font-bold text-foreground leading-tight">{compatibility.worst}</p>
+                <p className="text-xs text-rose-500 mt-1 leading-tight">{compatibility.worstReason}</p>
               </div>
             </div>
           </div>
