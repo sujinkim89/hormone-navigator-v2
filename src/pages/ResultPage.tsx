@@ -122,26 +122,9 @@ const ResultPage = () => {
             </div>
             
             {/* Hook Line */}
-            <p className="text-base text-foreground font-medium px-4 mb-6">
+            <p className="text-base text-foreground font-medium px-4">
               "{type.hookLine}"
             </p>
-
-            {/* Age Comparison */}
-            <div className="inline-flex items-center gap-4 bg-card rounded-2xl px-6 py-4 shadow-card">
-              <div className="text-center">
-                <p className="text-xs text-muted-foreground flex items-center justify-center gap-1">
-                  <span>👶</span> 외모
-                </p>
-                <p className="text-2xl font-bold text-primary">24세</p>
-              </div>
-              <span className="text-sm text-muted-foreground font-medium">VS</span>
-              <div className="text-center">
-                <p className="text-xs text-muted-foreground flex items-center justify-center gap-1">
-                  <span>🔥</span> 호르몬
-                </p>
-                <p className="text-2xl font-bold text-[#FF6B6B]">38세</p>
-              </div>
-            </div>
           </div>
 
           {/* Hormone DNA Section with Chart */}
