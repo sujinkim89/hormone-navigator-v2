@@ -77,7 +77,7 @@ const QuizPage = () => {
           {/* Question Card */}
           <div className="flex-1 flex flex-col justify-center">
             {/* Situation */}
-            <div className="rounded-2xl p-5 shadow-card mb-6 animate-fade-up delay-100" style={{ background: 'linear-gradient(to right, #A78BBA, #7B5BA0)' }}>
+            <div className="bg-gradient-to-r from-[#CE84FC] to-[#865AE8] rounded-2xl p-5 shadow-card mb-6 animate-fade-up delay-100">
               <div className="text-sm text-white/80 mb-2">현재 상황은?</div>
               <p className="text-base font-medium text-white leading-relaxed">
                 {question.situation}
