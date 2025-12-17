@@ -309,7 +309,17 @@ const ResultPage = () => {
             </div>
           </div>
 
-          {/* Bridge Section - with gradient background start */}
+          {/* Action Buttons - After Partner Guide */}
+          <div className="flex gap-3 mb-5 animate-fade-up delay-300">
+            <Button variant="meme" size="lg" className="flex-1" onClick={handleShare}>
+              <Share2 className="w-5 h-5" />
+              공유하기
+            </Button>
+            <Button variant="outline" size="lg" onClick={handleRestart}>
+              <RotateCcw className="w-5 h-5" />
+            </Button>
+          </div>
+
           {/* Bridge Section - with gradient background start */}
           <div className="mb-6 animate-fade-up delay-400">
             {gender === 'female' ? <BridgeSection /> : <MaleBridgeSection />}
@@ -318,17 +328,6 @@ const ResultPage = () => {
           {/* Credibility Section */}
           <div className="mb-8 animate-fade-up delay-500">
             <CredibilitySection />
-          </div>
-
-          {/* Action Buttons */}
-          <div className="flex gap-3 mb-6 animate-fade-up delay-600">
-            <Button variant="meme" size="lg" className="flex-1" onClick={handleShare}>
-              <Share2 className="w-5 h-5" />
-              공유하기
-            </Button>
-            <Button variant="outline" size="lg" onClick={handleRestart}>
-              <RotateCcw className="w-5 h-5" />
-            </Button>
           </div>
 
           {/* Footer */}
