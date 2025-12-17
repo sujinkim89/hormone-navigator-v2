@@ -6,11 +6,13 @@ interface QuizState {
   currentQuestion: number;
   answers: string[];
   resultType: string | null;
+  lastSelectedIndex: number | null;
   
   setNickname: (name: string) => void;
   setGender: (gender: 'female' | 'male') => void;
   setCurrentQuestion: (q: number) => void;
-  addAnswer: (answer: string) => void;
+  addAnswer: (answer: string, index: number) => void;
+  goBack: () => void;
   setResultType: (type: string) => void;
   resetQuiz: () => void;
 }
@@ -21,14 +23,26 @@ export const useQuizStore = create<QuizState>((set) => ({
   currentQuestion: 0,
   answers: [],
   resultType: null,
+  lastSelectedIndex: null,
   
   setNickname: (name) => set({ nickname: name }),
   setGender: (gender) => set({ gender }),
   setCurrentQuestion: (q) => set({ currentQuestion: q }),
-  addAnswer: (answer) => set((state) => ({ 
+  addAnswer: (answer, index) => set((state) => ({ 
     answers: [...state.answers, answer],
     currentQuestion: state.currentQuestion + 1,
+    lastSelectedIndex: index,
   })),
+  goBack: () => set((state) => {
+    if (state.currentQuestion > 0) {
+      return {
+        currentQuestion: state.currentQuestion - 1,
+        answers: state.answers.slice(0, -1),
+        lastSelectedIndex: null,
+      };
+    }
+    return state;
+  }),
   setResultType: (type) => set({ resultType: type }),
   resetQuiz: () => set({
     nickname: '',
@@ -36,5 +50,6 @@ export const useQuizStore = create<QuizState>((set) => ({
     currentQuestion: 0,
     answers: [],
     resultType: null,
+    lastSelectedIndex: null,
   }),
 }));

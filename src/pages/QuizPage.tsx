@@ -6,10 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useQuizStore } from "@/store/quizStore";
 import { femaleQuizQuestions, maleQuizQuestions, calculateType } from "@/data/quizData";
+import { ChevronLeft } from "lucide-react";
 
 const QuizPage = () => {
   const navigate = useNavigate();
-  const { nickname, gender, currentQuestion, answers, addAnswer, setResultType } = useQuizStore();
+  const { nickname, gender, currentQuestion, answers, addAnswer, goBack, setResultType, lastSelectedIndex } = useQuizStore();
 
   // Redirect if no nickname
   useEffect(() => {
@@ -31,8 +32,8 @@ const QuizPage = () => {
     return "happy";
   }, [progress]);
 
-  const handleAnswer = (type: string) => {
-    addAnswer(type);
+  const handleAnswer = (type: string, index: number) => {
+    addAnswer(type, index);
     
     // Check if this was the last question
     if (currentQuestion === quizQuestions.length - 1) {
@@ -52,9 +53,20 @@ const QuizPage = () => {
           {/* Progress Header */}
           <div className="mb-6 animate-fade-up">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-muted-foreground">
-                Q{currentQuestion + 1} / {quizQuestions.length}
-              </span>
+              <div className="flex items-center gap-2">
+                {currentQuestion > 0 && (
+                  <button
+                    onClick={goBack}
+                    className="p-1 rounded-full hover:bg-muted/50 transition-colors"
+                    aria-label="이전 질문"
+                  >
+                    <ChevronLeft className="w-5 h-5 text-muted-foreground" />
+                  </button>
+                )}
+                <span className="text-sm font-medium text-muted-foreground">
+                  Q{currentQuestion + 1} / {quizQuestions.length}
+                </span>
+              </div>
               <span className="text-sm font-medium text-primary">
                 {Math.round(progress)}%
               </span>
@@ -86,8 +98,10 @@ const QuizPage = () => {
                   key={index}
                   variant="quiz"
                   size="lg"
-                  className="w-full h-auto py-4 px-5 text-left justify-start whitespace-normal"
-                  onClick={() => handleAnswer(option.type)}
+                  className={`w-full h-auto py-4 px-5 text-left justify-start whitespace-normal ${
+                    lastSelectedIndex === index ? 'ring-2 ring-primary ring-offset-2' : ''
+                  }`}
+                  onClick={() => handleAnswer(option.type, index)}
                 >
                   <span className="text-base leading-relaxed">
                     {option.text}
