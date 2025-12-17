@@ -10,7 +10,7 @@ import { MaleBridgeSection } from "@/components/MaleBridgeSection";
 import { AllTypesSection } from "@/components/AllTypesSection";
 import { CredibilitySection } from "@/components/CredibilitySection";
 import { useQuizStore } from "@/store/quizStore";
-import { getTypeData, calculateCoordinates } from "@/data/quizData";
+import { getTypeData, calculateCoordinates, maleTypes } from "@/data/quizData";
 import { Share2, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
 const ResultPage = () => {
@@ -118,6 +118,42 @@ const ResultPage = () => {
 
   const hormoneInfo = getHormoneInfo();
 
+  // Get compatibility info from male types
+  const getCompatibilityInfo = () => {
+    // Map female type emoji to male type
+    const compatibilityMap: Record<string, { best: string; worst: string; bestReason: string; worstReason: string }> = {
+      '번개치타': { best: 'TD_T', worst: 'TD_D', bestReason: '서로 부족한 부분을 채워줌', worstReason: '해결 vs 폭발 충돌' },
+      '꾸덕거북': { best: 'TS_T', worst: 'TS_S', bestReason: '서로 부족한 부분을 채워줌', worstReason: '둔감 vs 예민 충돌' },
+      '살랑햄스터': { best: 'ES_E', worst: 'ES_S', bestReason: '서로 부족한 부분을 채워줌', worstReason: '냉정 vs 예민 충돌' },
+      '몽글늘보': { best: 'TD_D', worst: 'TD_T', bestReason: '서로 부족한 부분을 채워줌', worstReason: '속도 차이로 스트레스' },
+      '스파크카멜레온': { best: 'ES_S', worst: 'TS_S', bestReason: '서로 부족한 부분을 채워줌', worstReason: '예측 불가 vs 계획 충돌' },
+      '감성수달': { best: 'TS_T', worst: 'ED_E', bestReason: '서로 부족한 부분을 채워줌', worstReason: '소통 부재로 서운함 누적' },
+    };
+    
+    const typeTitle = type.title;
+    const match = compatibilityMap[typeTitle];
+    
+    if (match) {
+      const bestType = maleTypes[match.best];
+      const worstType = maleTypes[match.worst];
+      return {
+        best: bestType ? `${bestType.emoji} ${bestType.title}` : type.bestMatch,
+        worst: worstType ? `${worstType.emoji} ${worstType.title}` : type.worstMatch,
+        bestReason: match.bestReason,
+        worstReason: match.worstReason,
+      };
+    }
+    
+    return {
+      best: type.bestMatch,
+      worst: type.worstMatch,
+      bestReason: '서로 부족한 부분을 채워줌',
+      worstReason: '감정 충돌 위험 높음',
+    };
+  };
+
+  const compatibility = getCompatibilityInfo();
+
   const handleShare = async () => {
     const shareText = `나의 PMS ${gender === 'female' ? '호르몬' : '대응'} 유형은 "${type.title}" ${type.emoji}\n\n나도 테스트하기 👇`;
     if (navigator.share) {
@@ -143,88 +179,88 @@ const ResultPage = () => {
       <div className="min-h-screen px-4 py-6">
         <div className="w-full max-w-md mx-auto">
           {/* Result Header - Hero Section */}
-          <div className="text-center mb-8 animate-fade-up">
-            <p className="text-sm text-muted-foreground mb-4">
+          <div className="text-center mb-6 animate-fade-up">
+            <p className="text-sm text-muted-foreground mb-3">
               {nickname}님의 {gender === 'female' ? '호르몬 자아' : 'PMS 대응 유형'}는...
             </p>
             
             {/* Title Badge */}
-            <div className={`inline-block px-8 py-3 rounded-full bg-gradient-to-r ${type.color} shadow-meme mb-6`}>
-              <h1 className="font-display text-2xl text-primary-foreground">
+            <div className={`inline-block px-6 py-2.5 rounded-full bg-gradient-to-r ${type.color} shadow-meme mb-4`}>
+              <h1 className="font-display text-xl text-primary-foreground">
                 {type.title}
               </h1>
             </div>
 
             {/* Large Emoji */}
-            <div className="text-8xl mb-4 drop-shadow-lg">
+            <div className="text-7xl mb-3 drop-shadow-lg">
               {type.emoji}
             </div>
             
             {/* Hook Line */}
-            <p className="text-base text-foreground font-medium px-4">
+            <p className="text-sm text-foreground font-medium px-2 leading-relaxed">
               "{type.hookLine}"
             </p>
           </div>
 
           {/* Hormone DNA Section with Chart */}
-          <div className="mb-6 animate-fade-up delay-100">
-            <div className="bg-gradient-to-br from-[#F8E8FF] to-[#E8D4F8] rounded-3xl p-4 shadow-card">
+          <div className="mb-5 animate-fade-up delay-100">
+            <div className="bg-gradient-to-br from-[#F8E8FF] to-[#E8D4F8] rounded-2xl p-3 shadow-card">
               {/* Header */}
-              <div className="flex items-center justify-center gap-2 mb-4">
-                <span className="text-xl">🧬</span>
-                <h3 className="font-display text-lg font-bold text-[#9D4EDD]">
+              <div className="flex items-center justify-center gap-2 mb-3">
+                <span className="text-lg">🧬</span>
+                <h3 className="font-display text-base font-bold text-[#9D4EDD]">
                   내 호르몬 DNA
                 </h3>
               </div>
 
               {/* Percentile Badge */}
-              <div className="flex justify-center mb-3">
-                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#9D4EDD] to-[#7C3AED] text-white px-4 py-2 rounded-full">
+              <div className="flex justify-center mb-2">
+                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#9D4EDD] to-[#7C3AED] text-white px-3 py-1.5 rounded-full text-sm">
                   <span className="font-bold">상위 {percentile}%</span>
-                  <span className="text-white/80 text-sm">{type.title}</span>
+                  <span className="text-white/80 text-xs">{type.title}</span>
                 </div>
               </div>
 
               {/* Description - aligned with type hookLine */}
-              <p className="text-center text-sm text-muted-foreground mb-4">
+              <p className="text-center text-xs text-muted-foreground mb-3">
                 {type.hookLine}
               </p>
 
               {/* Chart */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 mb-4">
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 mb-3">
                 <TypeChart x={coordinates.x} y={coordinates.y} />
               </div>
 
               {/* Main Hormone */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 mb-3 border-l-4 border-[#9D4EDD]">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg">{hormoneInfo.main.emoji}</span>
-                    <span className="font-bold text-foreground">주지배: {hormoneInfo.main.name}</span>
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 mb-2 border-l-4 border-[#9D4EDD]">
+                <div className="flex items-center justify-between mb-1.5">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-base">{hormoneInfo.main.emoji}</span>
+                    <span className="font-bold text-foreground text-sm">주지배: {hormoneInfo.main.name}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-[#9D4EDD] font-bold">상위 {hormoneInfo.main.percentile}%</span>
-                    <span className="text-xs bg-[#9D4EDD] text-white px-2 py-1 rounded-full font-medium">MAIN</span>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[10px] text-[#9D4EDD] font-bold">상위 {hormoneInfo.main.percentile}%</span>
+                    <span className="text-[10px] bg-[#9D4EDD] text-white px-1.5 py-0.5 rounded-full font-medium">MAIN</span>
                   </div>
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-xs text-muted-foreground leading-relaxed">
                   {hormoneInfo.main.desc}
                 </p>
               </div>
 
               {/* Sub Hormone */}
-              <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-4 border-l-4 border-muted-foreground/30">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg">{hormoneInfo.sub.emoji}</span>
-                    <span className="font-bold text-foreground">부지배: {hormoneInfo.sub.name}</span>
+              <div className="bg-white/60 backdrop-blur-sm rounded-xl p-3 border-l-4 border-muted-foreground/30">
+                <div className="flex items-center justify-between mb-1.5">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-base">{hormoneInfo.sub.emoji}</span>
+                    <span className="font-bold text-foreground text-sm">부지배: {hormoneInfo.sub.name}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-muted-foreground font-bold">상위 {hormoneInfo.sub.percentile}%</span>
-                    <span className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-full font-medium">SUB</span>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[10px] text-muted-foreground font-bold">상위 {hormoneInfo.sub.percentile}%</span>
+                    <span className="text-[10px] bg-muted text-muted-foreground px-1.5 py-0.5 rounded-full font-medium">SUB</span>
                   </div>
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-xs text-muted-foreground leading-relaxed">
                   {hormoneInfo.sub.desc}
                 </p>
               </div>
@@ -232,57 +268,57 @@ const ResultPage = () => {
           </div>
 
           {/* Carousel Tabs - Detailed Info */}
-          <div className="mb-6 animate-fade-up delay-200">
+          <div className="mb-5 animate-fade-up delay-200">
             <ResultCarousel type={type} nickname={nickname} gender={gender} />
           </div>
 
           {/* Partner Guide Section */}
-          <div className="bg-gradient-to-br from-[#F8E8FF] to-[#E8D4F8] rounded-3xl p-4 mb-6 animate-fade-up delay-300 shadow-card">
+          <div className="bg-gradient-to-br from-[#F8E8FF] to-[#E8D4F8] rounded-2xl p-3 mb-5 animate-fade-up delay-300 shadow-card">
             {/* Header */}
-            <div className="flex items-center gap-2 mb-3">
-              <span className="text-xl">👫</span>
-              <h3 className="font-display text-lg font-bold text-[#9D4EDD]">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-lg">👫</span>
+              <h3 className="font-display text-base font-bold text-[#9D4EDD]">
                 연인/친구 가이드
               </h3>
             </div>
 
             {/* Guide Content */}
             {type.bfGuide && (
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 mb-3">
-                <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 mb-3">
+                <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">
                   {type.bfGuide}
                 </p>
               </div>
             )}
 
             {/* Compatibility Section */}
-            <p className="text-center text-sm text-muted-foreground mb-3">
+            <p className="text-center text-xs text-muted-foreground mb-2">
               PMS 대처유형 궁합
             </p>
-            <div className="grid grid-cols-2 gap-3 mb-4">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 text-center">
-                <p className="text-xs text-muted-foreground mb-1">BEST 궁합</p>
-                <p className="text-sm font-bold text-foreground">{type.bestMatch}</p>
-                <p className="text-xs text-[#9D4EDD] mt-1">서로 부족한 부분을 채워줌</p>
+            <div className="grid grid-cols-2 gap-2 mb-3">
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2.5 text-center">
+                <p className="text-[10px] text-muted-foreground mb-0.5">BEST 궁합</p>
+                <p className="text-[11px] font-bold text-foreground leading-tight">{compatibility.best}</p>
+                <p className="text-[9px] text-[#9D4EDD] mt-0.5 leading-tight">{compatibility.bestReason}</p>
               </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 text-center">
-                <p className="text-xs text-muted-foreground mb-1">WORST 궁합</p>
-                <p className="text-sm font-bold text-foreground">{type.worstMatch}</p>
-                <p className="text-xs text-rose-500 mt-1">감정 충돌 위험 높음</p>
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-2.5 text-center">
+                <p className="text-[10px] text-muted-foreground mb-0.5">WORST 궁합</p>
+                <p className="text-[11px] font-bold text-foreground leading-tight">{compatibility.worst}</p>
+                <p className="text-[9px] text-rose-500 mt-0.5 leading-tight">{compatibility.worstReason}</p>
               </div>
             </div>
 
             {/* CTA Button */}
             <Button 
               variant="outline" 
-              size="lg" 
-              className="w-full bg-white/90 border-[#9D4EDD]/30 hover:bg-white text-foreground font-medium"
+              size="default" 
+              className="w-full bg-white/90 border-[#9D4EDD]/30 hover:bg-white text-foreground font-medium text-sm"
               onClick={handleShare}
             >
-              <Share2 className="w-5 h-5 mr-2 text-[#9D4EDD]" />
+              <Share2 className="w-4 h-4 mr-2 text-[#9D4EDD]" />
               테스트 링크 공유하기
             </Button>
-            <p className="text-xs text-center text-[#9D4EDD] mt-2">
+            <p className="text-[10px] text-center text-[#9D4EDD] mt-1.5">
               "궁합 테스트하고 PMS 평화협정 맺기"
             </p>
           </div>
