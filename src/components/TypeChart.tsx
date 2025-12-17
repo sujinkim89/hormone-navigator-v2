@@ -29,24 +29,18 @@ export const TypeChart = ({ x, y, className }: TypeChartProps) => {
         <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-secondary/5 rounded-bl-2xl" />
         <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-rose/5 rounded-br-2xl" />
 
-        {/* Quadrant labels */}
-        <div className="absolute top-3 left-3 text-xs font-medium text-violet/70">TS</div>
-        <div className="absolute top-3 right-3 text-xs font-medium text-hot-pink/70">TD</div>
-        <div className="absolute bottom-3 left-3 text-xs font-medium text-secondary/70">ES</div>
-        <div className="absolute bottom-3 right-3 text-xs font-medium text-rose/70">ED</div>
-
         {/* Axis labels */}
-        <div className="absolute top-1 left-1/2 -translate-x-1/2 text-[9px] text-muted-foreground font-medium whitespace-nowrap">
-          테스토스테론 (T)
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 text-xs text-muted-foreground font-bold whitespace-nowrap">
+          테스토스테론
         </div>
-        <div className="absolute bottom-1 left-1/2 -translate-x-1/2 text-[9px] text-muted-foreground font-medium whitespace-nowrap">
-          에스트로겐 (E)
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-xs text-muted-foreground font-bold whitespace-nowrap">
+          에스트로겐
         </div>
-        <div className="absolute left-1 top-1/2 -translate-y-1/2 text-[9px] text-muted-foreground font-medium [writing-mode:vertical-rl] rotate-180">
-          세로토닌 (S)
+        <div className="absolute left-2 top-1/2 -translate-y-1/2 text-xs text-muted-foreground font-bold [writing-mode:vertical-lr]">
+          세로토닌
         </div>
-        <div className="absolute right-1 top-1/2 -translate-y-1/2 text-[9px] text-muted-foreground font-medium [writing-mode:vertical-rl]">
-          도파민 (D)
+        <div className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-muted-foreground font-bold [writing-mode:vertical-lr]">
+          도파민
         </div>
       </div>
 
