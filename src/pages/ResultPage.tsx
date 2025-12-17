@@ -60,18 +60,39 @@ const ResultPage = () => {
               {nickname}님의 {gender === 'female' ? '호르몬 자아' : 'PMS 대응 유형'}는...
             </p>
             
-            {/* Main Symbol - Large & Prominent */}
-            <div className={`relative inline-block px-10 py-8 rounded-3xl bg-gradient-to-br ${type.color} shadow-meme mb-4`}>
-              <span className="text-7xl mb-3 block drop-shadow-lg">{type.emoji}</span>
-              <h1 className="font-display text-3xl text-primary-foreground leading-tight">
+            {/* Title Badge */}
+            <div className={`inline-block px-8 py-3 rounded-full bg-gradient-to-r ${type.color} shadow-meme mb-6`}>
+              <h1 className="font-display text-2xl text-primary-foreground">
                 {type.title}
               </h1>
             </div>
+
+            {/* Large Emoji */}
+            <div className="text-8xl mb-4 drop-shadow-lg">
+              {type.emoji}
+            </div>
             
-            {/* Hook Line - Emphasized */}
-            <p className="mt-4 text-base text-foreground font-medium px-4">
+            {/* Hook Line */}
+            <p className="text-base text-foreground font-medium px-4 mb-6">
               "{type.hookLine}"
             </p>
+
+            {/* Age Comparison */}
+            <div className="inline-flex items-center gap-4 bg-card rounded-2xl px-6 py-4 shadow-card">
+              <div className="text-center">
+                <p className="text-xs text-muted-foreground flex items-center justify-center gap-1">
+                  <span>👶</span> 외모
+                </p>
+                <p className="text-2xl font-bold text-primary">24세</p>
+              </div>
+              <span className="text-sm text-muted-foreground font-medium">VS</span>
+              <div className="text-center">
+                <p className="text-xs text-muted-foreground flex items-center justify-center gap-1">
+                  <span>🔥</span> 호르몬
+                </p>
+                <p className="text-2xl font-bold text-[#FF6B6B]">38세</p>
+              </div>
+            </div>
           </div>
 
           {/* Carousel Tabs - Detailed Info */}
