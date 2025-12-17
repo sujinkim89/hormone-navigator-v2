@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import appMockup from "@/assets/app-mockup-transparent.png";
 import hormoneCharacters from "@/assets/hormone-characters-trio.png";
-import rhaboLogo from "@/assets/rhabo-logo-white.png";
+import rhaboLogoSignature from "@/assets/rhabo-logo-signature.png";
 
 export const BridgeSection = () => {
   return (
@@ -98,22 +98,22 @@ export const BridgeSection = () => {
         >
           {/* White Card Container */}
           <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mx-2">
-            {/* RHABO Logo Text */}
-            <div className="text-center mb-4">
-              <h2 className="text-3xl font-bold tracking-tight">
-                <span className="text-[#1E3A5F]">RHA</span>
-                <span className="text-[#9D4EDD]">"</span>
-                <span className="text-[#1E3A5F]">BO</span>
-              </h2>
+            {/* RHABO Logo Image */}
+            <div className="flex justify-center mb-4">
+              <img 
+                src={rhaboLogoSignature} 
+                alt="RHABO 로고" 
+                className="h-8 w-auto"
+              />
             </div>
             
             {/* Main Description */}
-            <p className="text-center text-[#1E3A5F] font-bold text-[15px] mb-5 tracking-tight font-pretendard">
+            <p className="text-center text-white font-bold text-[15px] mb-5 tracking-tight font-pretendard">
               전문의가 직접 운영하는 라보 여성 호르몬 3종 검사
             </p>
             
             {/* Trust Badges */}
-            <div className="flex flex-wrap justify-center items-center gap-x-3 gap-y-1 text-[11px] text-slate-500 font-pretendard">
+            <div className="flex flex-wrap justify-center items-center gap-x-3 gap-y-1 text-[11px] text-slate-300 font-pretendard">
               <span>전문의 창업</span>
               <span className="text-[#9D4EDD]">•</span>
               <span>전문의 자문</span>
