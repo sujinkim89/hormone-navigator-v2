@@ -54,35 +54,35 @@ const ResultPage = () => {
   return <AuraBackground>
       <div className="min-h-screen px-4 py-6">
         <div className="w-full max-w-md mx-auto">
-          {/* Result Header */}
-          <div className="text-center mb-6 animate-fade-up">
-            <div className="flex justify-center mb-3">
-              <EggCharacter size="sm" mood="happy" />
-            </div>
-            <p className="text-sm text-muted-foreground mb-2">
+          {/* Result Header - Hero Section */}
+          <div className="text-center mb-8 animate-fade-up">
+            <p className="text-sm text-muted-foreground mb-4">
               {nickname}님의 {gender === 'female' ? '호르몬 자아' : 'PMS 대응 유형'}는...
             </p>
-            <div className={`inline-block px-6 py-4 rounded-3xl bg-gradient-to-r ${type.color} shadow-meme`}>
-              <span className="text-4xl mb-2 block">{type.emoji}</span>
-              <h1 className="font-display text-2xl text-primary-foreground">
+            
+            {/* Main Symbol - Large & Prominent */}
+            <div className={`relative inline-block px-10 py-8 rounded-3xl bg-gradient-to-br ${type.color} shadow-meme mb-4`}>
+              <span className="text-7xl mb-3 block drop-shadow-lg">{type.emoji}</span>
+              <h1 className="font-display text-3xl text-primary-foreground leading-tight">
                 {type.title}
               </h1>
             </div>
-            {/* Hook Line */}
-            <p className="mt-3 text-sm text-muted-foreground italic">
-              {type.hookLine}
+            
+            {/* Hook Line - Emphasized */}
+            <p className="mt-4 text-base text-foreground font-medium px-4">
+              "{type.hookLine}"
             </p>
           </div>
 
-          {/* Coordinate Chart */}
+          {/* Carousel Tabs - Detailed Info */}
           <div className="mb-6 animate-fade-up delay-100">
-            <h3 className="font-display text-lg text-center mb-4">내 호르몬 좌표</h3>
-            <TypeChart x={coordinates.x} y={coordinates.y} />
+            <ResultCarousel type={type} nickname={nickname} gender={gender} />
           </div>
 
-          {/* Carousel Tabs */}
+          {/* Coordinate Chart - Moved Down */}
           <div className="mb-6 animate-fade-up delay-200">
-            <ResultCarousel type={type} nickname={nickname} gender={gender} />
+            <h3 className="font-display text-lg text-center mb-4">내 호르몬 좌표</h3>
+            <TypeChart x={coordinates.x} y={coordinates.y} />
           </div>
 
           {/* BF Guide (Female only) */}
