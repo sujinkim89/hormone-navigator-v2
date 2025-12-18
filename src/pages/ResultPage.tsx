@@ -172,23 +172,25 @@ const ResultPage = () => {
       <div className="min-h-screen px-4 py-6">
         <div className="w-full max-w-md mx-auto">
           {/* Result Header - Hero Section (Screenshot-friendly) */}
-          <div ref={resultCardRef} className="text-center mb-6">
+          <div
+            ref={resultCardRef}
+            data-result-card
+            className="text-center mb-6 bg-[#F8E8FF] rounded-2xl py-6 px-4"
+          >
             <p className="text-sm text-muted-foreground mb-3">
               {nickname}님의 {gender === 'female' ? '호르몬 자아' : 'PMS 대응 유형'}는...
             </p>
 
             {/* Large Emoji */}
-            <div className="text-6xl mb-2 drop-shadow-lg">
-              {type.emoji}
-            </div>
-            
+            <div className="text-6xl mb-2">{type.emoji}</div>
+
             {/* Hook Line - Main title */}
             <h1 className="font-display text-2xl font-bold text-foreground mb-4">
               {type.hookLine.split(' - ')[0]}
             </h1>
 
             {/* Reference Card - Actress Style */}
-            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-card mx-auto max-w-sm">
+            <div className="bg-white rounded-2xl p-5 shadow-card mx-auto max-w-sm">
               {/* Sub description - 재질 */}
               {type.hookLine.includes(' - ') && (
                 <p className="text-base font-bold text-foreground mb-4">
@@ -199,13 +201,14 @@ const ResultPage = () => {
               {/* Reference Image Placeholder */}
               <div className="mb-4">
                 {type.refImage ? (
-                  <img 
-                    src={type.refImage} 
+                  <img
+                    src={type.refImage}
                     alt={type.hookLine.split(' - ')[1]}
                     className="w-full aspect-[3/4] max-w-[200px] object-cover rounded-xl mx-auto shadow-lg"
+                    crossOrigin="anonymous"
                   />
                 ) : (
-                  <div className="w-full aspect-[3/4] max-w-[200px] mx-auto bg-gradient-to-br from-muted/50 to-muted rounded-xl flex items-center justify-center">
+                  <div className="w-full aspect-[3/4] max-w-[200px] mx-auto bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl flex items-center justify-center">
                     <span className="text-4xl">🎬</span>
                   </div>
                 )}
@@ -220,6 +223,11 @@ const ResultPage = () => {
                 </div>
               )}
             </div>
+
+            {/* Watermark for share image */}
+            <p className="text-xs text-muted-foreground/60 mt-4">
+              pms-test.vercel.app
+            </p>
           </div>
 
           {/* Carousel Tabs - Detailed Info (PMS 호르몬 처방전) */}
