@@ -343,9 +343,9 @@ const ResultPage = () => {
           </div>
           {/* PMS Scientific Evidence Section - Professional Dark Theme */}
           <div className="animate-fade-up delay-400">
-            <div className="bg-gradient-to-b from-[#2D1B4E] to-[#1E293B] rounded-t-2xl p-6">
+            <div className="bg-gradient-to-b from-[#2D1B4E] to-[#1E293B] rounded-t-2xl p-6 font-pretendard">
               {/* Title */}
-              <h3 className="font-display text-xl font-bold text-center text-white mb-2 tracking-tight">
+              <h3 className="text-xl font-bold text-center text-white mb-2 tracking-tight">
                 PMS가 갈수록 심해지는 기분
               </h3>
               
