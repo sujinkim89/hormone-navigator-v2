@@ -241,10 +241,17 @@ const ResultPage = () => {
                 </h3>
               </div>
 
-              {/* Description - hookLine with larger font */}
-              <p className="text-center text-base font-bold text-foreground mb-3">
-                {type.hookLine}
-              </p>
+              {/* Description - hookLine split into two lines */}
+              <div className="text-center mb-3">
+                <p className="text-lg font-bold text-foreground">
+                  {type.hookLine.split(' - ')[0]}
+                </p>
+                {type.hookLine.includes(' - ') && (
+                  <p className="text-sm text-muted-foreground">
+                    {type.hookLine.split(' - ')[1]}
+                  </p>
+                )}
+              </div>
 
               {/* Chart */}
               <div className="bg-white/80 backdrop-blur-sm rounded-xl p-3 mb-3">
