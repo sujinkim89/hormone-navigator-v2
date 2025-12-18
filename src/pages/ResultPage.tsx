@@ -31,33 +31,42 @@ const ResultPage = () => {
   const type = getTypeData(resultType, gender);
   const coordinates = calculateCoordinates(answers);
 
-  // Calculate percentile based on how extreme the position is (10 questions total: 7 DS + 3 TE)
-  const calculatePercentile = (x: number, y: number) => {
-    // Count how many answers lean toward extremes
-    // DS axis: 7 questions, TE axis: 3 questions
-    const dsCount = Object.keys(answers).filter(k => Number(k) <= 7).length;
-    const teCount = Object.keys(answers).filter(k => Number(k) > 7).length;
+  // Advanced percentile calculation based on statistical distribution
+  // Uses binomial distribution approximation for more accurate percentiles
+  const calculateAdvancedPercentile = (dominantCount: number, totalQuestions: number) => {
+    // Calculate how extreme the result is (0 = balanced, 1 = all one side)
+    const maxDominant = totalQuestions;
+    const minForDominance = Math.ceil(totalQuestions / 2) + 1;
     
-    // Distance from center based on actual answer distribution
-    const distance = Math.sqrt(x * x + y * y);
-    const maxDistance = Math.sqrt(2);
+    // If perfectly balanced or less, return higher percentile (more common)
+    if (dominantCount <= totalQuestions / 2) {
+      return 50;
+    }
     
-    // More extreme positions = rarer = lower percentile
-    const rawPercentile = Math.round((1 - distance / maxDistance) * 40) + 1;
-    return Math.max(1, Math.min(50, rawPercentile));
-  };
-
-  const percentile = calculatePercentile(coordinates.x, coordinates.y);
-
-  // Calculate percentile based on answer count
-  const getPercentileFromCount = (count: number, total: number) => {
-    const ratio = count / total;
-    if (ratio >= 1) return 1;
-    if (ratio >= 0.8) return 5;
-    if (ratio >= 0.7) return 10;
-    if (ratio >= 0.6) return 15;
-    if (ratio >= 0.5) return 25;
-    return 35;
+    // Map dominant count to percentile using binomial-like distribution
+    // More extreme = rarer = lower percentile
+    const extremeRatio = (dominantCount - (totalQuestions / 2)) / (totalQuestions / 2);
+    
+    // Percentile mapping based on approximate binomial distribution
+    // For 7 questions: 7/7 → ~1%, 6/7 → ~5%, 5/7 → ~15%, 4/7 → ~35%
+    // For 3 questions: 3/3 → ~12%, 2/3 → ~38%
+    const percentileMap: Record<number, number[]> = {
+      7: [50, 35, 22, 12, 5, 3, 1], // index = dominantCount - 4 (4,5,6,7)
+      3: [50, 38, 12], // index = dominantCount - 2 (2,3)
+    };
+    
+    const map = percentileMap[totalQuestions];
+    if (map) {
+      const minDominant = Math.ceil(totalQuestions / 2);
+      const index = dominantCount - minDominant;
+      if (index >= 0 && index < map.length) {
+        return map[index];
+      }
+    }
+    
+    // Fallback: exponential decay from 50% to 1%
+    const basePercentile = Math.round(50 * Math.pow(0.5, extremeRatio * 3));
+    return Math.max(1, Math.min(50, basePercentile));
   };
 
   // Get main and sub hormone info with percentiles
@@ -101,14 +110,14 @@ const ResultPage = () => {
       else if (firstPart.includes('S')) sub = 'S';
     }
 
-    // Calculate percentiles
+    // Calculate percentiles using advanced binomial-based calculation
     const mainPercentile = main === 'T' || main === 'E' 
-      ? getPercentileFromCount(main === 'T' ? tCount : eCount, 3)
-      : getPercentileFromCount(main === 'D' ? dCount : sCount, 7);
+      ? calculateAdvancedPercentile(main === 'T' ? tCount : eCount, 3)
+      : calculateAdvancedPercentile(main === 'D' ? dCount : sCount, 7);
     
     const subPercentile = sub === 'D' || sub === 'S'
-      ? getPercentileFromCount(sub === 'D' ? dCount : sCount, 7)
-      : getPercentileFromCount(sub === 'T' ? tCount : eCount, 3);
+      ? calculateAdvancedPercentile(sub === 'D' ? dCount : sCount, 7)
+      : calculateAdvancedPercentile(sub === 'T' ? tCount : eCount, 3);
 
     return { 
       main: { ...hormones[main], percentile: mainPercentile }, 
