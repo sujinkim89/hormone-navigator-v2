@@ -26,7 +26,7 @@ const StartPage = () => {
             </h1>
             <div className="inline-flex items-center gap-1.5 bg-primary/10 border border-primary/20 px-3 py-1 rounded-full">
               <Zap className="w-3.5 h-3.5 text-primary" />
-              <span className="text-xs font-medium text-primary">호르몬 정체 폭로</span>
+              <span className="text-xs font-medium text-primary">에겐/테토 분석 끝판왕</span>
             </div>
           </div>
 
