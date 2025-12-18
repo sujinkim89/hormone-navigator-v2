@@ -1,15 +1,17 @@
 import { cn } from "@/lib/utils";
 
 interface TypeChartProps {
-  x: number; // -50 to 50 (S to D)
-  y: number; // -50 to 50 (E to T)
+  x: number; // -1 to 1 (S to D) - normalized from quiz answers
+  y: number; // -1 to 1 (E to T) - normalized from quiz answers
   className?: string;
 }
 
 export const TypeChart = ({ x, y, className }: TypeChartProps) => {
-  // Convert coordinates to percentage position (0-100)
-  const posX = 50 + x;
-  const posY = 50 - y; // Invert Y for visual (T is top)
+  // Convert normalized coordinates (-1 to 1) to percentage position (0-100)
+  // x: negative = S (left), positive = D (right)
+  // y: negative = E (bottom), positive = T (top)
+  const posX = 50 + (x * 50); // Scale to 0-100%
+  const posY = 50 - (y * 50); // Invert Y for visual (T is top)
 
   return (
     <div className={cn("relative w-full aspect-square max-w-[280px] mx-auto", className)}>
