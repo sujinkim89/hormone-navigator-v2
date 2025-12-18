@@ -341,6 +341,34 @@ const ResultPage = () => {
               <RotateCcw className="w-5 h-5" />
             </Button>
           </div>
+          {/* PMS Scientific Evidence Section */}
+          <div className="mb-6 animate-fade-up delay-400">
+            <div className="bg-gradient-to-br from-rose-50 to-pink-100 rounded-2xl p-5 shadow-card border border-rose-200/50">
+              {/* Title */}
+              <h3 className="font-display text-xl font-bold text-center text-foreground mb-4">
+                PMS가 갈수록 심해지는 기분
+              </h3>
+              
+              <p className="text-center text-muted-foreground text-sm mb-5">
+                혹시 느끼셨나요?
+              </p>
+
+              {/* Scientific Explanation */}
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 mb-4">
+                <p className="text-center font-bold text-[#9D4EDD] text-base mb-3">
+                  당신의 난소가 보내는 SOS 신호입니다.
+                </p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  우리 몸의 호르몬 공장인 난소가 지쳐갈수록, 유지되어야 할 호르몬 수치는 급락을 반복합니다. 이 '호르몬 롤러코스터'가 바로 당신을 PMS 기간에 빌런으로 만드는 진범이자, 반드시 관리해야 할 핵심 데이터입니다.
+                </p>
+              </div>
+
+              {/* Source */}
+              <p className="text-center text-xs text-muted-foreground italic">
+                (Source: Penn Ovarian Aging Study & Harvard Medical School Joint Research)
+              </p>
+            </div>
+          </div>
 
           {/* Bridge Section - with gradient background start */}
           <div className="mb-6 animate-fade-up delay-400">
