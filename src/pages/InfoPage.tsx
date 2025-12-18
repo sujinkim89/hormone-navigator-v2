@@ -1,25 +1,39 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuraBackground } from "@/components/AuraBackground";
-import { EggCharacter } from "@/components/EggCharacter";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useQuizStore } from "@/store/quizStore";
-import { AlertTriangle, Sparkles, Heart, BookOpen } from "lucide-react";
+import { AlertTriangle, Sparkles, Heart, BookOpen, RefreshCw } from "lucide-react";
+import { getRandomNickname } from "@woowa-babble/random-nickname";
+
+const generateNickname = (): string => {
+  const types = ['animals', 'heros', 'characters', 'monsters'] as const;
+  const randomType = types[Math.floor(Math.random() * types.length)];
+  return getRandomNickname(randomType);
+};
 
 const InfoPage = () => {
   const navigate = useNavigate();
-  const [inputName, setInputName] = useState("");
+  const [nickname, setNicknameState] = useState("");
+  const [isSpinning, setIsSpinning] = useState(false);
   const setNickname = useQuizStore(state => state.setNickname);
   const gender = useQuizStore(state => state.gender);
 
   const isFemale = gender === 'female';
-  const partner = isFemale ? '남자친구' : '여자친구';
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (inputName.trim()) {
-      setNickname(inputName.trim());
+  useEffect(() => {
+    setNicknameState(generateNickname());
+  }, []);
+
+  const handleRegenerate = () => {
+    setIsSpinning(true);
+    setNicknameState(generateNickname());
+    setTimeout(() => setIsSpinning(false), 300);
+  };
+
+  const handleSubmit = () => {
+    if (nickname.trim()) {
+      setNickname(nickname.trim());
       navigate('/quiz');
     }
   };
@@ -39,21 +53,29 @@ const InfoPage = () => {
             </p>
           </div>
 
-          {/* Nickname Input */}
+          {/* Random Nickname */}
           <div className="space-y-2 mb-6">
             <label className="text-sm font-medium text-foreground">
-              {isFemale ? '👩 언니 본캐 이름이 뭐야?' : '👨 형 이름이 뭐야?'}
+              {isFemale ? '👩 언니 오늘의 닉네임은...' : '👨 형 오늘의 닉네임은...'}
             </label>
-            <Input 
-              type="text" 
-              placeholder="닉네임 입력" 
-              value={inputName} 
-              onChange={e => setInputName(e.target.value)} 
-              className="h-14 text-base rounded-2xl border-2 border-border focus:border-primary bg-card" 
-              maxLength={10} 
-            />
+            <div className="flex items-center gap-2">
+              <div className="flex-1 h-14 flex items-center justify-center rounded-2xl border-2 border-primary/30 bg-card">
+                <span className="text-base font-medium text-foreground">
+                  {nickname || '로딩 중...'}
+                </span>
+              </div>
+              <Button
+                type="button"
+                variant="outline"
+                size="icon"
+                className="h-14 w-14 rounded-2xl border-2 border-border"
+                onClick={handleRegenerate}
+              >
+                <RefreshCw className={`w-5 h-5 ${isSpinning ? 'animate-spin' : ''}`} />
+              </Button>
+            </div>
             <p className="text-xs text-muted-foreground">
-              결과에 사용될 이름이에요 (최대 10자)
+              마음에 안 들면 다시 뽑기!
             </p>
           </div>
 
@@ -67,7 +89,7 @@ const InfoPage = () => {
                 <span className="font-medium">{isFemale ? '너 성격 이상한 사람 아님!' : '네 여자친구 성격 이상한 사람 아님!'}</span>
               </p>
             </div>
-            
+
             <div className="flex items-center gap-3 bg-card rounded-xl p-4 shadow-card">
               <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center">
                 <Heart className="w-5 h-5 text-secondary" />
@@ -76,7 +98,7 @@ const InfoPage = () => {
                 <span className="font-medium">{isFemale ? '나의 호르몬 발작 버튼' : '여자친구의 호르몬 발작 버튼'}</span>을 알면 평화가 옴
               </p>
             </div>
-            
+
             <div className="flex items-center gap-3 bg-card rounded-xl p-4 shadow-card">
               <div className="w-10 h-10 rounded-full bg-violet/20 flex items-center justify-center">
                 <BookOpen className="w-5 h-5 text-violet" />
@@ -88,11 +110,16 @@ const InfoPage = () => {
           </div>
 
           {/* Submit Button */}
-          <form onSubmit={handleSubmit}>
-            <Button type="submit" variant="meme" size="xl" className="w-full" disabled={!inputName.trim()}>
-              호르몬 자아 분석 시작! 🔮
-            </Button>
-          </form>
+          <Button
+            type="button"
+            variant="meme"
+            size="xl"
+            className="w-full"
+            onClick={handleSubmit}
+            disabled={!nickname.trim()}
+          >
+            호르몬 자아 분석 시작! 🔮
+          </Button>
 
           {/* Warning Box */}
           <div className="bg-accent/20 border-2 border-accent rounded-2xl p-4 mt-4">
@@ -106,7 +133,7 @@ const InfoPage = () => {
           </div>
 
           {/* Back button */}
-          <button onClick={() => navigate('/')} className="w-full mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors">
+          <button type="button" onClick={() => navigate('/')} className="w-full mt-4 text-sm text-muted-foreground hover:text-foreground transition-colors">
             ← 처음으로
           </button>
         </div>

@@ -98,6 +98,9 @@ importers:
       '@tanstack/react-query':
         specifier: ^5.83.0
         version: 5.90.12(react@18.3.1)
+      '@woowa-babble/random-nickname':
+        specifier: ^1.0.2
+        version: 1.0.2
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -1600,6 +1603,9 @@ packages:
     resolution: {integrity: sha512-YTJCGFdNMHCMfjODYtxRNVAYmTWQ1Lb8PulP/2/f/oEEtglw8oKxKIZmmRkyXrVrHfsKOaVkAc3NT9/dMutO5w==}
     peerDependencies:
       vite: ^4 || ^5 || ^6 || ^7
+
+  '@woowa-babble/random-nickname@1.0.2':
+    resolution: {integrity: sha512-7wdR7s0T6D3aDZROTgaFvA9aP8h9L2OtKHUPselBa3goBe8mweJD7oBub2urs/lJjy/4djqYdkJBEf3lETuG1Q==}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -3858,6 +3864,8 @@ snapshots:
       vite: 5.4.21(@types/node@22.19.3)
     transitivePeerDependencies:
       - '@swc/helpers'
+
+  '@woowa-babble/random-nickname@1.0.2': {}
 
   acorn-jsx@5.3.2(acorn@8.15.0):
     dependencies:
