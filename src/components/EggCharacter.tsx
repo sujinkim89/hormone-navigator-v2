@@ -41,11 +41,11 @@ const moodAltTexts: Record<EggMood, string> = {
   tired: "피곤한 계란 캐릭터",
 };
 
-export const EggCharacter = ({ 
-  className, 
-  size = "md", 
+export const EggCharacter = ({
+  className,
+  size = "md",
   mood = "default",
-  animate = true 
+  animate = false
 }: EggCharacterProps) => {
   return (
     <div className={cn("relative inline-flex items-center justify-center", className)}>

@@ -29,12 +29,12 @@ const InfoPage = () => {
       <div className="min-h-screen flex flex-col items-center justify-center px-4 py-8">
         <div className="w-full max-w-md mx-auto">
           {/* Egg Character */}
-          <div className="flex justify-center mb-4 animate-fade-up">
-            <EggCharacter size="sm" mood="angry" />
+          <div className="flex justify-center mb-4">
+            <EggCharacter size="sm" mood="angry" animate={false} />
           </div>
 
           {/* Warning Title */}
-          <div className="text-center mb-6 animate-fade-up">
+          <div className="text-center mb-6">
             <h1 className="font-display text-2xl sm:text-3xl text-foreground mb-2">
               잠깐! 🚨
             </h1>
@@ -44,7 +44,7 @@ const InfoPage = () => {
           </div>
 
           {/* Nickname Input */}
-          <div className="space-y-2 mb-6 animate-fade-up delay-100">
+          <div className="space-y-2 mb-6">
             <label className="text-sm font-medium text-foreground">
               {isFemale ? '👩 언니 본캐 이름이 뭐야?' : '👨 형 이름이 뭐야?'}
             </label>
@@ -62,7 +62,7 @@ const InfoPage = () => {
           </div>
 
           {/* Selling Points */}
-          <div className="space-y-3 mb-8 animate-fade-up delay-200">
+          <div className="space-y-3 mb-8">
             <div className="flex items-center gap-3 bg-card rounded-xl p-4 shadow-card">
               <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-primary" />
@@ -92,14 +92,14 @@ const InfoPage = () => {
           </div>
 
           {/* Submit Button */}
-          <form onSubmit={handleSubmit} className="animate-fade-up delay-300">
+          <form onSubmit={handleSubmit}>
             <Button type="submit" variant="meme" size="xl" className="w-full" disabled={!inputName.trim()}>
               호르몬 자아 분석 시작! 🔮
             </Button>
           </form>
 
           {/* Warning Box */}
-          <div className="bg-accent/20 border-2 border-accent rounded-2xl p-4 mt-4 animate-fade-up delay-300">
+          <div className="bg-accent/20 border-2 border-accent rounded-2xl p-4 mt-4">
             <div className="flex items-start gap-3">
               <AlertTriangle className="w-5 h-5 text-accent-foreground flex-shrink-0 mt-0.5" />
               <p className="text-sm text-accent-foreground">

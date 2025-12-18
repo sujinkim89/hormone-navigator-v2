@@ -172,7 +172,7 @@ const ResultPage = () => {
       <div className="min-h-screen px-4 py-6">
         <div className="w-full max-w-md mx-auto">
           {/* Result Header - Hero Section (Screenshot-friendly) */}
-          <div ref={resultCardRef} className="text-center mb-6 animate-fade-up">
+          <div ref={resultCardRef} className="text-center mb-6">
             <p className="text-sm text-muted-foreground mb-3">
               {nickname}님의 {gender === 'female' ? '호르몬 자아' : 'PMS 대응 유형'}는...
             </p>
@@ -223,12 +223,12 @@ const ResultPage = () => {
           </div>
 
           {/* Carousel Tabs - Detailed Info (PMS 호르몬 처방전) */}
-          <div className="mb-6 animate-fade-up delay-100">
+          <div className="mb-6">
             <ResultCarousel type={type} nickname={nickname} gender={gender} />
           </div>
 
           {/* Hormone Coordinate Section with Chart */}
-          <div className="mb-6 animate-fade-up delay-200">
+          <div className="mb-6">
             <div className="bg-gradient-to-br from-[#F8E8FF] to-[#E8D4F8] rounded-2xl p-4 shadow-card">
               {/* Header */}
               <div className="flex items-center justify-center gap-2 mb-4">
@@ -292,7 +292,7 @@ const ResultPage = () => {
           </div>
 
           {/* Partner Guide Section */}
-          <div className="bg-gradient-to-br from-[#F8E8FF] to-[#E8D4F8] rounded-2xl p-4 mb-6 animate-fade-up delay-300 shadow-card">
+          <div className="bg-gradient-to-br from-[#F8E8FF] to-[#E8D4F8] rounded-2xl p-4 mb-6 shadow-card">
             {/* Header */}
             <div className="flex items-center gap-2 mb-4">
               <span className="text-xl">👫</span>
@@ -329,7 +329,7 @@ const ResultPage = () => {
           </div>
 
           {/* Action Buttons - After Partner Guide */}
-          <div className="flex gap-3 mb-6 animate-fade-up delay-300">
+          <div className="flex gap-3 mb-6">
             <Button variant="meme" size="lg" className="flex-1" onClick={handleShare}>
               <Share2 className="w-5 h-5" />
               공유하기
@@ -339,7 +339,7 @@ const ResultPage = () => {
             </Button>
           </div>
           {/* PMS Scientific Evidence Section - Professional Dark Theme */}
-          <div className="animate-fade-up delay-400">
+          <div>
             <div className={`bg-gradient-to-b from-[#2D1B4E] to-[#1E293B] px-5 pt-6 font-pretendard ${gender === 'female' ? 'rounded-t-2xl pb-0' : 'rounded-2xl pb-6'}`}>
               {/* Title */}
               <h3 className="text-xl font-bold text-center text-white mb-2 tracking-tight">
@@ -374,7 +374,7 @@ const ResultPage = () => {
           </div>
 
           {/* Bridge Section - seamlessly connected */}
-          <div className="mb-6 animate-fade-up delay-400">
+          <div className="mb-6">
             {gender === 'female' ? <BridgeSection /> : <MaleBridgeSection />}
           </div>
 

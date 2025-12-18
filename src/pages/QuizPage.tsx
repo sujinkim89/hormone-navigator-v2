@@ -51,7 +51,7 @@ const QuizPage = () => {
       <div className="min-h-screen flex flex-col px-4 py-6">
         <div className="w-full max-w-md mx-auto flex-1 flex flex-col">
           {/* Progress Header */}
-          <div className="mb-6 animate-fade-up">
+          <div className="mb-6">
             {/* Back Button */}
             {currentQuestion > 0 && (
               <button
@@ -77,7 +77,7 @@ const QuizPage = () => {
           {/* Question Card */}
           <div className="flex-1 flex flex-col justify-start pt-4">
             {/* Situation */}
-            <div className="bg-gradient-to-r from-[#CE84FC] to-[#865AE8] rounded-2xl p-5 shadow-card mb-6 animate-fade-up delay-100">
+            <div className="bg-gradient-to-r from-[#CE84FC] to-[#865AE8] rounded-2xl p-5 shadow-card mb-6">
               <div className="text-sm text-white/80 mb-2">현재 상황은?</div>
               <p className="text-base font-medium text-white leading-relaxed">
                 {question.situation}
@@ -85,14 +85,14 @@ const QuizPage = () => {
             </div>
 
             {/* Question */}
-            <div className="text-center mb-6 animate-fade-up delay-200">
+            <div className="text-center mb-6">
               <h2 className="font-display text-xl text-foreground">
                 {question.question}
               </h2>
             </div>
 
             {/* Options */}
-            <div className="space-y-3 animate-fade-up delay-300">
+            <div className="space-y-3">
               {question.options.map((option, index) => (
                 <Button
                   key={index}
@@ -112,7 +112,7 @@ const QuizPage = () => {
           </div>
 
           {/* Nickname indicator with Egg */}
-          <div className="mt-6 flex items-center justify-center gap-2 animate-fade-up delay-400">
+          <div className="mt-6 flex items-center justify-center gap-2">
             <EggCharacter size="xs" mood={eggMood} animate={false} />
             <p className="text-xs text-muted-foreground">
               <span className="font-medium text-primary">{nickname}</span>님의 호르몬 분석 중...

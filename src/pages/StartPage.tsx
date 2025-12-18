@@ -20,7 +20,7 @@ const StartPage = () => {
         <div className="w-full max-w-md mx-auto text-center relative z-10">
           
           {/* Main Title */}
-          <div className="mb-6 animate-fade-up">
+          <div className="mb-6">
             <h1 className="font-display text-3xl sm:text-4xl font-black tracking-tight mb-2">
               <span className="text-gradient-meme">PMS 빌런 분석기</span>
             </h1>
@@ -31,7 +31,7 @@ const StartPage = () => {
           </div>
 
           {/* Subtitle */}
-          <div className="space-y-3 mb-6 animate-fade-up delay-100">
+          <div className="space-y-3 mb-6">
             <p className="text-lg sm:text-xl font-medium text-foreground leading-relaxed">
               한 달에 한 번,<br />
               나도 모르게 <span className="text-primary font-bold">빌런 모드 ON</span>?
@@ -46,7 +46,7 @@ const StartPage = () => {
           </div>
 
           {/* Villain Image */}
-          <div className="flex justify-center mb-6 animate-fade-up delay-200">
+          <div className="flex justify-center mb-6">
             <img 
               src={villainMirror} 
               alt="거울 속 빌런 모습" 
@@ -55,14 +55,13 @@ const StartPage = () => {
           </div>
 
           {/* Description */}
-          <p className="text-muted-foreground text-sm leading-relaxed mb-8 animate-fade-up delay-300 px-2">
+          <p className="text-muted-foreground text-sm leading-relaxed mb-8 px-2">
             당신을 조종하는 호르몬 정체성을 폭로합니다.<br />
-            의사의 시선으로 에겐/테토 뿐만 아니라<br />
-            호르몬을 종합적으로 파헤칩니다.
+          
           </p>
 
           {/* CTA Buttons */}
-          <div className="space-y-4 animate-fade-up delay-400">
+          <div className="space-y-4">
             <Button 
               variant="female" 
               size="xl" 
