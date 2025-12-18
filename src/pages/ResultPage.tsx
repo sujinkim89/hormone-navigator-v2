@@ -78,28 +78,41 @@ const ResultPage = () => {
       }
     });
 
-    // Determine main and sub hormones
-    const parts = resultType.split('_');
-    let main: 'T' | 'E' | 'D' | 'S' = 'T';
-    let sub: 'T' | 'E' | 'D' | 'S' = 'D';
-
-    if (parts.length >= 1) {
-      const firstPart = parts[0];
-      if (firstPart.includes('T')) main = 'T';
-      else if (firstPart.includes('E')) main = 'E';
-
-      if (firstPart.includes('D')) sub = 'D';
-      else if (firstPart.includes('S')) sub = 'S';
+    // Determine dominant hormone on each axis
+    const dsDominant: 'D' | 'S' = dCount >= sCount ? 'D' : 'S';
+    const teDominant: 'T' | 'E' = tCount >= eCount ? 'T' : 'E';
+    
+    // Calculate how extreme each axis is (distance from center)
+    const dsExtremity = Math.abs(dCount - sCount); // 0-5
+    const teExtremity = Math.abs(tCount - eCount); // 0-5
+    
+    // Get dominant count for each axis
+    const dsDominantCount = Math.max(dCount, sCount);
+    const teDominantCount = Math.max(tCount, eCount);
+    
+    // Main hormone comes from the MORE extreme axis
+    // If tied, TE axis takes priority
+    let main: 'T' | 'E' | 'D' | 'S';
+    let sub: 'T' | 'E' | 'D' | 'S';
+    
+    if (teExtremity >= dsExtremity) {
+      // TE axis is more extreme (or tied) → TE is main
+      main = teDominant;
+      sub = dsDominant;
+    } else {
+      // DS axis is more extreme → DS is main
+      main = dsDominant;
+      sub = teDominant;
     }
 
-    // Calculate percentiles using advanced binomial-based calculation (5 questions per axis)
+    // Calculate percentiles - main should have lower (more rare) percentile
     const mainPercentile = main === 'T' || main === 'E' 
-      ? calculateAdvancedPercentile(main === 'T' ? tCount : eCount)
-      : calculateAdvancedPercentile(main === 'D' ? dCount : sCount);
+      ? calculateAdvancedPercentile(teDominantCount)
+      : calculateAdvancedPercentile(dsDominantCount);
     
     const subPercentile = sub === 'D' || sub === 'S'
-      ? calculateAdvancedPercentile(sub === 'D' ? dCount : sCount)
-      : calculateAdvancedPercentile(sub === 'T' ? tCount : eCount);
+      ? calculateAdvancedPercentile(dsDominantCount)
+      : calculateAdvancedPercentile(teDominantCount);
 
     return { 
       main: { ...hormones[main], percentile: mainPercentile }, 

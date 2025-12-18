@@ -7,11 +7,14 @@ interface TypeChartProps {
 }
 
 export const TypeChart = ({ x, y, className }: TypeChartProps) => {
-  // Convert normalized coordinates (-1 to 1) to percentage position (0-100)
-  // x: negative = S (left), positive = D (right)
-  // y: negative = E (bottom), positive = T (top)
-  const posX = 50 + (x * 50); // Scale to 0-100%
-  const posY = 50 - (y * 50); // Invert Y for visual (T is top)
+  // Clamp coordinates to stay within bounds
+  const clampedX = Math.max(-1, Math.min(1, x));
+  const clampedY = Math.max(-1, Math.min(1, y));
+  
+  // Convert normalized coordinates (-1 to 1) to percentage position
+  // Add padding (10-90%) to keep marker inside the chart visually
+  const posX = 10 + ((clampedX + 1) / 2) * 80; // Scale to 10-90%
+  const posY = 10 + ((1 - clampedY) / 2) * 80; // Invert Y, scale to 10-90%
 
   return (
     <div className={cn("relative w-full aspect-square max-w-[280px] mx-auto", className)}>
