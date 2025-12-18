@@ -183,23 +183,30 @@ const ResultPage = () => {
             <p className="text-sm text-muted-foreground mb-3">
               {nickname}님의 {gender === 'female' ? '호르몬 자아' : 'PMS 대응 유형'}는...
             </p>
-            
-            {/* Title Badge */}
-            <div className={`inline-block px-6 py-2.5 rounded-full bg-gradient-to-r ${type.color} shadow-meme mb-4`}>
-              <h1 className="font-display text-xl text-primary-foreground">
-                {type.title}
-              </h1>
-            </div>
 
             {/* Large Emoji */}
-            <div className="text-7xl mb-3 drop-shadow-lg">
+            <div className="text-6xl mb-2 drop-shadow-lg">
               {type.emoji}
             </div>
             
-            {/* Hook Line */}
-            <p className="text-sm text-foreground font-medium px-2 leading-relaxed">
-              "{type.hookLine}"
-            </p>
+            {/* Hook Line - Category as largest */}
+            <h1 className="font-display text-2xl font-bold text-foreground mb-2">
+              {type.hookLine.split(' - ')[0]}
+            </h1>
+            
+            {/* Title Badge */}
+            <div className={`inline-block px-5 py-2 rounded-full bg-gradient-to-r ${type.color} shadow-meme mb-2`}>
+              <span className="font-display text-lg text-primary-foreground">
+                {type.title}
+              </span>
+            </div>
+
+            {/* Sub description */}
+            {type.hookLine.includes(' - ') && (
+              <p className="text-xs text-muted-foreground mt-2">
+                {type.hookLine.split(' - ')[1]}
+              </p>
+            )}
           </div>
 
           {/* Hormone DNA Section with Chart */}
