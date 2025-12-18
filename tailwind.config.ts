@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Pretendard', 'Noto Sans KR', 'sans-serif'],
-        display: ['Black Han Sans', 'sans-serif'],
+        display: ['GmarketSans', 'sans-serif'],
         pretendard: ['Pretendard', 'sans-serif'],
       },
       letterSpacing: {
