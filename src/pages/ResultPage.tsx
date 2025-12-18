@@ -213,13 +213,6 @@ const ResultPage = () => {
                 </h3>
               </div>
 
-              {/* Percentile Badge */}
-              <div className="flex justify-center mb-2">
-                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#9D4EDD] to-[#7C3AED] text-white px-3 py-1.5 rounded-full text-sm">
-                  <span className="font-bold">상위 {percentile}%</span>
-                  <span className="text-white/80 text-xs">{type.title}</span>
-                </div>
-              </div>
 
               {/* Description - aligned with type hookLine */}
               <p className="text-center text-xs text-muted-foreground mb-3">
