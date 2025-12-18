@@ -18,14 +18,14 @@ export const ResultCarousel = ({ type, nickname, gender }: ResultCarouselProps) 
 
   const sections = gender === 'female' 
     ? [
-        { emoji: "🔥", label: "팩폭 진단", ...extractQuoteAndContent(type.diagnosis) },
-        { emoji: "🌿", label: "평소 본캐", ...extractQuoteAndContent(type.normalSelf) },
-        { emoji: "💊", label: "생존 처방", ...extractQuoteAndContent(type.survivalTip) },
+        { emoji: "🎭", label: "빌런성", quote: "", content: type.villainTrait || type.diagnosis },
+        { emoji: "✨", label: "영웅성", quote: "", content: type.heroTrait || type.normalSelf },
+        { emoji: "💊", label: "케어팁", quote: "", content: type.careTip || type.survivalTip },
       ]
     : [
-        { emoji: "🔥", label: "팩폭 진단", ...extractQuoteAndContent(type.diagnosis) },
-        { emoji: "🌿", label: "평소 본캐", ...extractQuoteAndContent(type.normalSelf) },
-        { emoji: "💡", label: "케어 팁", ...extractQuoteAndContent(type.survivalTip) },
+        { emoji: "⚠️", label: "NG 포인트", quote: "", content: type.villainTrait || type.diagnosis },
+        { emoji: "💪", label: "케미 포인트", quote: "", content: type.heroTrait || type.normalSelf },
+        { emoji: "💡", label: "케어 팁", quote: "", content: type.careTip || type.survivalTip },
       ];
 
   return (
