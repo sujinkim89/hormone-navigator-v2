@@ -31,42 +31,24 @@ const ResultPage = () => {
   const type = getTypeData(resultType, gender);
   const coordinates = calculateCoordinates(answers);
 
-  // Advanced percentile calculation based on statistical distribution
-  // Uses binomial distribution approximation for more accurate percentiles
-  const calculateAdvancedPercentile = (dominantCount: number, totalQuestions: number) => {
-    // Calculate how extreme the result is (0 = balanced, 1 = all one side)
-    const maxDominant = totalQuestions;
-    const minForDominance = Math.ceil(totalQuestions / 2) + 1;
-    
-    // If perfectly balanced or less, return higher percentile (more common)
+  // Advanced percentile calculation based on binomial distribution
+  // For 5 questions per axis, the distribution is:
+  // 5/5 (100%) → 3%, 4/5 (80%) → 16%, 3/5 (60%) → 31%, 2.5/5 (50%) → 50%
+  const calculateAdvancedPercentile = (dominantCount: number, totalQuestions: number = 5) => {
+    // If balanced or less dominant, return 50% (most common)
     if (dominantCount <= totalQuestions / 2) {
       return 50;
     }
     
-    // Map dominant count to percentile using binomial-like distribution
-    // More extreme = rarer = lower percentile
-    const extremeRatio = (dominantCount - (totalQuestions / 2)) / (totalQuestions / 2);
-    
-    // Percentile mapping based on approximate binomial distribution
-    // For 7 questions: 7/7 → ~1%, 6/7 → ~5%, 5/7 → ~15%, 4/7 → ~35%
-    // For 3 questions: 3/3 → ~12%, 2/3 → ~38%
-    const percentileMap: Record<number, number[]> = {
-      7: [50, 35, 22, 12, 5, 3, 1], // index = dominantCount - 4 (4,5,6,7)
-      3: [50, 38, 12], // index = dominantCount - 2 (2,3)
+    // Percentile mapping for 5 questions based on binomial probability
+    // P(X=k) for n=5, p=0.5: more extreme = rarer
+    const percentileMap5: Record<number, number> = {
+      3: 31,  // 3/5 dominant → ~31% (slightly above average)
+      4: 16,  // 4/5 dominant → ~16% (fairly rare)
+      5: 3,   // 5/5 dominant → ~3% (very rare)
     };
     
-    const map = percentileMap[totalQuestions];
-    if (map) {
-      const minDominant = Math.ceil(totalQuestions / 2);
-      const index = dominantCount - minDominant;
-      if (index >= 0 && index < map.length) {
-        return map[index];
-      }
-    }
-    
-    // Fallback: exponential decay from 50% to 1%
-    const basePercentile = Math.round(50 * Math.pow(0.5, extremeRatio * 3));
-    return Math.max(1, Math.min(50, basePercentile));
+    return percentileMap5[dominantCount] || 50;
   };
 
   // Get main and sub hormone info with percentiles
@@ -79,20 +61,20 @@ const ResultPage = () => {
     };
 
     // Count answers per hormone type
-    // TE axis: questions 8, 9, 10 (3 questions)
-    // DS axis: questions 1-7 (7 questions)
+    // DS axis: questions 1-5 (5 questions)
+    // TE axis: questions 6-10 (5 questions)
     let tCount = 0, eCount = 0, dCount = 0, sCount = 0;
     
-    Object.entries(answers).forEach(([questionId, answer]) => {
-      const id = Number(questionId);
-      if (id >= 8) {
-        // TE axis
-        if (answer === 'T') tCount++;
-        else if (answer === 'E') eCount++;
-      } else {
-        // DS axis
+    answers.forEach((answer, index) => {
+      const questionNum = index + 1;
+      if (questionNum <= 5) {
+        // DS axis (Q1-Q5)
         if (answer === 'D') dCount++;
         else if (answer === 'S') sCount++;
+      } else {
+        // TE axis (Q6-Q10)
+        if (answer === 'T') tCount++;
+        else if (answer === 'E') eCount++;
       }
     });
 
@@ -110,14 +92,14 @@ const ResultPage = () => {
       else if (firstPart.includes('S')) sub = 'S';
     }
 
-    // Calculate percentiles using advanced binomial-based calculation
+    // Calculate percentiles using advanced binomial-based calculation (5 questions per axis)
     const mainPercentile = main === 'T' || main === 'E' 
-      ? calculateAdvancedPercentile(main === 'T' ? tCount : eCount, 3)
-      : calculateAdvancedPercentile(main === 'D' ? dCount : sCount, 7);
+      ? calculateAdvancedPercentile(main === 'T' ? tCount : eCount)
+      : calculateAdvancedPercentile(main === 'D' ? dCount : sCount);
     
     const subPercentile = sub === 'D' || sub === 'S'
-      ? calculateAdvancedPercentile(sub === 'D' ? dCount : sCount, 7)
-      : calculateAdvancedPercentile(sub === 'T' ? tCount : eCount, 3);
+      ? calculateAdvancedPercentile(sub === 'D' ? dCount : sCount)
+      : calculateAdvancedPercentile(sub === 'T' ? tCount : eCount);
 
     return { 
       main: { ...hormones[main], percentile: mainPercentile }, 

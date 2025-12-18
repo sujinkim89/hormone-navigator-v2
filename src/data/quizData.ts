@@ -574,9 +574,9 @@ export const calculateCoordinates = (answers: string[]): { x: number; y: number 
     }
   });
   
-  // Normalize to -1 to 1 range (10 questions total: 7 DS + 3 TE)
-  const normalizedX = x / 7;
-  const normalizedY = y / 3;
+  // Normalize to -1 to 1 range (10 questions total: 5 DS + 5 TE)
+  const normalizedX = x / 5;
+  const normalizedY = y / 5;
   
   return { x: normalizedX, y: normalizedY };
 };
