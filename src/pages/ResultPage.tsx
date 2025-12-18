@@ -8,7 +8,7 @@ import { ResultCarousel } from "@/components/ResultCarousel";
 import { BridgeSection } from "@/components/BridgeSection";
 import { MaleBridgeSection } from "@/components/MaleBridgeSection";
 
-import { CredibilitySection } from "@/components/CredibilitySection";
+
 import { useQuizStore } from "@/store/quizStore";
 import { getTypeData, calculateCoordinates, maleTypes } from "@/data/quizData";
 import { Share2, RotateCcw } from "lucide-react";
@@ -381,10 +381,6 @@ const ResultPage = () => {
             {gender === 'female' ? <BridgeSection /> : <MaleBridgeSection />}
           </div>
 
-          {/* Credibility Section */}
-          <div className="mb-8 animate-fade-up delay-500">
-            <CredibilitySection />
-          </div>
 
           {/* Footer */}
           <p className="text-center text-xs text-muted-foreground">
