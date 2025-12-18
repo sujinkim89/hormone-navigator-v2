@@ -189,8 +189,8 @@ export const BridgeSection = () => {
 
           {/* Final CTA */}
           <div className="bg-[#3B4A6B] rounded-2xl p-5 text-center">
-            <p className="text-white text-[14px] font-semibold tracking-tight-mobile">지금 이 순간에도</p>
-            <p className="text-slate-400 text-[12px] mb-4 tracking-normal-mobile">난소는 나이를 먹고 있습니다.</p>
+            <p className="text-white text-[14px] font-semibold tracking-tight-mobile">여자의 몸의 주도권을 되찾는</p>
+            <p className="text-slate-400 text-[12px] mb-4 tracking-normal-mobile">가장 과학적인 첫걸음</p>
 
             <a 
               href="https://www.rhabo.co.kr" 
@@ -202,7 +202,7 @@ export const BridgeSection = () => {
                 className="w-full bg-[#4A7CFF] hover:bg-[#3A6CEF] text-white font-bold py-4 rounded-xl text-[14px] tracking-tight-mobile"
               >
                 <Sparkles className="w-4 h-4 mr-2" />
-                혜택 받고 시작하기
+                30만원 상당 전문병원 쿠폰 받고 시작하기
               </Button>
             </a>
           </div>
