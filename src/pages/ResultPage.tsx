@@ -203,19 +203,24 @@ const ResultPage = () => {
 
             {/* Reference Image & Sub description */}
             {type.hookLine.includes(' - ') && (
-              <div className="mt-3">
+              <div className="mt-4 bg-white/60 backdrop-blur-sm rounded-2xl p-4 shadow-card">
                 {type.refImage && (
-                  <div className="mb-2">
+                  <div className="mb-3">
                     <img 
                       src={type.refImage} 
                       alt={type.hookLine.split(' - ')[1]}
-                      className="w-32 h-20 object-cover rounded-lg mx-auto shadow-md"
+                      className="w-full max-w-xs h-auto object-cover rounded-xl mx-auto shadow-lg"
                     />
                   </div>
                 )}
-                <p className="text-xs text-muted-foreground">
+                <p className="text-sm font-medium text-foreground mb-1">
                   {type.hookLine.split(' - ')[1]}
                 </p>
+                {type.quote && (
+                  <p className="text-xs text-muted-foreground italic">
+                    "{type.quote}"
+                  </p>
+                )}
               </div>
             )}
           </div>
