@@ -169,7 +169,7 @@ const ResultPage = () => {
   return <AuraBackground>
       <div className="min-h-screen px-4 py-6">
         <div className="w-full max-w-md mx-auto">
-          {/* Result Header - Hero Section */}
+          {/* Result Header - Hero Section (Screenshot-friendly) */}
           <div className="text-center mb-6 animate-fade-up">
             <p className="text-sm text-muted-foreground mb-3">
               {nickname}님의 {gender === 'female' ? '호르몬 자아' : 'PMS 대응 유형'}는...
@@ -180,40 +180,44 @@ const ResultPage = () => {
               {type.emoji}
             </div>
             
-            {/* Hook Line - Category as largest */}
-            <h1 className="font-display text-2xl font-bold text-foreground mb-2">
+            {/* Hook Line - Main title */}
+            <h1 className="font-display text-2xl font-bold text-foreground mb-4">
               {type.hookLine.split(' - ')[0]}
             </h1>
-            
-            {/* Title Badge */}
-            <div className={`inline-block px-5 py-2 rounded-full bg-gradient-to-r ${type.color} shadow-meme mb-2`}>
-              <span className="font-display text-lg text-primary-foreground">
-                {type.title}
-              </span>
-            </div>
 
-            {/* Reference Image & Sub description */}
-            {type.hookLine.includes(' - ') && (
-              <div className="mt-4 bg-white/60 backdrop-blur-sm rounded-2xl p-4 shadow-card">
-                {type.refImage && (
-                  <div className="mb-3">
-                    <img 
-                      src={type.refImage} 
-                      alt={type.hookLine.split(' - ')[1]}
-                      className="w-full max-w-xs h-auto object-cover rounded-xl mx-auto shadow-lg"
-                    />
-                  </div>
-                )}
-                <p className="text-sm font-medium text-foreground mb-1">
+            {/* Reference Card - Actress Style */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-5 shadow-card mx-auto max-w-sm">
+              {/* Sub description - 재질 */}
+              {type.hookLine.includes(' - ') && (
+                <p className="text-base font-bold text-foreground mb-4">
                   {type.hookLine.split(' - ')[1]}
                 </p>
-                {type.quote && (
-                  <p className="text-xs text-muted-foreground italic">
-                    "{type.quote}"
-                  </p>
+              )}
+
+              {/* Reference Image Placeholder */}
+              <div className="mb-4">
+                {type.refImage ? (
+                  <img 
+                    src={type.refImage} 
+                    alt={type.hookLine.split(' - ')[1]}
+                    className="w-full aspect-[3/4] max-w-[200px] object-cover rounded-xl mx-auto shadow-lg"
+                  />
+                ) : (
+                  <div className="w-full aspect-[3/4] max-w-[200px] mx-auto bg-gradient-to-br from-muted/50 to-muted rounded-xl flex items-center justify-center">
+                    <span className="text-4xl">🎬</span>
+                  </div>
                 )}
               </div>
-            )}
+
+              {/* Villain Quote */}
+              {type.quote && (
+                <div className="bg-gradient-to-r from-[#2D1B4E] to-[#1E293B] rounded-xl px-4 py-3">
+                  <p className="text-white text-sm font-medium italic leading-relaxed">
+                    "{type.quote}"
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Carousel Tabs - Detailed Info (PMS 호르몬 처방전) */}
