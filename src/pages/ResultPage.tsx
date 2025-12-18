@@ -225,20 +225,24 @@ const ResultPage = () => {
             )}
           </div>
 
-          {/* Hormone DNA Section with Chart */}
+          {/* Carousel Tabs - Detailed Info (PMS 호르몬 처방전) */}
           <div className="mb-5 animate-fade-up delay-100">
+            <ResultCarousel type={type} nickname={nickname} gender={gender} />
+          </div>
+
+          {/* Hormone Coordinate Section with Chart */}
+          <div className="mb-5 animate-fade-up delay-200">
             <div className="bg-gradient-to-br from-[#F8E8FF] to-[#E8D4F8] rounded-2xl p-3 shadow-card">
               {/* Header */}
               <div className="flex items-center justify-center gap-2 mb-3">
-                <span className="text-lg">🧬</span>
+                <span className="text-lg">📍</span>
                 <h3 className="font-display text-base font-bold text-[#9D4EDD]">
-                  내 호르몬 DNA
+                  내 호르몬 좌표
                 </h3>
               </div>
 
-
-              {/* Description - aligned with type hookLine */}
-              <p className="text-center text-xs text-muted-foreground mb-3">
+              {/* Description - hookLine with larger font */}
+              <p className="text-center text-base font-bold text-foreground mb-3">
                 {type.hookLine}
               </p>
 
@@ -281,11 +285,6 @@ const ResultPage = () => {
                 </p>
               </div>
             </div>
-          </div>
-
-          {/* Carousel Tabs - Detailed Info */}
-          <div className="mb-5 animate-fade-up delay-200">
-            <ResultCarousel type={type} nickname={nickname} gender={gender} />
           </div>
 
           {/* Partner Guide Section */}
