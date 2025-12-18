@@ -341,30 +341,36 @@ const ResultPage = () => {
               <RotateCcw className="w-5 h-5" />
             </Button>
           </div>
-          {/* PMS Scientific Evidence Section */}
+          {/* PMS Scientific Evidence Section - Professional Dark Theme */}
           <div className="mb-6 animate-fade-up delay-400">
-            <div className="bg-gradient-to-br from-rose-50 to-pink-100 rounded-2xl p-5 shadow-card border border-rose-200/50">
+            <div className="bg-gradient-to-b from-[#2D1B4E] to-[#1A1025] rounded-2xl p-6 shadow-xl">
               {/* Title */}
-              <h3 className="font-display text-xl font-bold text-center text-foreground mb-4">
+              <h3 className="font-display text-xl font-bold text-center text-white mb-2 tracking-tight">
                 PMS가 갈수록 심해지는 기분
               </h3>
               
-              <p className="text-center text-muted-foreground text-sm mb-5">
+              <p className="text-center text-white/60 text-sm mb-6">
                 혹시 느끼셨나요?
               </p>
 
-              {/* Scientific Explanation */}
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 mb-4">
-                <p className="text-center font-bold text-[#9D4EDD] text-base mb-3">
-                  당신의 난소가 보내는 SOS 신호입니다.
-                </p>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  우리 몸의 호르몬 공장인 난소가 지쳐갈수록, 유지되어야 할 호르몬 수치는 급락을 반복합니다. 이 '호르몬 롤러코스터'가 바로 당신을 PMS 기간에 빌런으로 만드는 진범이자, 반드시 관리해야 할 핵심 데이터입니다.
-                </p>
+              {/* Divider dots */}
+              <div className="flex justify-center gap-1 mb-6">
+                <span className="w-1 h-1 bg-white/30 rounded-full"></span>
+                <span className="w-1 h-1 bg-white/30 rounded-full"></span>
+                <span className="w-1 h-1 bg-white/30 rounded-full"></span>
               </div>
 
+              {/* SOS Signal */}
+              <p className="text-center font-bold text-[#C9A0FF] text-lg mb-4">
+                당신의 난소가 보내는 SOS 신호입니다.
+              </p>
+              
+              <p className="text-sm text-white/80 leading-relaxed text-center mb-5">
+                우리 몸의 호르몬 공장인 난소가 지쳐갈수록, 유지되어야 할 호르몬 수치는 급락을 반복합니다. 이 '호르몬 롤러코스터'가 바로 당신을 PMS 기간에 빌런으로 만드는 진범이자, 반드시 관리해야 할 핵심 데이터입니다.
+              </p>
+
               {/* Source */}
-              <p className="text-center text-xs text-muted-foreground italic">
+              <p className="text-center text-xs text-white/40 italic">
                 (Source: Penn Ovarian Aging Study & Harvard Medical School Joint Research)
               </p>
             </div>
