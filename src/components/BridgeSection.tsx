@@ -8,34 +8,6 @@ import rhaboLogoSignature from "@/assets/rhabo-logo-signature.png";
 export const BridgeSection = () => {
   return (
     <div className="w-full font-pretendard">
-
-      {/* === PHASE 1: 반전 트리거 (Gradient Start) === */}
-      <div className="py-8 text-center bg-gradient-to-b from-[#F8E8FF]/50 via-[#E8E0F0] to-[#E8E0F0]">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <span className="text-5xl mb-4 block">😰</span>
-          <div className="space-y-1">
-            <p className="text-lg font-bold text-foreground tracking-tight-mobile">
-              PMS가 갈수록 심해지는 기분
-            </p>
-            <p className="text-sm text-muted-foreground tracking-normal-mobile">
-              혹시 느끼셨나요?
-            </p>
-          </div>
-        </motion.div>
-
-        {/* Dotted Transition */}
-        <div className="flex flex-col items-center mt-8 mb-4">
-          <div className="w-1 h-1 rounded-full bg-muted-foreground/40 mb-1" />
-          <div className="w-1 h-1 rounded-full bg-muted-foreground/40 mb-1" />
-          <div className="w-1 h-1 rounded-full bg-muted-foreground/40" />
-        </div>
-      </div>
-
       {/* === PHASE 2: Dark Section === */}
       <div className="bg-[#1E293B] py-8 px-4">
 
