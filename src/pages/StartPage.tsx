@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { AuraBackground } from "@/components/AuraBackground";
-import { EggCharacter } from "@/components/EggCharacter";
 import { Button } from "@/components/ui/button";
+import villainMirror from "@/assets/villain-mirror.png";
 import { useQuizStore } from "@/store/quizStore";
 import { Zap } from "lucide-react";
 
@@ -45,9 +45,13 @@ const StartPage = () => {
             </div>
           </div>
 
-          {/* Egg Character */}
+          {/* Villain Image */}
           <div className="mx-auto mb-6 animate-fade-up delay-200">
-            <EggCharacter size="lg" mood="angry" />
+            <img 
+              src={villainMirror} 
+              alt="거울 속 빌런 모습" 
+              className="w-full max-w-xs rounded-xl shadow-2xl"
+            />
           </div>
 
           {/* Description */}
