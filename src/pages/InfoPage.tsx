@@ -34,7 +34,7 @@ const InfoPage = () => {
   const handleSubmit = () => {
     if (nickname.trim()) {
       setNickname(nickname.trim());
-      navigate('/quiz');
+      navigate('/countdown');
     }
   };
 

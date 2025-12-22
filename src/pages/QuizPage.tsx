@@ -34,13 +34,13 @@ const QuizPage = () => {
 
   const handleAnswer = (type: string, index: number) => {
     addAnswer(type, index);
-    
+
     // Check if this was the last question
     if (currentQuestion === quizQuestions.length - 1) {
       const finalAnswers = [...answers, type];
       const resultType = calculateType(finalAnswers, gender || 'female');
       setResultType(resultType);
-      navigate('/result');
+      navigate('/analyzing');
     }
   };
 
