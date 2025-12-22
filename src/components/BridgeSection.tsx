@@ -192,9 +192,9 @@ export const BridgeSection = () => {
             <p className="text-white text-[14px] font-semibold tracking-tight-mobile">여자의 몸의 주도권을 되찾는</p>
             <p className="text-slate-400 text-[12px] mb-3 tracking-normal-mobile">가장 과학적인 첫걸음</p>
 
-            <a 
-              href="https://www.rhabo.co.kr" 
-              target="_blank" 
+            <a
+              href="http://pf.kakao.com/_dlxkQn"
+              target="_blank"
               rel="noopener noreferrer"
               className="block"
             >
