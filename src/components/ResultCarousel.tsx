@@ -23,9 +23,9 @@ export const ResultCarousel = ({ type, nickname, gender }: ResultCarouselProps) 
         { emoji: "💊", label: "케어팁", quote: "", content: type.careTip || type.survivalTip },
       ]
     : [
+        { emoji: "🫡", label: "투철한 사명", quote: "", content: type.mission || type.normalSelf },
+        { emoji: "💑", label: "여배우와 케미", quote: "", content: type.chemistry || type.heroTrait },
         { emoji: "⚠️", label: "NG 포인트", quote: "", content: type.villainTrait || type.diagnosis },
-        { emoji: "💪", label: "케미 포인트", quote: "", content: type.heroTrait || type.normalSelf },
-        { emoji: "💡", label: "케어 팁", quote: "", content: type.careTip || type.survivalTip },
       ];
 
   return (

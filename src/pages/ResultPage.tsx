@@ -11,7 +11,7 @@ import { ShareBottomSheet } from "@/components/ShareBottomSheet";
 
 
 import { useQuizStore } from "@/store/quizStore";
-import { getTypeData, calculateCoordinates, maleTypes } from "@/data/quizData";
+import { getTypeData, calculateCoordinates, maleTypes, femaleTypes } from "@/data/quizData";
 import { Share2, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
 const ResultPage = () => {
@@ -57,10 +57,10 @@ const ResultPage = () => {
   // Get main and sub hormone info with percentiles
   const getHormoneInfo = () => {
     const hormones = {
-      T: { name: '테스토스테론', emoji: '⚡', desc: '목표 쉐도 모드. 논리로 감정을 눌러버리고 해결책을 찾아 직진하는 전투형 호르몬.' },
-      E: { name: '에스트로겐', emoji: '💗', desc: '공감 연결 모드. 타인의 감정을 흡수하고 관계 속에서 안정감을 찾는 유대형 호르몬.' },
-      D: { name: '도파민', emoji: '🚀', desc: '자극 갈망 모드. 지루함은 적, 새로운 자극이 곧 산소. 쾌락과 흥분을 향해 돌진하는 모험형 호르몬.' },
-      S: { name: '세로토닌', emoji: '🌿', desc: '안정 추구 모드. 예측 가능한 루틴과 평화로운 환경 속에서 에너지를 충전하는 균형형 호르몬.' },
+      T: { name: '테스토스테론', emoji: '⚡', desc: '논리로 해결책을 찾아 직진하는 전투형 호르몬' },
+      E: { name: '에스트로겐', emoji: '💗', desc: '깊은 공감과 관계를 중시하는 유대형 호르몬' },
+      D: { name: '도파민', emoji: '🚀', desc: '새로운 자극과 흥분을 쫓는 모험형 호르몬' },
+      S: { name: '세로토닌', emoji: '🌿', desc: '규칙과 평화 속 안정을 찾는 균형형 호르몬' },
     };
 
     // Count answers per hormone type
@@ -113,13 +113,11 @@ const ResultPage = () => {
       ? calculateAdvancedPercentile(teDominantCount)
       : calculateAdvancedPercentile(dsDominantCount);
     
-    const subPercentile = sub === 'D' || sub === 'S'
-      ? calculateAdvancedPercentile(dsDominantCount)
-      : calculateAdvancedPercentile(teDominantCount);
+    const subPercentile = 15; // User requested to unify sub percentile to 15%
 
     return { 
-      main: { ...hormones[main], percentile: mainPercentile }, 
-      sub: { ...hormones[sub], percentile: subPercentile } 
+      main: { ...hormones[main], percentile: mainPercentile, desc: type.hormoneCoordinate?.mainDesc || hormones[main].desc }, 
+      sub: { ...hormones[sub], percentile: subPercentile, desc: type.hormoneCoordinate?.subDesc || hormones[sub].desc } 
     };
   };
 
@@ -127,29 +125,8 @@ const ResultPage = () => {
 
   // Get compatibility info from male types
   const getCompatibilityInfo = () => {
-    // Map female type emoji to male type
-    const compatibilityMap: Record<string, { best: string; worst: string; bestReason: string; worstReason: string }> = {
-      '번개치타': { best: 'TD_T', worst: 'TD_D', bestReason: '서로 부족한 부분을 채워줌', worstReason: '해결 vs 폭발 충돌' },
-      '꾸덕거북': { best: 'TS_T', worst: 'TS_S', bestReason: '서로 부족한 부분을 채워줌', worstReason: '둔감 vs 예민 충돌' },
-      '살랑햄스터': { best: 'ES_E', worst: 'ES_S', bestReason: '서로 부족한 부분을 채워줌', worstReason: '냉정 vs 예민 충돌' },
-      '몽글늘보': { best: 'TD_D', worst: 'TD_T', bestReason: '서로 부족한 부분을 채워줌', worstReason: '속도 차이로 스트레스' },
-      '스파크카멜레온': { best: 'ES_S', worst: 'TS_S', bestReason: '서로 부족한 부분을 채워줌', worstReason: '예측 불가 vs 계획 충돌' },
-      '감성수달': { best: 'TS_T', worst: 'ED_E', bestReason: '서로 부족한 부분을 채워줌', worstReason: '소통 부재로 서운함 누적' },
-    };
-    
-    const typeTitle = type.title;
-    const match = compatibilityMap[typeTitle];
-    
-    if (match) {
-      const bestType = maleTypes[match.best];
-      const worstType = maleTypes[match.worst];
-      return {
-        best: bestType ? `${bestType.emoji} ${bestType.title}` : type.bestMatch,
-        worst: worstType ? `${worstType.emoji} ${worstType.title}` : type.worstMatch,
-        bestReason: match.bestReason,
-        worstReason: match.worstReason,
-      };
-    }
+    // Legacy map logic removed as it used outdated keys. 
+    // Now directly using data from quizData.ts
     
     return {
       best: type.bestMatch,
@@ -160,6 +137,25 @@ const ResultPage = () => {
   };
 
   const compatibility = getCompatibilityInfo();
+
+  // Helper to format compatibility string
+  const formatCompatibility = (matchString: string) => {
+    const items = matchString.split(',').map(s => s.trim());
+    
+    if (gender === 'male') {
+      // Partner page: matches are female types (titles). 
+      // Replace title (e.g. "쉬헐크") with descriptive name (e.g. "초록빛 폭주 테토녀")
+      return items.map(item => {
+        const foundType = Object.values(femaleTypes).find(t => t.title === item);
+        return foundType ? foundType.hookLine.split(' - ')[0] : item;
+      });
+    }
+    
+    return items;
+  };
+
+  const bestMatches = formatCompatibility(compatibility.best);
+  const worstMatches = formatCompatibility(compatibility.worst);
 
   const handleShare = () => {
     setShareOpen(true);
@@ -193,6 +189,15 @@ const ResultPage = () => {
                 <p className="text-base font-bold text-foreground mb-4">
                   {type.hookLine.split(' - ')[1]}
                 </p>
+              )}
+
+              {/* Character Summary */}
+              {type.characterSummary && (
+                <div className="mb-4">
+                  <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line font-medium">
+                    {type.characterSummary}
+                  </p>
+                </div>
               )}
 
               {/* Reference Image Placeholder */}
@@ -244,16 +249,24 @@ const ResultPage = () => {
               </div>
 
               {/* Description - hookLine split into two lines */}
-              <div className="text-center mb-4">
-                <p className="text-lg font-bold text-foreground">
-                  {type.hookLine.split(' - ')[0]}
-                </p>
-                {type.hookLine.includes(' - ') && (
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {type.hookLine.split(' - ')[1]}
+              {type.hormoneCoordinate ? (
+                <div className="text-center mb-4">
+                  <p className="text-lg font-bold text-foreground whitespace-pre-line leading-snug">
+                    {type.hormoneCoordinate.title}
                   </p>
-                )}
-              </div>
+                </div>
+              ) : (
+                <div className="text-center mb-4">
+                  <p className="text-lg font-bold text-foreground">
+                    {type.hookLine.split(' - ')[0]}
+                  </p>
+                  {type.hookLine.includes(' - ') && (
+                    <p className="text-sm text-muted-foreground mt-1">
+                      {type.hookLine.split(' - ')[1]}
+                    </p>
+                  )}
+                </div>
+              )}
 
               {/* Chart */}
               <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 mb-4">
@@ -320,15 +333,23 @@ const ResultPage = () => {
               PMS 대처유형 궁합
             </p>
             <div className="grid grid-cols-2 gap-3">
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 text-center">
-                <p className="text-xs text-muted-foreground mb-1">BEST 궁합</p>
-                <p className="text-sm font-bold text-foreground leading-tight">{compatibility.best}</p>
-                <p className="text-xs text-[#9D4EDD] mt-1.5 leading-tight">{compatibility.bestReason}</p>
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 text-center flex flex-col justify-center min-h-[120px]">
+                <p className="text-xs text-muted-foreground mb-2">BEST 궁합</p>
+                <div className="text-sm font-bold text-foreground leading-tight space-y-1 mb-2">
+                  {bestMatches.map((match, idx) => (
+                    <p key={idx}>{match}</p>
+                  ))}
+                </div>
+                <p className="text-xs text-[#9D4EDD] mt-auto leading-tight">{compatibility.bestReason}</p>
               </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 text-center">
-                <p className="text-xs text-muted-foreground mb-1">WORST 궁합</p>
-                <p className="text-sm font-bold text-foreground leading-tight">{compatibility.worst}</p>
-                <p className="text-xs text-rose-500 mt-1.5 leading-tight">{compatibility.worstReason}</p>
+              <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 text-center flex flex-col justify-center min-h-[120px]">
+                <p className="text-xs text-muted-foreground mb-2">WORST 궁합</p>
+                <div className="text-sm font-bold text-foreground leading-tight space-y-1 mb-2">
+                  {worstMatches.map((match, idx) => (
+                    <p key={idx}>{match}</p>
+                  ))}
+                </div>
+                <p className="text-xs text-rose-500 mt-auto leading-tight">{compatibility.worstReason}</p>
               </div>
             </div>
           </div>
@@ -343,45 +364,11 @@ const ResultPage = () => {
               <RotateCcw className="w-5 h-5" />
             </Button>
           </div>
-          {/* PMS Scientific Evidence Section - Professional Dark Theme */}
-          <div>
-            <div className={`bg-gradient-to-b from-[#2D1B4E] to-[#1E293B] px-5 pt-6 font-pretendard ${gender === 'female' ? 'rounded-t-2xl pb-0' : 'rounded-2xl pb-6'}`}>
-              {/* Title */}
-              <h3 className="text-xl font-bold text-center text-white mb-2 tracking-tight">
-                PMS가 갈수록 심해지는 기분
-              </h3>
-
-              <p className="text-center text-white/60 text-sm mb-5">
-                혹시 느끼셨나요?
-              </p>
-
-              {/* Divider dots */}
-              <div className="flex justify-center gap-1.5 mb-5">
-                <span className="w-1 h-1 bg-white/30 rounded-full"></span>
-                <span className="w-1 h-1 bg-white/30 rounded-full"></span>
-                <span className="w-1 h-1 bg-white/30 rounded-full"></span>
-              </div>
-
-              {/* SOS Signal */}
-              <p className="text-center font-bold text-[#C9A0FF] text-lg mb-3">
-                당신의 난소가 보내는 SOS 신호입니다.
-              </p>
-
-              <p className="text-sm text-white/80 leading-relaxed text-center mb-4">
-                우리 몸의 호르몬 공장인 난소가 지쳐갈수록, 유지되어야 할 호르몬 수치는 급락을 반복합니다. 이 '호르몬 롤러코스터'가 바로 당신을 PMS 기간에 빌런으로 만드는 진범이자, 반드시 관리해야 할 핵심 데이터입니다.
-              </p>
-
-              {/* Source */}
-              <p className="text-center text-xs text-white/40 italic pb-4">
-                (Source: Penn Ovarian Aging Study & Harvard Medical School Joint Research)
-              </p>
-            </div>
-          </div>
-
-          {/* Bridge Section - seamlessly connected */}
+          {/* PMS Scientific Evidence Section */}
           <div className="mb-6">
             {gender === 'female' ? <BridgeSection /> : <MaleBridgeSection />}
           </div>
+
 
 
           {/* Footer */}

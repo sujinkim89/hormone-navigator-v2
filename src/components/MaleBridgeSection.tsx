@@ -1,156 +1,280 @@
-import { Sparkles, Gift } from "lucide-react";
+import { motion, Variants } from "framer-motion";
+import hormoneCharacters from "@/assets/hormone-characters-trio.png";
+import rhaboLogoSignature from "@/assets/rhabo-logo-signature.png";
 import { Button } from "@/components/ui/button";
-import { EggCharacter } from "@/components/EggCharacter";
 
 export const MaleBridgeSection = () => {
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15
+      }
+    }
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+
   return (
-    <div className="space-y-6">
-      {/* Section 1: Hook */}
-      <div className="bg-card rounded-2xl p-5 shadow-card">
-        <div className="flex items-start gap-3 mb-3">
-          <EggCharacter size="xs" mood="worried" animate={false} />
-          <h3 className="font-display text-lg text-foreground">
-            💭 여자친구가 왜 그러는지, 이제 좀 이해가 되셨나요?
-          </h3>
-        </div>
-        <div className="bg-muted/50 rounded-xl p-4">
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            사실, 그녀의 감정 기복은 <span className="text-rose font-medium">성격의 문제가 아니라, 호르몬의 언어</span>거든요.
-            <br /><br />그녀 자신도 왜 그런지 모르는 경우가 많아요.
-            <br />하지만 당신이 먼저 이해하고 준비한다면, 관계가 훨씬 편해질 거예요.
-          </p>
-        </div>
-      </div>
-
-      {/* Section 2: Gift Idea */}
-      <div className="bg-gradient-to-br from-rose/20 to-violet/20 border border-rose/30 rounded-2xl p-5">
-        <div className="flex items-center gap-2 mb-4">
-          <Gift className="w-5 h-5 text-rose" />
-          <h3 className="font-display text-lg text-rose">그녀를 위한 특별한 선물</h3>
-        </div>
+    <div className="w-full font-pretendard">
+      <div className="bg-gradient-to-b from-[#1A1A2E] to-[#1E293B] rounded-2xl p-6 pt-8 shadow-xl overflow-hidden relative">
         
-        <div className="bg-card/80 rounded-xl p-4 mb-4">
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            "화장품? 가방? 맛집?"
-            <br /><br />물론 좋죠. 하지만...
-            <br /><span className="text-rose font-medium">그녀의 건강과 미래를 위한 선물</span>은 어떨까요?
-            <br /><br />매달 찾아오는 PMS, 막연한 건강 걱정...
-            <br />이걸 <strong className="text-foreground">'데이터'로 바꿔주는 선물</strong>이에요.
-          </p>
-        </div>
+        {/* --- PART 1: Scientific Evidence (Merged) --- */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={containerVariants}
+          className="text-center mb-8"
+        >
+          {/* Headline */}
+          <motion.h3 
+            variants={itemVariants}
+            className="text-[26px] font-extrabold text-white tracking-[-0.02em] leading-tight mb-4 font-pretendard"
+          >
+            여자친구의 예민함 이해가 되셨나요?
+          </motion.h3>
 
-        <div className="bg-card rounded-xl p-4 text-center">
-          <span className="text-3xl mb-3 block">🎁</span>
-          <p className="text-base font-display text-rose mb-2">"내가 널 이해하고 싶어서"</p>
-          <p className="text-sm text-muted-foreground">
-            이 한마디와 함께 선물하면,
-            <br />그녀는 당신의 진심을 느낄 거예요.
-          </p>
-        </div>
-      </div>
+          {/* Highlight */}
+          <motion.div 
+            variants={itemVariants}
+            className="relative py-2 mb-6"
+          >
+            <p className="text-[18px] font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-blue-200 leading-tight">
+              난소가 지쳐있으면, 매달 무너질 수밖에 없습니다.
+            </p>
+          </motion.div>
 
-      {/* Section 3: What She Gets */}
-      <div className="bg-card rounded-2xl p-5 shadow-card">
-        <h3 className="font-display text-lg text-foreground mb-4">
-          💝 이 선물로 그녀가 얻는 것
-        </h3>
-        <ul className="space-y-3 text-sm">
-          <li className="flex items-start gap-2">
-            <span className="text-primary mt-0.5">✓</span>
-            <span className="text-muted-foreground">왜 감정 기복이 심한지 <span className="text-foreground font-medium">과학적으로 이해</span></span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-primary mt-0.5">✓</span>
-            <span className="text-muted-foreground">난소 건강 상태를 <span className="text-foreground font-medium">정확한 숫자로 확인</span></span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-primary mt-0.5">✓</span>
-            <span className="text-muted-foreground">미래 계획을 위한 <span className="text-foreground font-medium">실제 타임라인</span></span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-primary mt-0.5">✓</span>
-            <span className="text-muted-foreground">"내 탓이 아니었구나"라는 <span className="text-foreground font-medium">마음의 안정</span></span>
-          </li>
-        </ul>
-      </div>
-
-      {/* Section 4: What You Get */}
-      <div className="bg-violet/10 border border-violet/30 rounded-2xl p-5">
-        <h3 className="font-display text-lg text-foreground mb-4">
-          🙌 그리고 당신이 얻는 것
-        </h3>
-        <ul className="space-y-3 text-sm">
-          <li className="flex items-start gap-2">
-            <span className="text-violet mt-0.5">✓</span>
-            <span className="text-muted-foreground">그녀의 감정 변화를 <span className="text-foreground font-medium">미리 예측</span>할 수 있어요</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-violet mt-0.5">✓</span>
-            <span className="text-muted-foreground">"왜 저래?"가 아닌 <span className="text-foreground font-medium">"아, 그럴 때구나"</span>로 바뀌어요</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-violet mt-0.5">✓</span>
-            <span className="text-muted-foreground">불필요한 싸움이 <span className="text-foreground font-medium">확실히 줄어들어요</span></span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-violet mt-0.5">✓</span>
-            <span className="text-muted-foreground">"진짜 날 생각해주는구나"라는 <span className="text-foreground font-medium">그녀의 신뢰</span></span>
-          </li>
-        </ul>
-      </div>
-
-      {/* Section 5: Test Info */}
-      <div className="bg-card rounded-2xl p-5 shadow-card">
-        <h3 className="font-display text-lg text-foreground mb-2">라보 여성 호르몬 3종 검사</h3>
-        <p className="text-xs text-muted-foreground mb-4">전문의가 직접 운영하는 신뢰할 수 있는 검사예요</p>
-
-        <div className="bg-gradient-to-br from-primary/10 to-violet/10 rounded-xl p-4 border border-primary/20">
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">검사 항목</span>
-              <span className="font-medium text-foreground">AMH, FSH, E2</span>
+          {/* Scientific Proof Box */}
+          <motion.div 
+            variants={itemVariants}
+            className="bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-sm text-left mb-10"
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-1 h-3.5 bg-blue-500 rounded-full"></span>
+              <p className="text-[15px] font-bold text-blue-200">
+                하버드·펜실베니아 의대 공동 연구 증명
+              </p>
             </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">소요 시간</span>
-              <span className="font-medium text-foreground">단 5분</span>
+            <p className="text-[15px] text-gray-200 leading-relaxed">
+              난소 에너지가 고갈되면 뇌와의 소통이 끊겨 호르몬이 폭주합니다. PMS 기간, 그녀의 멘탈이 의지와 상관없이 무너지는 의학적 이유입니다.
+            </p>
+          </motion.div>
+
+
+          {/* --- PART 2: CTA Bridge (Merged) --- */}
+          
+          {/* Main CTA Title */}
+          <motion.div variants={itemVariants} className="text-center mb-8 font-pretendard">
+            <h3 className="text-[26px] font-bold text-white mb-2 leading-tight tracking-tight font-pretendard">
+              그녀의 3대 호르몬<br />
+              <span className="text-[#4A7CFF]">바이오 데이터</span>로 지켜주세요
+            </h3>
+          </motion.div>
+
+          {/* 3 Major Hormones Engine */}
+          <motion.div variants={itemVariants} className="mb-10">
+            <div className="text-center mb-6">
+              {/* Characters Image */}
+              <div className="mb-6 -mx-6">
+                <img
+                  src={hormoneCharacters}
+                  alt="AMH, FSH, E2 호르몬 캐릭터"
+                  className="w-full opacity-90"
+                />
+              </div>
             </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">결과 확인</span>
-              <span className="font-medium text-foreground">3~5일 이내</span>
+
+            <div className="space-y-4">
+              {/* AMH */}
+              <div className="bg-[#2D3A4F] rounded-xl p-5 border border-slate-700/50 text-left">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-[#FF71A4] font-bold text-lg">AMH</span>
+                  <span className="text-sm text-slate-300">난소 나이</span>
+                  <span className="text-xs text-slate-500 ml-auto border border-slate-600 px-2 py-0.5 rounded-full">
+                    우리 커플의 타임라인
+                  </span>
+                </div>
+                <p className="text-[15px] text-white font-medium mb-2 leading-snug">
+                  "출산 시점은 언제가 좋을까?"
+                </p>
+                <p className="text-[13px] text-slate-400 leading-relaxed">
+                  막연한 걱정 대신, 데이터로 두 분의 적기를 설계하세요.
+                </p>
+              </div>
+
+              {/* FSH */}
+              <div className="bg-[#2D3A4F] rounded-xl p-5 border border-slate-700/50 text-left">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-[#FFB347] font-bold text-lg">FSH</span>
+                  <span className="text-sm text-slate-300">난소 체력</span>
+                  <span className="text-xs text-slate-500 ml-auto border border-slate-600 px-2 py-0.5 rounded-full">
+                    난소 엔진의 에너지 효율
+                  </span>
+                </div>
+                <p className="text-[15px] text-white font-medium mb-2 leading-snug">
+                  "완경기는 언제쯤 올까?"
+                </p>
+                <p className="text-[13px] text-slate-400 leading-relaxed">
+                  지금 그녀가 무리하고 있는 건 아닌지 확인해보세요.
+                </p>
+              </div>
+              
+              {/* E2 */}
+              <div className="bg-[#2D3A4F] rounded-xl p-5 border border-slate-700/50 text-left">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-[#B388FF] font-bold text-lg">E2</span>
+                  <span className="text-sm text-slate-300">에스트로겐</span>
+                  <span className="text-xs text-slate-500 ml-auto border border-slate-600 px-2 py-0.5 rounded-full">
+                    여성성 조율
+                  </span>
+                </div>
+                <p className="text-[15px] text-white font-medium mb-2 leading-snug">
+                  "여성호르몬 수치의 밸런스는 어떨까?"
+                </p>
+                <p className="text-[13px] text-slate-400 leading-relaxed">
+                  이유 없는 짜증과 감정 기복의 진짜 원인을 찾아주세요.
+                </p>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </motion.div>
 
-      {/* Section 6: Final CTA */}
-      <div className="bg-gradient-card border-2 border-primary/30 rounded-3xl p-6 shadow-lg">
-        <h3 className="font-display text-lg text-foreground text-center mb-4">
-          🎁 그녀에게 진심을 선물하세요
-        </h3>
-        <p className="text-sm text-muted-foreground text-center mb-6 leading-relaxed">
-          명품백은 1년, 꽃다발은 일주일이면 시들지만
-          <br /><strong className="text-foreground">건강에 대한 관심은 평생 기억에 남아요.</strong>
-          <br /><br />"나 때문에 힘들었지? 이거 한번 받아봐."
-          <br />이 한마디가 관계를 바꿀 수 있어요.
-        </p>
+          {/* RHABO Intro */}
+          <motion.div variants={itemVariants}>
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 mb-8">
+              <div className="flex justify-center mb-3">
+                <img
+                  src={rhaboLogoSignature}
+                  alt="RHABO 로고"
+                  className="h-8 w-auto"
+                />
+              </div>
+              <p className="text-center text-white font-bold text-[15px] mb-4 tracking-tight">
+                전문의가 직접 운영하는 라보 여성 호르몬 3종 검사
+              </p>
+              <div className="flex flex-wrap justify-center items-center gap-x-3 gap-y-1 text-[11px] text-[#4A7CFF] font-medium">
+                <span>전문의 창업</span>
+                <span>•</span>
+                <span>전문의 자문</span>
+                <span>•</span>
+                <span>임상 데이터 기반</span>
+                <span>•</span>
+                <span>1만+ 검증</span>
+              </div>
+            </div>
 
-        <div className="space-y-3">
-          <Button variant="premium" size="lg" className="w-full">
-            <Gift className="w-5 h-5" />
-            여자친구에게 선물하기
-          </Button>
-        </div>
-      </div>
+            <div className="relative mb-8 -mx-6 flex justify-center">
+              <img 
+                  src="/mockup.png" 
+                  alt="라보 앱 화면" 
+                  className="w-full"
+                  style={{ imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }}
+                />
+            </div>
 
-      {/* Section 7: P.S. */}
-      <div className="bg-rose/10 border border-rose/30 rounded-2xl p-5">
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          <strong className="text-foreground">💌 P.S.</strong>
-          <br /><br />여기까지 읽으셨다면, 당신은 이미 여자친구를 진심으로 이해하려는 좋은 남자친구예요.
-          <br /><br />그녀의 감정 기복을 '성격 문제'로 치부하지 않고,
-          <br />'호르몬'이라는 과학적 이유를 찾으려 한 것만으로도 대단해요.
-          <br /><br /><strong className="text-rose">이제 한 걸음만 더, 그녀에게 진심을 전해보세요. 💕</strong>
-        </p>
+            {/* Benefits Section */}
+            <div className="bg-[#2D3A4F] rounded-2xl p-5 mb-4 border border-slate-700/50 text-left">
+              <h4 className="text-white font-bold text-center mb-4 text-[15px] tracking-tight">
+                검사 후, 이런 것들이 명확해집니다
+              </h4>
+              <ul className="space-y-3 text-slate-300 text-[13px] leading-relaxed">
+                <li className="flex items-start gap-2.5">
+                  <span className="text-[#4A7CFF] mt-1.5 flex-shrink-0 text-[8px]">●</span>
+                  <span>
+                    <span className="text-white font-medium">난소 나이</span>: 그녀의 몸의 진짜 나이, 난소는 지금 몇 살?
+                  </span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-[#4A7CFF] mt-1.5 flex-shrink-0 text-[8px]">●</span>
+                  <span>
+                    <span className="text-white font-medium">임신 계획</span>: 커리어와 출산 사이, 인생 시간표 세우기
+                  </span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-[#4A7CFF] mt-1.5 flex-shrink-0 text-[8px]">●</span>
+                  <span>
+                    <span className="text-white font-medium">완경기 예측</span>: 여성호르몬 엔진이 언제쯤 멈추는지
+                  </span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-[#4A7CFF] mt-1.5 flex-shrink-0 text-[8px]">●</span>
+                  <span>
+                    <span className="text-white font-medium">에겐력</span>: 기분 기복과 피부 탄력을 결정하는 수치
+                  </span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-[#4A7CFF] mt-1.5 flex-shrink-0 text-[8px]">●</span>
+                  <span>
+                    <span className="text-white font-medium">골밀도 체크</span>: 10년 뒤 뼈를 지키는 호르몬은 적정한지?
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Testimonials */}
+            <div className="bg-[#2D3A4F] rounded-2xl p-5 mb-8 border border-slate-700/50 text-left">
+              <p className="text-center text-white font-semibold text-[15px] mb-4 tracking-tight">
+                먼저 검사받은 분들의 이야기
+              </p>
+              <div className="space-y-3">
+                <div className="bg-[#1E293B] rounded-xl p-4 border border-slate-600/30">
+                  <p className="text-slate-300 text-[13px] leading-relaxed mb-2">
+                    "AMH 수치 보고 솔직히 충격받았어요. 근데 오히려 마음이 편해졌어요. 
+                    뭘 해야 할지 명확해지니까요."
+                  </p>
+                  <p className="text-slate-500 text-[11px]">— 32세, 직장인</p>
+                </div>
+                <div className="bg-[#1E293B] rounded-xl p-4 border border-slate-600/30">
+                  <p className="text-slate-300 text-[13px] leading-relaxed mb-2">
+                    "FSH가 높게 나와서 난자 동결 바로 결정했어요. 
+                    6개월만 늦었어도 정말 후회했을 것 같아요."
+                  </p>
+                  <p className="text-slate-500 text-[11px]">— 29세, 프리랜서</p>
+                </div>
+                <div className="bg-[#1E293B] rounded-xl p-4 border border-slate-600/30">
+                  <p className="text-slate-300 text-[13px] leading-relaxed mb-2">
+                    "PMS가 심한 게 제 탓이 아니었더라고요. 
+                    호르몬 관리 시작하고 진짜 인생이 달라졌어요."
+                  </p>
+                  <p className="text-slate-500 text-[11px]">— 35세, 마케터</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Final CTA */}
+            <div className="bg-[#3B4A6B] rounded-2xl p-6 text-center mb-24">
+              <p className="text-white text-[20px] font-bold tracking-tight mb-1">그녀를 위한 가장 특별한 선물</p>
+              <p className="text-slate-300 text-[16px] mb-4 tracking-normal">여자의 몸의 주도권을 찾아주세요</p>
+            </div>
+
+            {/* Sticky Bottom CTA */}
+            <div className="fixed bottom-0 left-0 right-0 p-4 z-50 bg-gradient-to-t from-[#1A1A2E] via-[#1A1A2E] to-transparent pb-8">
+              <div className="max-w-md mx-auto">
+                <a
+                  href="http://pf.kakao.com/_dlxkQn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block shadow-xl rounded-xl"
+                >
+                  <Button 
+                    className="w-full bg-[#4A7CFF] hover:bg-[#3A6CEF] text-white font-bold py-7 rounded-xl text-[17px] tracking-tight shadow-lg shadow-blue-900/20 whitespace-pre-wrap leading-snug"
+                  >
+                    여자친구에게 라보 선물하고,{'\n'}30만원 난자냉동 지원금 받기
+                  </Button>
+                </a>
+              </div>
+            </div>
+          </motion.div>
+
+        </motion.div>
       </div>
     </div>
   );

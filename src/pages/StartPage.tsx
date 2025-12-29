@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { AuraBackground } from "@/components/AuraBackground";
 import { Button } from "@/components/ui/button";
-import villainMirror from "@/assets/villain-mirror.png";
+// import villainMirror from "@/assets/villain-mirror.png";
+import mainImage from "/og-main.png";
 import { useQuizStore } from "@/store/quizStore";
 import { Zap } from "lucide-react";
 
@@ -48,9 +49,9 @@ const StartPage = () => {
           {/* Villain Image */}
           <div className="flex justify-center mb-5">
             <img
-              src={villainMirror}
-              alt="거울 속 빌런 모습"
-              className="w-full max-w-xs rounded-xl shadow-2xl"
+              src={mainImage}
+              alt="PMS 밈: 누군가를 죽이고 싶으면서 프레첼도 먹고 싶은 심리"
+              className="w-full max-w-sm rounded-xl shadow-2xl"
             />
           </div>
 
