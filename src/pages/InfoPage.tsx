@@ -59,11 +59,14 @@ const InfoPage = () => {
               {isFemale ? '👩 언니 오늘의 닉네임은...' : '👨 형 오늘의 닉네임은...'}
             </label>
             <div className="flex items-center gap-2">
-              <div className="flex-1 h-14 flex items-center justify-center rounded-2xl border-2 border-primary/30 bg-card">
-                <span className="text-base font-medium text-foreground">
-                  {nickname || '로딩 중...'}
-                </span>
-              </div>
+              <input
+                type="text"
+                value={nickname}
+                onChange={(e) => setNicknameState(e.target.value)}
+                placeholder="닉네임을 입력하세요"
+                className="flex-1 h-14 px-4 rounded-2xl border-2 border-primary/30 bg-card text-base font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                maxLength={10}
+              />
               <Button
                 type="button"
                 variant="outline"
@@ -75,7 +78,7 @@ const InfoPage = () => {
               </Button>
             </div>
             <p className="text-xs text-muted-foreground">
-              마음에 안 들면 다시 뽑기!
+              직접 입력하거나 랜덤으로 뽑기!
             </p>
           </div>
 

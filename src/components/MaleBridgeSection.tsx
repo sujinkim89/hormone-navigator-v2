@@ -38,9 +38,9 @@ export const MaleBridgeSection = () => {
           {/* Headline */}
           <motion.h3 
             variants={itemVariants}
-            className="text-[26px] font-extrabold text-white tracking-[-0.02em] leading-tight mb-4 font-pretendard"
+            className="text-[24px] font-extrabold text-white tracking-[-0.02em] leading-tight mb-4 font-pretendard"
           >
-            여자친구의 예민함 이해가 되셨나요?
+            여자들의 예민함이 이해가나요?
           </motion.h3>
 
           {/* Highlight */}
@@ -49,7 +49,7 @@ export const MaleBridgeSection = () => {
             className="relative py-2 mb-6"
           >
             <p className="text-[18px] font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-blue-200 leading-tight">
-              난소가 지쳐있으면, 매달 무너질 수밖에 없습니다.
+              난소가 지쳐있으면,<br />매달 무너질 수밖에 없습니다.
             </p>
           </motion.div>
 
@@ -100,14 +100,14 @@ export const MaleBridgeSection = () => {
                   <span className="text-[#FF71A4] font-bold text-lg">AMH</span>
                   <span className="text-sm text-slate-300">난소 나이</span>
                   <span className="text-xs text-slate-500 ml-auto border border-slate-600 px-2 py-0.5 rounded-full">
-                    우리 커플의 타임라인
+                    내 인생의 타임라인
                   </span>
                 </div>
                 <p className="text-[15px] text-white font-medium mb-2 leading-snug">
-                  "출산 시점은 언제가 좋을까?"
+                  "내 커리어 플랜 속 출산 시점은 언제가 좋을까?"
                 </p>
                 <p className="text-[13px] text-slate-400 leading-relaxed">
-                  막연한 걱정 대신, 데이터로 두 분의 적기를 설계하세요.
+                  막연한 계획 대신, 데이터로 내 인생의 적기를 설계하세요.
                 </p>
               </div>
 
@@ -121,10 +121,10 @@ export const MaleBridgeSection = () => {
                   </span>
                 </div>
                 <p className="text-[15px] text-white font-medium mb-2 leading-snug">
-                  "완경기는 언제쯤 올까?"
+                  "내 완경기는 언제쯤 올까?"
                 </p>
                 <p className="text-[13px] text-slate-400 leading-relaxed">
-                  지금 그녀가 무리하고 있는 건 아닌지 확인해보세요.
+                  지금 난소가 과부하 상태인지, 안정적인지 확인하세요.
                 </p>
               </div>
               
@@ -138,10 +138,10 @@ export const MaleBridgeSection = () => {
                   </span>
                 </div>
                 <p className="text-[15px] text-white font-medium mb-2 leading-snug">
-                  "여성호르몬 수치의 밸런스는 어떨까?"
+                  "내 여성호르몬 수치의 밸런스는 어떨까?"
                 </p>
                 <p className="text-[13px] text-slate-400 leading-relaxed">
-                  이유 없는 짜증과 감정 기복의 진짜 원인을 찾아주세요.
+                  생리 불순, 감정 기복의 원인을 수치로 확인하세요.
                 </p>
               </div>
             </div>
@@ -163,17 +163,13 @@ export const MaleBridgeSection = () => {
               <div className="flex flex-wrap justify-center items-center gap-x-3 gap-y-1 text-[11px] text-white font-medium">
                 <span>전문의 창업</span>
                 <span>•</span>
-                <span>전문의 자문</span>
-                <span>•</span>
-                <span>임상 데이터 기반</span>
-                <span>•</span>
-                <span>1만+ 검증</span>
+                <span>임상 데이터 1만+ 검증</span>
               </div>
             </div>
 
             <div className="relative mb-8 px-4 flex justify-center">
               <img 
-                  src="/mockup.png"
+                  src="/Mockup_final_png.png"
                   alt="라보 앱 화면" 
                   className="w-full h-auto object-contain"
                   style={{ mixBlendMode: 'normal' }}
@@ -189,31 +185,31 @@ export const MaleBridgeSection = () => {
                 <li className="flex items-start gap-2.5">
                   <span className="text-[#4A7CFF] mt-1.5 flex-shrink-0 text-[8px]">●</span>
                   <span>
-                    <span className="text-white font-medium">난소 나이</span>: 그녀의 몸의 진짜 나이, 난소는 지금 몇 살?
+                    <span className="text-white font-medium">난소 나이</span>: 내 몸의 진짜 나이, 내 난소는 몇 살?
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="text-[#4A7CFF] mt-1.5 flex-shrink-0 text-[8px]">●</span>
                   <span>
-                    <span className="text-white font-medium">임신 계획</span>: 커리어와 출산 사이, 인생 시간표 세우기
+                    <span className="text-white font-medium">임신 계획</span>: 커리어와 출산 사이, 인생 시간표
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="text-[#4A7CFF] mt-1.5 flex-shrink-0 text-[8px]">●</span>
                   <span>
-                    <span className="text-white font-medium">완경기 예측</span>: 여성호르몬 엔진이 언제쯤 멈추는지
+                    <span className="text-white font-medium">완경기 예측</span>: 여성호르몬 엔진이 언제 멈추는지
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="text-[#4A7CFF] mt-1.5 flex-shrink-0 text-[8px]">●</span>
                   <span>
-                    <span className="text-white font-medium">에겐력</span>: 기분 기복과 피부 탄력을 결정하는 수치
+                    <span className="text-white font-medium">에스트로겐</span>: 기분 기복과 피부 탄력 결정 수치
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="text-[#4A7CFF] mt-1.5 flex-shrink-0 text-[8px]">●</span>
                   <span>
-                    <span className="text-white font-medium">골밀도 체크</span>: 10년 뒤 뼈를 지키는 호르몬은 적정한지?
+                    <span className="text-white font-medium">골밀도 체크</span>: 10년 뒤 내 뼈를 지키는 호르몬 적정한지?
                   </span>
                 </li>
               </ul>
@@ -252,7 +248,19 @@ export const MaleBridgeSection = () => {
             {/* Final CTA */}
             <div className="bg-[#3B4A6B] rounded-2xl p-6 text-center mb-24">
               <p className="text-white text-[20px] font-bold tracking-tight mb-1">그녀를 위한 가장 특별한 선물</p>
-              <p className="text-slate-300 text-[16px] mb-4 tracking-normal">여자의 몸의 주도권을 찾아주세요</p>
+              <p className="text-slate-300 text-[16px] mb-6 tracking-normal">여자의 몸의 주도권을 찾아주세요</p>
+              <a
+                href="http://pf.kakao.com/_dlxkQn"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <Button 
+                  className="w-full bg-[#4A7CFF] hover:bg-[#3A6CEF] text-white font-bold py-6 rounded-xl text-[16px] tracking-tight shadow-lg shadow-blue-900/20 whitespace-pre-wrap leading-snug"
+                >
+                  소중한 인연에게 라보 선물하고,{'\n'}30만원 난자냉동 지원금 받기
+                </Button>
+              </a>
             </div>
 
             {/* Sticky Bottom CTA removed from here */}

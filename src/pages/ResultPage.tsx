@@ -17,19 +17,56 @@ import { toast } from "sonner";
 const ResultPage = () => {
   const navigate = useNavigate();
   const [shareOpen, setShareOpen] = useState(false);
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [localNickname, setLocalNickname] = useState('');
+  const nameInputRef = useRef<HTMLInputElement>(null);
   const resultCardRef = useRef<HTMLDivElement>(null);
   const {
     nickname,
     gender,
     resultType,
     answers,
-    resetQuiz
+    resetQuiz,
+    setNickname
   } = useQuizStore();
   useEffect(() => {
     if (!resultType || !nickname) {
       navigate('/');
     }
   }, [resultType, nickname, navigate]);
+
+  useEffect(() => {
+    setLocalNickname(nickname);
+  }, [nickname]);
+
+  useEffect(() => {
+    if (isEditingName && nameInputRef.current) {
+      nameInputRef.current.focus();
+      nameInputRef.current.select();
+    }
+  }, [isEditingName]);
+
+  const handleNameClick = () => {
+    setIsEditingName(true);
+  };
+
+  const handleNameSave = () => {
+    if (localNickname.trim()) {
+      setNickname(localNickname.trim());
+    } else {
+      setLocalNickname(nickname);
+    }
+    setIsEditingName(false);
+  };
+
+  const handleNameKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleNameSave();
+    } else if (e.key === 'Escape') {
+      setLocalNickname(nickname);
+      setIsEditingName(false);
+    }
+  };
   if (!resultType || !nickname || !gender) return null;
   const type = getTypeData(resultType, gender);
   const coordinates = calculateCoordinates(answers);
@@ -128,8 +165,6 @@ const ResultPage = () => {
     return {
       best: type.bestMatch,
       worst: type.worstMatch,
-      bestReason: '서로 부족한 부분을 채워줌',
-      worstReason: '감정 충돌 위험 높음',
     };
   };
 
@@ -154,6 +189,31 @@ const ResultPage = () => {
   const bestMatches = formatCompatibility(compatibility.best);
   const worstMatches = formatCompatibility(compatibility.worst);
 
+  // Helper to split text into two lines for mobile display
+  const splitTextForMobile = (text: string): [string, string] => {
+    if (text.length <= 8) return [text, '']; // Short text, no need to split
+    
+    // Count spaces in the text
+    const spaceCount = (text.match(/ /g) || []).length;
+    
+    // If there are 2 or more spaces, split at the last space
+    // Example: "디바마을 퀸 에겐녀" -> "디바마을 퀸" / "에겐녀"
+    if (spaceCount >= 2) {
+      const lastSpaceIndex = text.lastIndexOf(' ');
+      return [text.slice(0, lastSpaceIndex), text.slice(lastSpaceIndex + 1)];
+    }
+    
+    // If there's only one space, split at that space
+    if (spaceCount === 1) {
+      const spaceIndex = text.indexOf(' ');
+      return [text.slice(0, spaceIndex), text.slice(spaceIndex + 1)];
+    }
+    
+    // If no space, find the middle point
+    const midPoint = Math.floor(text.length / 2);
+    return [text.slice(0, midPoint), text.slice(midPoint)];
+  };
+
   const handleShare = () => {
     setShareOpen(true);
   };
@@ -171,7 +231,32 @@ const ResultPage = () => {
             className="text-center mb-6 bg-[#F8E8FF] rounded-2xl py-6 px-4"
           >
             <p className="text-sm text-muted-foreground mb-3">
-              {nickname}님의 {gender === 'female' ? '호르몬 자아' : 'PMS 대응 유형'}는...
+              {isEditingName ? (
+                <span className="flex items-center justify-center gap-2">
+                  <input
+                    ref={nameInputRef}
+                    type="text"
+                    value={localNickname}
+                    onChange={(e) => setLocalNickname(e.target.value)}
+                    onBlur={handleNameSave}
+                    onKeyDown={handleNameKeyDown}
+                    className="text-center bg-white border-2 border-[#9D4EDD] rounded-lg px-2 py-1 text-sm font-medium text-foreground focus:outline-none focus:ring-2 focus:ring-[#9D4EDD] max-w-[120px]"
+                    maxLength={10}
+                  />
+                  <span>님의 {gender === 'female' ? '호르몬 빌런 유형' : '호르몬 빌런 대응유형'}은?</span>
+                </span>
+              ) : (
+                <span className="flex items-center justify-center gap-1 flex-wrap">
+                  <span 
+                    onClick={handleNameClick}
+                    className="cursor-pointer hover:text-[#9D4EDD] transition-colors font-medium underline decoration-dotted decoration-[#9D4EDD] hover:decoration-2"
+                    title="닉네임 수정하기"
+                  >
+                    {nickname}
+                  </span>
+                  <span>님의 {gender === 'female' ? '호르몬 빌런 유형' : '호르몬 빌런 대응유형'}은?</span>
+                </span>
+              )}
             </p>
 
             {/* Hook Line - Main title */}
@@ -225,7 +310,7 @@ const ResultPage = () => {
 
             {/* Watermark for share image */}
             <p className="text-xs text-muted-foreground/60 mt-4">
-              made with ❤️ by @rhabo
+              MADE WITH ❤️ BY @RHABO
             </p>
           </div>
 
@@ -332,21 +417,33 @@ const ResultPage = () => {
             <div className="grid grid-cols-2 gap-3">
               <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 text-center flex flex-col justify-center min-h-[120px]">
                 <p className="text-xs text-muted-foreground mb-2">BEST 궁합</p>
-                <div className="text-sm font-bold text-foreground leading-tight space-y-1 mb-2">
-                  {bestMatches.map((match, idx) => (
-                    <p key={idx}>{match}</p>
-                  ))}
+                <div className="text-sm font-bold text-foreground leading-tight">
+                  {(() => {
+                    const [first, second] = splitTextForMobile(bestMatches[0] || '');
+                    return second ? (
+                      <>
+                        {first}<br />{second}
+                      </>
+                    ) : (
+                      first
+                    );
+                  })()}
                 </div>
-                <p className="text-xs text-[#9D4EDD] mt-auto leading-tight">{compatibility.bestReason}</p>
               </div>
               <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 text-center flex flex-col justify-center min-h-[120px]">
                 <p className="text-xs text-muted-foreground mb-2">WORST 궁합</p>
-                <div className="text-sm font-bold text-foreground leading-tight space-y-1 mb-2">
-                  {worstMatches.map((match, idx) => (
-                    <p key={idx}>{match}</p>
-                  ))}
+                <div className="text-sm font-bold text-foreground leading-tight">
+                  {(() => {
+                    const [first, second] = splitTextForMobile(worstMatches[0] || '');
+                    return second ? (
+                      <>
+                        {first}<br />{second}
+                      </>
+                    ) : (
+                      first
+                    );
+                  })()}
                 </div>
-                <p className="text-xs text-[#9D4EDD] mt-auto leading-tight">{compatibility.worstReason}</p>
               </div>
             </div>
           </div>
@@ -370,7 +467,7 @@ const ResultPage = () => {
 
           {/* Footer */}
           <p className="text-center text-xs text-muted-foreground">
-            © 2024 PMS 호르몬 유형 분석 · 전문의 자문 기반
+            © PMS 호르몬 유형 분석 · Mirra x RHABO
           </p>
         </div>
       </div>
@@ -392,7 +489,7 @@ const ResultPage = () => {
       />
 
       {/* Sticky Bottom CTA - Moved here to be visible immediately */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 z-50 bg-gradient-to-t from-[#1A1A2E] via-[#1A1A2E] to-transparent pb-8">
+      <div className="fixed bottom-4 left-0 right-0 p-4 z-50 bg-gradient-to-t from-[#1A1A2E] via-[#1A1A2E] to-transparent pb-8">
         <div className="max-w-md mx-auto">
           <a
             href="http://pf.kakao.com/_dlxkQn"
@@ -405,7 +502,7 @@ const ResultPage = () => {
             >
               {gender === 'female' 
                 ? "지금 집에서 라보 시작하고,\n30만원 난자냉동 지원금 받기"
-                : "여자친구에게 라보 선물하고,\n30만원 난자냉동 지원금 받기"
+                : "소중한 인연에게 라보 선물하고,\n30만원 난자냉동 지원금 받기"
               }
             </Button>
           </a>

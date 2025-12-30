@@ -86,7 +86,7 @@ const QuizPage = () => {
 
             {/* Question */}
             <div className="text-center mb-6">
-              <h2 className="font-display text-xl text-foreground whitespace-pre-line leading-relaxed">
+              <h2 className="font-display text-xl text-foreground leading-relaxed">
                 {question.question}
               </h2>
             </div>

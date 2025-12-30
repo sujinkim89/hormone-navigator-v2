@@ -73,17 +73,6 @@ export const ShareBottomSheet = ({
     }
   };
 
-  // 텍스트 복사 (스토리용)
-  const handleCopyText = async () => {
-    const text = `${shareData.emoji} 나의 PMS ${shareData.gender === "female" ? "호르몬" : "대응"} 유형\n\n"${shareData.typeTitle}"\n\n나도 테스트하기 👇\n${shareData.url}`;
-    try {
-      await navigator.clipboard.writeText(text);
-      toast.success("텍스트가 복사되었어요! 스토리에 붙여넣기 하세요 📋");
-      onOpenChange(false);
-    } catch {
-      toast.error("복사에 실패했어요");
-    }
-  };
 
   // html2canvas로 이미지 캡처하는 공통 함수
   const captureImage = async (): Promise<Blob | null> => {
@@ -157,7 +146,7 @@ export const ShareBottomSheet = ({
     }
   };
 
-  // 인스타그램 스토리 공유 (Web Share API로 이미지 공유)
+  // 인스타그램 스토리 공유 모듈
   const handleInstagramShare = async () => {
     setIsCapturing(true);
     try {
@@ -171,32 +160,31 @@ export const ShareBottomSheet = ({
         type: "image/png",
       });
 
-      // Web Share API로 이미지 공유 (Instagram 스토리 선택 가능)
+      // Web Share API로 이미지 공유 (인스타그램 스토리 선택 가능)
       if (
         navigator.share &&
         navigator.canShare &&
         navigator.canShare({ files: [file] })
       ) {
-        await navigator.share({
-          files: [file],
-          title: `${shareData.emoji} ${shareData.typeTitle}`,
-          text: `나의 PMS ${shareData.gender === "female" ? "호르몬" : "대응"} 유형!\n${shareData.url}`,
-        });
-        onOpenChange(false);
+        try {
+          await navigator.share({
+            files: [file],
+            title: `${shareData.emoji} ${shareData.typeTitle}`,
+            text: `나의 PMS ${shareData.gender === "female" ? "호르몬" : "대응"} 유형!\n${shareData.url}`,
+          });
+          toast.success("인스타그램 스토리로 공유되었어요! 📸");
+          onOpenChange(false);
+        } catch (shareError) {
+          // 사용자가 공유 취소한 경우
+          if ((shareError as Error).name === "AbortError") {
+            // 취소는 정상 동작이므로 에러 표시하지 않음
+            return;
+          }
+          throw shareError;
+        }
       } else {
-        // Web Share API를 지원하지 않으면 이미지 저장 후 안내
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `pms-result-${shareData.nickname}.png`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        toast.success(
-          "이미지가 저장되었어요!\n인스타그램 스토리에 직접 올려주세요 📸"
-        );
-        onOpenChange(false);
+        // Web Share API를 지원하지 않는 경우
+        toast.error("이 기기에서는 인스타그램 스토리 공유를 지원하지 않아요");
       }
     } catch (error) {
       // 사용자가 공유 취소한 경우 에러 무시
@@ -209,45 +197,58 @@ export const ShareBottomSheet = ({
     }
   };
 
-  // 카카오톡 공유
+  // 카카오톡 공유 모듈
   const handleKakaoShare = () => {
-    if (window.Kakao && window.Kakao.isInitialized()) {
-      window.Kakao.Share.sendDefault({
-        objectType: "feed",
-        content: {
-          title: `나의 PMS 유형: ${shareData.typeTitle} ${shareData.emoji}`,
-          description: shareData.text,
-          imageUrl: "https://lovable.dev/opengraph-image-p98pqg.png",
-          link: {
-            mobileWebUrl: shareData.url,
-            webUrl: shareData.url,
-          },
-        },
-        buttons: [
-          {
-            title: "나도 테스트하기",
+    try {
+      if (window.Kakao && window.Kakao.isInitialized()) {
+        window.Kakao.Share.sendDefault({
+          objectType: "feed",
+          content: {
+            title: `나의 PMS 유형: ${shareData.typeTitle} ${shareData.emoji}`,
+            description: shareData.text,
+            imageUrl: `${window.location.origin}/og-main.png`,
             link: {
               mobileWebUrl: shareData.url,
               webUrl: shareData.url,
             },
           },
-        ],
-      });
-      onOpenChange(false);
-    } else {
-      // 카카오 SDK가 없으면 카카오톡 공유 URL scheme 사용 시도
-      const kakaoShareUrl = `https://sharer.kakao.com/talk/friends/picker/link?url=${encodeURIComponent(shareData.url)}&text=${encodeURIComponent(shareData.text)}`;
-      window.open(kakaoShareUrl, "_blank");
-      onOpenChange(false);
+          buttons: [
+            {
+              title: "나도 테스트하기",
+              link: {
+                mobileWebUrl: shareData.url,
+                webUrl: shareData.url,
+              },
+            },
+          ],
+        });
+        toast.success("카카오톡으로 공유되었어요! 💬");
+        onOpenChange(false);
+      } else {
+        // 카카오 SDK가 없으면 카카오톡 공유 URL scheme 사용
+        const kakaoShareUrl = `https://sharer.kakao.com/talk/friends/picker/link?url=${encodeURIComponent(shareData.url)}&text=${encodeURIComponent(shareData.text)}`;
+        window.open(kakaoShareUrl, "_blank");
+        toast.success("카카오톡 공유 창이 열렸어요! 💬");
+        onOpenChange(false);
+      }
+    } catch (error) {
+      console.error("Kakao share failed:", error);
+      toast.error("카카오톡 공유에 실패했어요");
     }
   };
 
-  // 트위터/X 공유
+  // 엑스(X) 공유 모듈
   const handleTwitterShare = () => {
-    const text = `${shareData.emoji} 나의 PMS ${shareData.gender === "female" ? "호르몬" : "대응"} 유형은 "${shareData.typeTitle}"!\n\n나도 테스트하기 👇`;
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareData.url)}`;
-    window.open(twitterUrl, "_blank");
-    onOpenChange(false);
+    try {
+      const text = `${shareData.emoji} 나의 PMS ${shareData.gender === "female" ? "호르몬" : "대응"} 유형은 "${shareData.typeTitle}"!\n\n나도 테스트하기 👇`;
+      const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareData.url)}`;
+      window.open(twitterUrl, "_blank", "width=550,height=420");
+      toast.success("엑스(X) 공유 창이 열렸어요! 🐦");
+      onOpenChange(false);
+    } catch (error) {
+      console.error("Twitter share failed:", error);
+      toast.error("엑스(X) 공유에 실패했어요");
+    }
   };
 
   // 기타 공유 (Web Share API)
@@ -271,7 +272,7 @@ export const ShareBottomSheet = ({
   const shareOptions = [
     {
       icon: SiInstagram,
-      label: "스토리",
+      label: "인스타그램\n스토리",
       color: "bg-gradient-to-br from-[#F58529] via-[#DD2A7B] to-[#8134AF]",
       iconColor: "text-white",
       onClick: handleInstagramShare,
@@ -279,10 +280,17 @@ export const ShareBottomSheet = ({
     },
     {
       icon: SiKakaotalk,
-      label: "카카오톡",
+      label: "카카오톡\n공유",
       color: "bg-[#FEE500]",
       iconColor: "text-[#3C1E1E]",
       onClick: handleKakaoShare,
+    },
+    {
+      icon: SiX,
+      label: "엑스(X)\n공유",
+      color: "bg-black",
+      iconColor: "text-white",
+      onClick: handleTwitterShare,
     },
     {
       icon: Download,
@@ -291,20 +299,6 @@ export const ShareBottomSheet = ({
       iconColor: "text-white",
       onClick: handleSaveImage,
       disabled: isCapturing,
-    },
-    {
-      icon: SiX,
-      label: "X",
-      color: "bg-black",
-      iconColor: "text-white",
-      onClick: handleTwitterShare,
-    },
-    {
-      icon: MoreHorizontal,
-      label: "더보기",
-      color: "bg-gray-100",
-      iconColor: "text-gray-700",
-      onClick: handleOtherShare,
     },
   ];
 
@@ -332,7 +326,7 @@ export const ShareBottomSheet = ({
           </div>
 
           {/* Share Options */}
-          <div className="grid grid-cols-5 gap-3">
+          <div className="grid grid-cols-4 gap-3">
             {shareOptions.map((option) => (
               <button
                 key={option.label}
@@ -345,25 +339,17 @@ export const ShareBottomSheet = ({
                 >
                   <option.icon className={`w-6 h-6 ${option.iconColor}`} />
                 </div>
-                <span className="text-xs text-muted-foreground">
+                <span className="text-xs text-muted-foreground whitespace-pre-line text-center leading-tight">
                   {option.label}
                 </span>
               </button>
             ))}
           </div>
 
-          {/* Copy text for story */}
-          <button
-            onClick={handleCopyText}
-            className="w-full mt-6 py-3 bg-gradient-to-r from-[#9D4EDD] to-[#7B2CBF] text-white rounded-xl font-medium text-sm transition-transform active:scale-[0.98]"
-          >
-            📋 스토리용 텍스트 복사하기
-          </button>
-
           {/* Copy link button */}
           <button
             onClick={handleCopyLink}
-            className="w-full mt-3 py-3 bg-gray-100 text-gray-700 rounded-xl font-medium text-sm transition-transform active:scale-[0.98]"
+            className="w-full mt-6 py-3 bg-gradient-to-r from-[#9D4EDD] to-[#7B2CBF] text-white rounded-xl font-bold text-sm transition-transform active:scale-[0.98] shadow-lg shadow-purple-500/30"
           >
             🔗 링크 복사하기
           </button>
