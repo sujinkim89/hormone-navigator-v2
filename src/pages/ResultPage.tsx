@@ -446,6 +446,26 @@ const ResultPage = () => {
                 </div>
               </div>
             </div>
+            
+            {/* Share Prompt */}
+            <div className={`text-center ${gender === 'female' ? 'mt-[18px] mb-2' : 'mt-[18px] mb-2'}`}>
+              <p className="text-sm text-muted-foreground font-medium">
+                {gender === 'female' 
+                  ? (
+                    <>
+                      이제 파트너에게 공유하면 다 이해할 거예요 😎<br />
+                      PMS 평화 협정을 맺으세요 🕊️
+                    </>
+                  )
+                  : (
+                    <>
+                      이제 파트너에게 공유하면 다 이해할 거예요 😎<br />
+                      PMS 평화 협정을 맺으세요 🕊️
+                    </>
+                  )
+                }
+              </p>
+            </div>
           </div>
 
           {/* Action Buttons - After Partner Guide */}
@@ -498,11 +518,11 @@ const ResultPage = () => {
             className="block shadow-xl rounded-xl"
           >
             <Button 
-              className="w-full bg-[#4A7CFF] hover:bg-[#3A6CEF] text-white font-bold py-7 rounded-xl text-[17px] tracking-tight shadow-lg shadow-blue-900/20 whitespace-pre-wrap leading-snug"
+              className="w-full bg-[#4A7CFF] hover:bg-[#3A6CEF] text-white font-bold py-8 rounded-xl text-[20px] tracking-tight shadow-lg shadow-blue-900/20 whitespace-pre-wrap leading-tight"
             >
               {gender === 'female' 
-                ? "지금 집에서 라보 시작하고,\n30만원 난자냉동 지원금 받기"
-                : "소중한 인연에게 라보 선물하고,\n30만원 난자냉동 지원금 받기"
+                ? "30만원 지원금 받고\n진짜 호르몬 검사 시작하기"
+                : "진짜 호르몬 검사 선물하고\n30만원 지원금 받기"
               }
             </Button>
           </a>

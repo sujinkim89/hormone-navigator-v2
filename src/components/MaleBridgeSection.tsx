@@ -104,7 +104,7 @@ export const MaleBridgeSection = () => {
                   </span>
                 </div>
                 <p className="text-[15px] text-white font-medium mb-2 leading-snug">
-                  "내 커리어 플랜 속 출산 시점은 언제가 좋을까?"
+                  "커리어 플랜 속 출산 계획 언제가 좋을까?"
                 </p>
                 <p className="text-[13px] text-slate-400 leading-relaxed">
                   막연한 계획 대신, 데이터로 내 인생의 적기를 설계하세요.
@@ -117,11 +117,11 @@ export const MaleBridgeSection = () => {
                   <span className="text-[#FFB347] font-bold text-lg">FSH</span>
                   <span className="text-sm text-slate-300">난소 체력</span>
                   <span className="text-xs text-slate-500 ml-auto border border-slate-600 px-2 py-0.5 rounded-full">
-                    난소 엔진의 에너지 효율
+                    난소 엔진의 에너지
                   </span>
                 </div>
                 <p className="text-[15px] text-white font-medium mb-2 leading-snug">
-                  "내 완경기는 언제쯤 올까?"
+                  "30대에 벌써 조기 완경? 어떻게 대비할까?"
                 </p>
                 <p className="text-[13px] text-slate-400 leading-relaxed">
                   지금 난소가 과부하 상태인지, 안정적인지 확인하세요.
@@ -209,7 +209,7 @@ export const MaleBridgeSection = () => {
                 <li className="flex items-start gap-2.5">
                   <span className="text-[#4A7CFF] mt-1.5 flex-shrink-0 text-[8px]">●</span>
                   <span>
-                    <span className="text-white font-medium">골밀도 체크</span>: 10년 뒤 내 뼈를 지키는 호르몬 적정한지?
+                    <span className="text-white font-medium">골밀도 체크</span>: 내 뼈를 지키는 호르몬이 적정한지?
                   </span>
                 </li>
               </ul>
@@ -256,9 +256,9 @@ export const MaleBridgeSection = () => {
                 className="block"
               >
                 <Button 
-                  className="w-full bg-[#4A7CFF] hover:bg-[#3A6CEF] text-white font-bold py-6 rounded-xl text-[16px] tracking-tight shadow-lg shadow-blue-900/20 whitespace-pre-wrap leading-snug"
+                  className="w-full bg-[#4A7CFF] hover:bg-[#3A6CEF] text-white font-bold py-8 rounded-xl text-[20px] tracking-tight shadow-lg shadow-blue-900/20 whitespace-pre-wrap leading-tight"
                 >
-                  소중한 인연에게 라보 선물하고,{'\n'}30만원 난자냉동 지원금 받기
+                  진짜 호르몬 검사 선물하고{'\n'}30만원 지원금 받기
                 </Button>
               </a>
             </div>
