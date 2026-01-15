@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+/* PyeongChangPeace Font */
+@font-face {
+  font-family: 'PyeongChangPeace';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 270 50% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 270 50% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 270 50% 10%;
+
+    --primary: 270 75% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 280 80% 55%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 270 20% 96%;
+    --muted-foreground: 270 10% 45%;
+
+    --accent: 45 95% 55%;
+    --accent-foreground: 45 80% 20%;
+
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 270 20% 90%;
+    --input: 270 20% 90%;
+    --ring: 270 75% 60%;
+
+    --radius: 1rem;
+
+    /* Custom colors - Purple base gradient */
+    --hot-pink: 275 80% 65%;
+    --rose: 270 75% 55%;
+    --violet: 265 85% 55%;
+    --deep-purple: 270 75% 30%;
+    --warning-yellow: 45 95% 55%;
+    --alert-red: 0 85% 60%;
+    
+    /* Gradients */
+    --gradient-meme: linear-gradient(135deg, hsl(275, 80%, 70%) 0%, hsl(270, 75%, 55%) 50%, hsl(265, 85%, 45%) 100%);
+    --gradient-aura: radial-gradient(ellipse at center, hsl(275, 80%, 70%, 0.4) 0%, hsl(265, 85%, 60%, 0.2) 50%, transparent 70%);
+    --gradient-card: linear-gradient(180deg, hsl(0, 0%, 100%) 0%, hsl(270, 30%, 98%) 100%);
+  }
+
+  .dark {
+    --background: 270 50% 5%;
+    --foreground: 0 0% 98%;
+
+    --card: 270 40% 10%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 270 40% 10%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 270 75% 65%;
+    --primary-foreground: 270 50% 5%;
+
+    --secondary: 280 80% 60%;
+    --secondary-foreground: 270 50% 5%;
+
+    --muted: 270 30% 20%;
+    --muted-foreground: 270 20% 70%;
+
+    --accent: 45 95% 55%;
+    --accent-foreground: 45 80% 10%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 270 30% 20%;
+    --input: 270 30% 20%;
+    --ring: 270 75% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: 'PyeongChangPeace', sans-serif;
+    font-weight: 700;
+  }
+}
+
+@layer utilities {
+  .text-gradient-meme {
+    background: var(--gradient-meme);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-gradient-meme {
+    background: var(--gradient-meme);
+  }
+
+  .bg-gradient-aura {
+    background: var(--gradient-aura);
+  }
+
+  .bg-gradient-card {
+    background: var(--gradient-card);
+  }
+}
+
+/* Custom Animations */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes egg-shake {
+  0%, 100% {
+    transform: rotate(-5deg) translateY(0);
+  }
+  25% {
+    transform: rotate(5deg) translateY(-3px);
+  }
+  50% {
+    transform: rotate(-3deg) translateY(0);
+  }
+  75% {
+    transform: rotate(4deg) translateY(-2px);
+  }
+}
+
+@keyframes float-chat {
+  0%, 100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+.animate-egg-shake {
+  animation: egg-shake 0.8s ease-in-out infinite;
+}
+
+.animate-float-chat {
+  animation: float-chat 3s ease-in-out infinite;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out forwards;
+}
+
+.animate-scale-bounce {
+  animation: scale-bounce 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 0%, hsl(var(--primary) / 0.3) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Delay utilities for staggered animations */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
