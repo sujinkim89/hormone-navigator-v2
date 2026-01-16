@@ -5,7 +5,8 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: process.env.NODE_ENV === "production" ? "/eggwiki/" : "/",
+  // GitHub Pages는 /eggwiki/ base path 필요, Vercel은 루트 경로 사용
+  base: process.env.VERCEL ? "/" : process.env.NODE_ENV === "production" ? "/eggwiki/" : "/",
   server: {
     host: "::",
     port: 8080,
