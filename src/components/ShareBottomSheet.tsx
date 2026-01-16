@@ -211,7 +211,7 @@ export const ShareBottomSheet = ({
           content: {
             title: `나의 PMS 유형: ${shareData.typeTitle} ${shareData.emoji}`,
             description: shareData.text,
-            imageUrl: `${window.location.origin}/og-main.png`,
+            imageUrl: `${window.location.origin}/new-og-main.png`,
             link: {
               mobileWebUrl: shareData.url,
               webUrl: shareData.url,
