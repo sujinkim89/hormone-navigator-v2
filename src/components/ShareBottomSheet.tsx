@@ -206,12 +206,21 @@ export const ShareBottomSheet = ({
     trackShare('kakao', shareData.typeTitle, shareData.gender);
     try {
       if (window.Kakao && window.Kakao.isInitialized()) {
+        // 메인 페이지 공유인지 결과 페이지 공유인지 확인
+        const isMainPage = !shareData.typeTitle || shareData.typeTitle === '';
+        const shareTitle = isMainPage 
+          ? "에그위키, 자기주도적 여성들의 필수 선택"
+          : `나의 PMS 유형: ${shareData.typeTitle} ${shareData.emoji}`;
+        const shareDescription = isMainPage
+          ? "난자냉동, 올해도 고민만 하다 늦기 전에 '230만원' 지원받으세요."
+          : shareData.text;
+        
         window.Kakao.Share.sendDefault({
           objectType: "feed",
           content: {
-            title: `나의 PMS 유형: ${shareData.typeTitle} ${shareData.emoji}`,
-            description: shareData.text,
-            imageUrl: `${window.location.origin}/new-og-main.png`,
+            title: shareTitle,
+            description: shareDescription,
+            imageUrl: "https://eggwiki-one.vercel.app/new-og-main.png",
             link: {
               mobileWebUrl: shareData.url,
               webUrl: shareData.url,
@@ -231,7 +240,11 @@ export const ShareBottomSheet = ({
         onOpenChange(false);
       } else {
         // 카카오 SDK가 없으면 카카오톡 공유 URL scheme 사용
-        const kakaoShareUrl = `https://sharer.kakao.com/talk/friends/picker/link?url=${encodeURIComponent(shareData.url)}&text=${encodeURIComponent(shareData.text)}`;
+        const isMainPage = !shareData.typeTitle || shareData.typeTitle === '';
+        const shareText = isMainPage
+          ? "에그위키, 자기주도적 여성들의 필수 선택\n난자냉동, 올해도 고민만 하다 늦기 전에 '230만원' 지원받으세요."
+          : shareData.text;
+        const kakaoShareUrl = `https://sharer.kakao.com/talk/friends/picker/link?url=${encodeURIComponent(shareData.url)}&text=${encodeURIComponent(shareText)}`;
         window.open(kakaoShareUrl, "_blank");
         toast.success("카카오톡 공유 창이 열렸어요! 💬");
         onOpenChange(false);
